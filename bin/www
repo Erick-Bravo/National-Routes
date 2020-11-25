@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+//require server
+const app = require("../app");
+
+//require port variable
+const { port } = require("../config");
+
+//require models/index.js for sequelization
+const db = require("../db/models");
+
+//check connection to database
+db.sequelize.authenticate()
+.then(res => { console.log(
+`Connection to database was successful!
+     We are ready for an adventure!`)})
+.catch(error => { console.error(error)})
+
+//listening for server
+app.listen(port, () => console.log(`Server is on and listening on port ${port}...`));

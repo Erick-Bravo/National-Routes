@@ -1,0 +1,27 @@
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Visited = sequelize.define('Visited', {
+    parkId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    rate: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        max: 5,
+        min: 1
+      }
+    }
+  }, {});
+  Visited.associate = function(models) {
+    Visited.hasMany(models.Review, {
+      foreignKey: 'visitedId'
+    })
+  };
+  return Visited;
+};
