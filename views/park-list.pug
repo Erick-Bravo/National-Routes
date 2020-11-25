@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  each park in parks
+    div(id=`park-${park.id}`)
+      a(href=`/park/${park.id}`)= park.name

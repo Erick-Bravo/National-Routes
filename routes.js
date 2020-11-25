@@ -14,13 +14,15 @@ const csrfProtection = csrf({cookie: true});
 
 // entry points like:
     //HOMEPAGE
-router.get("/", (req, res) => {
-    if (!req.session.count) req.session.count = 0;
+router.get("/", asyncHandler(async (req, res) => {
+    const parks = await db.Park.findAll(); //maybe order the list by average rating.
+    res.render('park-list', {title: 'National Parks in United States', parks})
+    // if (!req.session.count) req.session.count = 0;
 
-    req.session.count++;
+    // req.session.count++;
 
-    res.send({count: req.session.count});
-});
+    // res.send({count: req.session.count});
+}));
 
 //exporting router
 module.exports = router;
