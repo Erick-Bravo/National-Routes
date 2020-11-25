@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     Route.belongsTo(models.User, {
       foreignKey: 'userId'
     });
-    Route.belongsToMany(model.Park,{
+    Route.belongsToMany(models.Park,{
       through: 'RoutesParks',
       foreignKey: 'routeId',
       otherKey: 'parkId'

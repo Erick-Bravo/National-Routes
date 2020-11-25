@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   State.associate = function(models) {
     State.belongsToMany(models.Park, {
-      throught: "Locations",
+      through: "Locations",
       foreignKey: "stateId",
       otherKey: "parkId"
     })

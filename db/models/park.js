@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Park.associate = function(models) {
     Park.belongsToMany(models.State, {
-      throught: "Locations",
+      through: "Locations",
       otherKey: "stateId",
       foreignKey: "parkId"
     });
 
     Park.belongsToMany(models.User, {
-      through: 'Visiteds',
+      through: 'Visited',
       otherKey: 'userId',
       foreignKey: 'parkId'
     });
 
-    Park.belongsToMany(model.Route,{
+    Park.belongsToMany(models.Route,{
       through: 'RoutesParks',
       otherKey: 'routeId',
       foreignKey: 'parkId'
