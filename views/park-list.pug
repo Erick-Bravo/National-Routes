@@ -1,6 +1,13 @@
 extends layout
 
 block content
-  each park in parks
-    div(id=`park-${park.id}`)
-      a(href=`/park/${park.id}`)= park.name
+  div.park-list
+    each park in parks
+      div(id=`park-${park.id}` class='park-list-item')
+        a(href=`/park/${park.id}`)
+          if park.id % 3 === 0
+            img(src='./img/park-8.png' alt=`${park.name}`)
+          else if park.id % 3 === 1
+            img(src='./img/park-15.png' alt=`${park.name}`)
+          else
+            img(src='./img/park-17.png' alt=`${park.name}`)

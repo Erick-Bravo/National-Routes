@@ -1,0 +1,18 @@
+.park-list-item {
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+}
+
+.park-list-item > a > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.park-list{
+  display: flex;
+  max-width: 800px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px;
+}
