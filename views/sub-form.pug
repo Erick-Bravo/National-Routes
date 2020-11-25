@@ -1,0 +1,15 @@
+h2 SIGN UP HERE!
+form(action="/register" method="post" class="register-new-user")
+    input(type="hidden" name="_csrf" value=token)
+    br
+    input(type="text" name="firstName" placeholder="First Name")
+    br
+    input(type="text" name="lastName" placeholder="Last Name")
+    br
+    input(type="email" name="email" placeholder="Email")
+    br
+    input(type="password" name="password" placeholder="passsword")
+    br
+    input(type="password" name="confirmPassword" placeholder="Confirm Password")
+    br
+    button(type="submit" value="Submit" class="signup-button")
