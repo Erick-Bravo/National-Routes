@@ -3,6 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
+const path = require("path");
+
 
 //importing local files
 const router = require('./routes.js');
@@ -17,6 +19,7 @@ app.set('view engine', 'pug');
 
 
 //entry points
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sessionSettings));  //setting a session
 app.use(morgan('dev'));             //request logs in terminal
 app.use(express.urlencoded({ extended: true }));     //all req.body encoded

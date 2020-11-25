@@ -1,6 +1,7 @@
 //importing modules
 const express = require("express");
 const csrf = require("csurf");
+const { readFile } = require("fs");
 
 //importing local files
 const db = require("./db/models");
@@ -23,6 +24,7 @@ router.get("/", asyncHandler(async (req, res) => {
 
     // res.send({count: req.session.count});
 }));
+
 
 //exporting router
 module.exports = router;
