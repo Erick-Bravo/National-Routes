@@ -7,11 +7,13 @@ const { readFile } = require("fs");
 const db = require("./db/models");
 const { environment } = require("./config");
 
+
+
 //defining global variables and helper functions
 const router = express.Router();
 const asyncHandler = (handler) =>
 (req, res, next) => handler(req, res, next).catch(next);
-const csrfProtection = csrf({cookie: true});
+const csrfProtection = csrf( {cookie: true} );
 
 // entry points like:
     //HOMEPAGE
@@ -26,5 +28,8 @@ router.get("/", asyncHandler(async (req, res) => {
 }));
 
 
+router.get("/")
+
+router.get("/")
 //exporting router
 module.exports = router;
