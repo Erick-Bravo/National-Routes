@@ -25,6 +25,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/")
+
+router.get("/")
 //exporting router
 module.exports = router;
-
