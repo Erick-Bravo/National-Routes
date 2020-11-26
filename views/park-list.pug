@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  include sub-form.pug
+
   div.park-list
     each park in parks
       div(id=`park-${park.id}` class='park-list-item')
