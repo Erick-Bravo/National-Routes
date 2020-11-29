@@ -7,9 +7,4 @@ block content
     each park in parks
       div(id=`park-${park.id}` class='park-list-item')
         a(href=`/park/${park.id}`)
-          if park.id % 3 === 0
-            img(src='./img/park-8.png' alt=`${park.name}`)
-          else if park.id % 3 === 1
-            img(src='./img/park-15.png' alt=`${park.name}`)
-          else
-            img(src='./img/park-17.png' alt=`${park.name}`)
+          img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)

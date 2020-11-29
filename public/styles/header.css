@@ -1,6 +1,60 @@
-header{
-    background-color: #b0b78f;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 20px;
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #7f8468;
+  box-sizing: border-box;
+  height: 170px;
+}
+header > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+header > div > h1 {
+  font-family: Park;
+  color: black;
+  font-size: 55px;
+  padding-left: 50px;
+}
+.login-in {
+  display: flex;
+  margin: 50px;
+}
+
+.login-in > * {
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 2px;
+}
+
+/* NAVI BAR */
+nav {
+  display: flex;
+  background-color: #c6cab6;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-family: Park;
+  color: black;
+  height: 50px;
+}
+
+nav > a {
+  color: black;
+  font-size: 22px;
+  text-decoration: none;
+}
+
+.search-bar {
+  width: 550px;
+  height: 30px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+.search-bar-button {
+  width: 80px;
+  height: 25px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
 }

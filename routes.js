@@ -19,7 +19,7 @@ const csrfProtection = csrf( {cookie: true} );
     //HOMEPAGE
 router.get("/", asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-    res.render('park-list', {title: 'National Parks in United States', parks})
+    res.render('park-list', {title: 'NATIONAL ROUTES', parks})
     // if (!req.session.count) req.session.count = 0;
 
     // req.session.count++;

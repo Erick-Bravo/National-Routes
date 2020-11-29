@@ -1,5 +1,6 @@
 form(action="/register" method="post" class="register-new-user")
-    h2 SIGN UP HERE!
+  div
+    h2 CREATE A NEW ACCOUNT
     input(type="hidden" name="_csrf" value=token)
     br
     input(type="text" name="firstName" placeholder="First Name")
@@ -8,7 +9,7 @@ form(action="/register" method="post" class="register-new-user")
     br
     input(type="email" name="email" placeholder="Email")
     br
-    input(type="password" name="password" placeholder="password")
+    input(type="password" name="password" placeholder="Password")
     br
     input(type="password" name="confirmPassword" placeholder="Confirm Password")
     br
