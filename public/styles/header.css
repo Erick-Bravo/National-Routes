@@ -15,7 +15,7 @@ header > div > h1 {
   color: black;
   font-size: 55px;
   padding-left: 50px;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
 }
 
 .mountains-img {
