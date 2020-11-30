@@ -16,10 +16,10 @@
   display: flex;
   max-width: 800px;
   flex-direction: row;
-  align-content: space-around;
+  /* align-content: space-around; */
   flex-wrap: wrap;
   margin-top: 50px;
-  margin-left: 50px;
+  /* margin-left: 50px; */
 }
 
 .register-new-user {

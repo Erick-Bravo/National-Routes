@@ -2,7 +2,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #7f8468;
+  background-color: #9fa582;
   box-sizing: border-box;
   height: 170px;
 }
@@ -31,13 +31,14 @@ header > div > h1 {
 /* NAVI BAR */
 nav {
   display: flex;
-  background-color: #c6cab6;
+  background-color: rgba(255, 255, 255, 0.5);
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   font-family: Park;
   color: black;
   height: 50px;
+  border: 0.75px solid black;
 }
 
 nav > a {
