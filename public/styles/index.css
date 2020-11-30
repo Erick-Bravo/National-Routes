@@ -6,3 +6,8 @@
   font-family: Park;
   src: url(park-font.otf);
 }
+
+@font-face {
+  font-family: Park-Thin;
+  src: url(park-font-thin.otf);
+}

@@ -1,10 +1,9 @@
 header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #9fa582;
+  background-color: #989e78;
   box-sizing: border-box;
-  height: 170px;
+  height: 160px;
 }
 header > div {
   display: flex;
@@ -12,50 +11,76 @@ header > div {
 }
 
 header > div > h1 {
-  font-family: Park;
+  font-family: Park-Thin;
   color: black;
   font-size: 55px;
   padding-left: 50px;
-}
-.login-in {
-  display: flex;
-  margin: 50px;
+  padding-bottom: 40px;
 }
 
-.login-in > * {
+.mountains-img {
+  margin-top: 30px;
+  width: 120px;
+  height: 70px;
+}
+
+.login-in {
+  display: flex;
+  align-self: flex-end;
+  margin: 60px 30px 30px 220px;
+}
+
+.login-in > input {
   height: 30px;
   margin-left: 10px;
-  border-radius: 2px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.login-button {
+  height: 30px;
+  width: 60px;
+  font-size: 13px;
+  font-family: Park;
+  margin-left: 10px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 /* NAVI BAR */
 nav {
   display: flex;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #555945;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   font-family: Park;
   color: black;
-  height: 50px;
-  border: 0.75px solid black;
+  height: 70px;
+  border-radius: 4px;
 }
 
 nav > a {
-  color: black;
-  font-size: 22px;
+  color: white;
+  font-size: 20px;
   text-decoration: none;
+  margin-left: 50px;
 }
 
 .search-bar {
   width: 550px;
-  height: 30px;
+  height: 25px;
   border-radius: 5px;
   padding-left: 10px;
+  margin-left: 120px;
 }
+
 .search-bar-button {
-  width: 80px;
+  width: 70px;
   height: 25px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-family: Park;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-right: 10px;
 }

@@ -9,13 +9,14 @@ html( lang="en")
         header
             div
                 h1= title
+                img(src=`./img/mountains.png` class=`mountains-img`)
                 include login-in.pug
             nav
                 a(href="/") HOME
                 a(href="/my-routes") MY ROUTES
                 a(href="/") BROWSE
                 input(type="text" placeholder="Search Parks" class="search-bar")
-                button(type="submit" class="search-bar-button") Search
+                button(type="submit" class="search-bar-button") SEARCH
         main
             block content
         footer
