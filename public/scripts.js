@@ -9,30 +9,27 @@ window.addEventListener("DOMContentLoaded", () => {
         let password = document.querySelector("#sign-up-form input[name='password']").value
         let confirmPassword = document.querySelector("#sign-up-form input[name='confirmPassword']").value
         let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value
-        // const formdata = new FormData(signUpForm)
 
         let result = await fetch("/sign-up", {
             init: {credentials: "same-origin"},
             method: "POST",
-            headers: { "Content-Type": "application/json",
-            Accept: "application/json",
-        },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password, confirmPassword, _csrf })
          })
 
-        result = await result.json()
+         if(!result.errors) {
+            location.href = "/routes"
+            return
 
-        if(result.errors) {
-            const errorDiv = document.querySelector("#sign-up-form div.errors")
-            result.errors.forEach(error => {
-                const div = document.createElement("div")
-                div.innerHTML = error
-                errorDiv.appendChild(div)
+        } else {
+             result = await result.json()
+             const errorDiv = document.querySelector("#sign-up-form div.errors")
+             errorDiv.innerHTML = ""
+             result.errors.forEach(error => {
+                 const div = document.createElement("div")
+                 div.innerHTML = error
+                 errorDiv.appendChild(div)
             })
         }
-         console.log(result)
     })
-
-
-
 })

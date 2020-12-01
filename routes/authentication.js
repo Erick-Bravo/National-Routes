@@ -8,12 +8,8 @@ const { environment } = require("../config");
 
 
 
-router.post("/sign-up", (req, res, next) => {
-    console.log(req.body, req.cookies)
-    next()
-}, csrfProtection, signUpValidator, asyncHandler(async(req, res) => {
+router.post("/sign-up", csrfProtection, signUpValidator, asyncHandler(async(req, res) => {
 
-    console.log("merp")
     const { username, email, password } = req.body
     const validatorError = validationResult(req)
     if(validatorError.isEmpty()) {
@@ -24,14 +20,16 @@ router.post("/sign-up", (req, res, next) => {
             createdAt: new Date(),
             updatedAt: new Date()
          })
-        res.redirect("/routes")
+    res.json() // Authentication Token to be inserted in the future
     } else {
     const errors = validatorError.array().map((error) => error.msg);
     res.json({ errors })
     }
-
-
 }))
+
+router.get("/routes", (req, res) => {
+    res.send("Welcome !#$%^&")
+})
 
 
 
