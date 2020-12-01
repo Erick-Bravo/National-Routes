@@ -8,7 +8,12 @@ const { environment } = require("../config");
 
 
 
-router.post("/sign-up", csrfProtection, signUpValidator, asyncHandler(async(req, res) => {
+router.post("/sign-up", (req, res, next) => {
+    console.log(req.body.username, req.cookies)
+    next()
+}, csrfProtection, signUpValidator, asyncHandler(async(req, res) => {
+
+    console.log("merp")
     const { username, email, password } = req.body
     const validatorError = validationResult(req)
     if(validatorError.isEmpty()) {
@@ -22,8 +27,7 @@ router.post("/sign-up", csrfProtection, signUpValidator, asyncHandler(async(req,
         res.redirect("/routes")
     } else {
     const errors = validatorError.array().map((error) => error.msg);
-    res.render("park-list", { errors, token: req.csrfToken() })
-    res.end()
+    res.json({ errors })
     }
 
 
