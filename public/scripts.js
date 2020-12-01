@@ -9,12 +9,13 @@ window.addEventListener("DOMContentLoaded", () => {
         let password = document.querySelector("#sign-up-form input[name='password']").value
         let confirmPassword = document.querySelector("#sign-up-form input[name='confirmPassword']").value
         let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value
-        console.log(_csrf)
+        // const formdata = new FormData(signUpForm)
+
         let result = await fetch("/sign-up", {
-            // credentials: "same-origin",
+            init: {credentials: "same-origin"},
             method: "POST",
             headers: { "Content-Type": "application/json",
-            // Accept: "application/json",
+            Accept: "application/json",
         },
             body: JSON.stringify({ username, email, password, confirmPassword, _csrf })
          })

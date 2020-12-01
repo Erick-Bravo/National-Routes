@@ -9,7 +9,7 @@ const { environment } = require("../config");
 
 
 router.post("/sign-up", (req, res, next) => {
-    console.log(req.body.username, req.cookies)
+    console.log(req.body, req.cookies)
     next()
 }, csrfProtection, signUpValidator, asyncHandler(async(req, res) => {
 
