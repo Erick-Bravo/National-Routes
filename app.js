@@ -8,7 +8,8 @@ const path = require("path");
 
 
 //importing local files
-const router = require('./routes.js');
+const router = require('./routes/routes.js');
+const authRouter = require("./routes/authentication.js")
 const { sequelize } = require('./db/models');
 const { environment, secret, sessionMaxAge} = require('./config');
 const store = new SequelizeStore({ db: sequelize });
@@ -37,9 +38,11 @@ app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sessionSettings));  //setting a session
 app.use(morgan('dev'));             //request logs in terminal
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));     //all req.body encoded
 app.use(cookieParser());            //cookie-check
 app.use(router);                    //sending request to check on router
+app.use(authRouter)
 
 //error handlers
 //if none of the routes and methodes matched - create 404 error
