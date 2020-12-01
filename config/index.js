@@ -8,12 +8,6 @@ module.exports = {
         database: process.env.DB_DATABASE,
         host: process.env.DB_HOST,
     },
-    sessionSettings: {
-        secret: process.env.SESSION_SECRET || uuidv4(),
-        resave: false,
-        saveUninitialized: false,
-        httpOnly: true,
-        maxAge: 86400000,
-        secure: true
-      }
+    secret: process.env.SESSION_SECRET || uuidv4(),
+    sessionMaxAge: parseInt(process.env.SESSION_MAX_AGE) || null
 };
