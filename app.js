@@ -3,20 +3,35 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require("path");
 
 
 //importing local files
 const router = require('./routes.js');
-const { environment, sessionSettings} = require('./config');
+const { sequelize } = require('./db/models');
+const { environment, secret, sessionMaxAge} = require('./config');
+const store = new SequelizeStore({ db: sequelize });
+const sessionSettings = {
+    secret,
+    store,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        maxAge: sessionMaxAge,
+        // secure: true
+    }
+};
 
+// create Session table if it doesn't already exist
+store.sync();
 
 //creating server
 const app = express();
 
 //server settings
 app.set('view engine', 'pug');
-
 
 //entry points
 app.use(express.static(path.join(__dirname, 'public')));
