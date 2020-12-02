@@ -17,6 +17,14 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken()})
 
 }));
+// MY ROUTES
+router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
+    const parks = await db.Park.findAll();
+    res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
+
+}));
+
+
 
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req,res) => {

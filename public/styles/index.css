@@ -1,6 +1,7 @@
 @import "header.css";
 @import "main.css";
 @import "park-list.css";
+@import "my-routes.css";
 
 @font-face {
   font-family: Park;
