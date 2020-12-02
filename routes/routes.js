@@ -17,6 +17,18 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
   res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken() });
 
 }));
+  //INDIVIDUAL PARK
+router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
+  const parkId = parseInt(req.params.id);
+  console.log(parkId)
+  let park = await db.Park.findByPk(parkId, {
+    include: db.State
+  });
+  park = await park.toJSON();
+  const state = park.States.map( state => state.name).join(", ");
+  res.render('park-page', { park, state });
+
+}));
 
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
@@ -32,12 +44,7 @@ router.get("/sessionCheck", (req, res) => {
   };
 });
 
-router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
-  const parkId = req.params.id;
-  const park = await db.Park.findOne(parkId);
-  res.render('park-page', { park });
 
-}));
 
 //exporting router
 module.exports = router;
