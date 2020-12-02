@@ -1,5 +1,5 @@
-if !user
-    form(action="/login-in" method="post" class="login-in")
+form(action="/login-in" method="post" class="login-in")
+    if !user
         input(type="email" name="email" placeholder="Email")
         br
         input(type="password" name="password" placeholder="Password")
@@ -7,5 +7,5 @@ if !user
         button(type="submit" class="login-button") LOGIN
         br
         a(href="/demo" class="demo-user-button") DEMO LOGIN
-else
-    a(href="/logout" class="demo-user-button") LOGOUT
+    else
+        a(href="/logout" class="logout-button") LOGOUT

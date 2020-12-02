@@ -48,28 +48,33 @@ const signUpValidator = [
         // .withMessage("Password confirmation is incorrect")
 ]
 
-const checkAuth = (req, res, next) => {
+const getUserFromSession = (req) => {
     if (req.session.auth) {
         const id = parseInt(req.session.auth.userId);
         const user = db.User.findByPk(id)
         if (user)
-            return next();
+            return user;
+        else
+            delete req.session.auth;
     }
-
-    delete req.session.auth
-    const err = new Error("Page not found");
-    err.status = 404;
-    next(err);
-
+    return false;
 }
 
-
-
+const checkAuth = (req, res, next) => {
+    let user = getUserFromSession(req);
+    if (user) next();
+    else {
+        const err = new Error("Page not found");
+        err.status = 404;
+        next(err);
+    }
+}
 
 module.exports = {
     asyncHandler,
     csrfProtection,
     signUpValidator,
     validationResult,
+    getUserFromSession,
     checkAuth
 }

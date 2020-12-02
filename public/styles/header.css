@@ -52,14 +52,14 @@ header > div {
   border: 1px solid white;
 }
 
-.login-in > a {
+.login-in > a, .logout-button {
   font-size: 11px;
   font-family: Park;
   text-decoration: none;
   color: black;
 }
 
-.demo-user-button {
+.demo-user-button, .logout-button {
   box-sizing: border-box;
   padding: 6px;
   height: 30px;

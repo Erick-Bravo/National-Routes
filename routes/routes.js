@@ -4,7 +4,7 @@ const express = require("express");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection, checkAuth } = require("./utiles");
+const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require("./utiles");
 const { route } = require("./authentication");
 
 //defining global variables and helper functions
@@ -14,7 +14,8 @@ const router = express.Router();
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-    res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken()})
+    const user = getUserFromSession(req);
+    res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
 
 }));
 
