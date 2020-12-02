@@ -1,5 +1,9 @@
-form(action="/login-in" method="post" class="login-in")
+form(action="/login" method="post" id="login" class="login-user")
     if !user
+        div.errors
+        div
+        input(type="hidden" name="_csrf" value=token)
+        br
         input(type="email" name="email" placeholder="Email")
         br
         input(type="password" name="password" placeholder="Password")

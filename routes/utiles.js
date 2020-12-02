@@ -12,7 +12,7 @@ const csrfProtection = csrf( {cookie: true} );
 const signUpValidator = [
     check("username")
         .exists({ checkFalsy: true })
-        .withMessage("Please Provide Valid User Name")
+        .withMessage("Please provide valid user name")
         .isLength({ min: 3, max: 50 })
         .withMessage("Username needs to be 3 to 50 characters long")
         .custom(value => {
@@ -24,7 +24,7 @@ const signUpValidator = [
         }),
     check("email")
         .exists({ checkFalsy: true })
-        .withMessage("Please Provide Valid Email")
+        .withMessage("Please provide valid email")
         .custom(value => {
             return db.User.findOne({ where: { email: value } }).then(user => {
                 if (user) {
@@ -37,7 +37,7 @@ const signUpValidator = [
         .withMessage("Please enter a valid Email"),
     check("password")
         .exists({ checkFalsy: true })
-        .withMessage("Please Provide Valid User Name")
+        .withMessage("Please provide a valid password")
         .isLength({ min: 6})
         .withMessage("Password needs to be longer than 6 characters")
         // .custom((value, { req }) => {
@@ -69,6 +69,26 @@ const checkAuth = (req, res, next) => {
         next(err);
     }
 }
+const loginValidators = [
+    check("email")
+        .exists({ checkFalsy: true })
+        .withMessage("Please nter your email address")
+        .custom(value => {
+            return User.findOne({ where: { email: value } }).then(user => {
+                if(!user) {
+                    return Promise.reject("The email entered does not exist")
+                }
+            })
+        })
+        .withMessage("Email does not exist")
+        .isEmail()
+        .withMessage("Please enter a valid email"),
+    check("password")
+        .exists({ checkFalsy: true })
+        .withMessage("Please Enter Your Password"),
+]
+
+
 
 module.exports = {
     asyncHandler,
@@ -76,5 +96,6 @@ module.exports = {
     signUpValidator,
     validationResult,
     getUserFromSession,
-    checkAuth
+    checkAuth,
+    loginValidators
 }
