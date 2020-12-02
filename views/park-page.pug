@@ -1,11 +1,29 @@
-extends layout.pug
+html( lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" type="text/css" href="../styles/index.css")
+        title National Routes-#{park.name}
+    body
+        header
+            div
+                h1 National Routes
+                img(src=`../img/mountains.png` class=`mountains-img`)
+                include login-in.pug
+            nav
+                a(href="/") HOME
+                a(href="/my-routes") MY ROUTES
+                a(href="/") BROWSE
+                input(type="text" placeholder="Search Parks" class="search-bar")
+                button(type="submit" class="search-bar-button") SEARCH
+        main
+            div(class="park-image")
+              img(src=`../img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+            div(class="park-details")
+                div(class="park-name")
+                    h1= park.name
 
-block content
-    div(class="park-details")
-        div(class="park-name")
-            h1= park.name
-
-        div(class= "park-location")
-            h3= state
-        div(class="park-info")
-            p= park.description
+                div(class= "park-location")
+                    h3= state
+                div(class="park-info")
+                    p= park.description
