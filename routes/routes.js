@@ -23,8 +23,9 @@ router.get('/parks', asyncHandler(async (req, res) => {
   const parks = await db.Park.findAll();
   res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
 }));
+
   //INDIVIDUAL PARK
-router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
+router.get('/parks/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
   console.log(parkId)
   let park = await db.Park.findByPk(parkId, {
@@ -32,10 +33,11 @@ router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
   });
   park = await park.toJSON();
   const state = park.States.map( state => state.name).join(", ");
-  res.render('park-page', { park, state });
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken() });
 
 }));
-// MY ROUTES
+
+  // MY ROUTES
 router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll();
     res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
