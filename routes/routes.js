@@ -4,7 +4,8 @@ const express = require("express");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection } = require("./utiles")
+const { asyncHandler, csrfProtection } = require("./utiles");
+const { route } = require("./authentication");
 
 
 //defining global variables and helper functions
@@ -17,12 +18,26 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken()})
 
 }));
-// MY ROUTES
-router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
-    const parks = await db.Park.findAll();
-    res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
 
-}));
+// // MY ROUTES
+// router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
+//     const parks = await db.Park.findAll();
+//     res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
+
+// }));
+
+router.get("/my-routes", asyncHandler(async (req, res) => {
+    const userId = 2;
+    let user = await db.User.findOne({
+        where: { id: userId },
+        include: db.Park,
+    });
+
+    user = await user.toJSON()
+    console.log(user.Parks[0])
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks })
+}))
+
 
 
 

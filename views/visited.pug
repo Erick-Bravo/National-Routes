@@ -1,0 +1,15 @@
+ul.visited-list
+    h1="VISITED PARKS"
+    each park in parks
+        div(id=`park-${park.id}` class='visited-list-item')
+            a(href=`/parks/${park.id}`)
+                img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+            p #{park.name}
+            div
+                span(class="fa fa-star star-1")
+                span(class="fa fa-star star-2")
+                span(class="fa fa-star star-3")
+                span(class="fa fa-star star-4")
+                span(class="fa fa-star star-5")
+            //- p #{park.createdAt}
+            button(type="submit" name="delete" class="remove") REMOVE

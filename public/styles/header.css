@@ -43,9 +43,27 @@ header > div {
 
 .login-button {
   height: 30px;
-  width: 60px;
+  width: 50px;
   font-size: 13px;
   font-family: Park;
+  margin-left: 10px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+}
+
+.login-in > a {
+  font-size: 11px;
+  font-family: Park;
+  text-decoration: none;
+  color: black;
+}
+
+.demo-user-button {
+  box-sizing: border-box;
+  padding: 6px;
+  height: 30px;
+  /* width: 80px; */
   margin-left: 10px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.7);
