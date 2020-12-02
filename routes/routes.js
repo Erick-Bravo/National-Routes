@@ -35,6 +35,14 @@ router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
   res.render('park-page', { park, state });
 
 }));
+// MY ROUTES
+router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
+    const parks = await db.Park.findAll();
+    res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
+
+}));
+
+
 
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {

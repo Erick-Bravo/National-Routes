@@ -9,21 +9,21 @@
 .park-list-item > a > img {
   max-width: 100%;
   max-height: 100%;
-  filter: drop-shadow(6px 6px 10px #404040);
+  /* filter: drop-shadow(6px 6px 10px #404040); */
 }
 
 .park-list {
   display: flex;
-  max-width: 800px;
+  /* max-width: 800px; */
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .register-new-user {
   width: 400px;
   height: 400px;
-  box-shadow: 8px 8px 10px grey;
+  /* box-shadow: 8px 8px 10px grey; */
   margin: 70px 50px 50px 50px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
@@ -31,6 +31,7 @@
 
 .register-new-user > div {
   margin: 40px;
+  width: 400px;
 }
 .register-new-user > div > input {
   height: 30px;
@@ -38,6 +39,7 @@
   margin-bottom: 10px;
   padding-left: 5px;
   border-radius: 5px;
+  border: 1px solid white;
 }
 
 .register-new-user > div > h2 {
@@ -45,12 +47,13 @@
   font-size: 25px;
 }
 
-.signup-button {
+.sign-up-button {
   width: 65px;
-  height: 35px;
+  height: 30px;
   margin-top: 10px;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.9);
   font-family: Park;
   font-size: 13px;
+  border: 1px solid white;
 }

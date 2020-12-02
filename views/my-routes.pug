@@ -1,0 +1,88 @@
+extends layout
+
+block content
+    include create-new-route.pug
+
+    div.visited-list
+        //- h1="VISITED"
+        //- for each park in visited
+        //-     div(id=`park-${park.id}` class='park-list-item')
+        //-         a(href=`/parks/${park.id}`)
+        //-             img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+        //-         p ${park.name}
+        //-         div
+        //-             span(class="fa fa-star star-1")
+        //-             span(class="fa fa-star star-2")
+        //-             span(class="fa fa-star star-3")
+        //-             span(class="fa fa-star star-4")
+        //-             span(class="fa fa-star star-5")
+        //-         p ${park.dateCreated}
+        //-         button(type="submit" name="delete" class="remove") REMOVE
+
+        h1="VISITED"
+        div(id=`park-1` class='visited-list-item')
+            a(href=`/park/1`)
+            img(src=`./img/park-19.png` class=`park-image`)
+            p Everglades
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            button(type="submit" name="delete" class="remove") REMOVE
+        div(id=`park-7` class='visited-list-item')
+            a(href=`/park/7`)
+            img(src=`./img/park-30.png` class=`park-image`)
+            p Haleakalā
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star "></span>
+            button(type="submit" name="delete" class="remove") REMOVE
+        div(id=`park-40` class='visited-list-item')
+            a(href=`/park/40`)
+            img(src=`./img/park-40.png` class=`park-image`)
+            p Lake Clark National Park
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            button(type="submit" name="delete" class="remove") REMOVE
+        div(id=`park-40` class='visited-list-item')
+            a(href=`/park/40`)
+            img(src=`./img/park-7.png` class=`park-image`)
+            p Black Canyon of the Gunnison
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            button(type="submit" name="delete" class="remove") REMOVE
+        div(id=`park-27` class='visited-list-item')
+            a(href=`/park/40`)
+            img(src=`./img/park-56.png` class=`park-image`)
+            p Voyageurs
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+            button(type="submit" name="delete" class="remove") REMOVE
+        div(id=`park-27` class='visited-list-item')
+            a(href=`/park/1`)
+            img(src=`./img/park-1.png` class=`park-image`)
+            p Acadia National Park
+            div
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            button(type="submit" name="delete" class="remove") REMOVE
