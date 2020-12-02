@@ -1,10 +1,10 @@
 //importing modules
 const express = require("express");
-const { asyncHandler, csrfProtection } = require("./utiles")
 
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
+const { asyncHandler, csrfProtection } = require("./utiles")
 
 
 //defining global variables and helper functions

@@ -33,18 +33,19 @@ const signUpValidator = [
             });
         })
         .withMessage("Email already in use")
-        // .isEmail()
+        .isEmail()
         .withMessage("Please enter a valid Email"),
-    // check("password")
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please Provide Valid User Name")
-    //     .isLength({ min: 6})
-    //     .withMessage("Password needs to be longer than 6 characters")
-    //     .custom((value, { req }) => {
-    //         if (value !== req.body.confirmPassword) {
-    //           throw new Error('Password confirmation is incorrect');
-    //         }
-    //     })
+    check("password")
+        .exists({ checkFalsy: true })
+        .withMessage("Please Provide Valid User Name")
+        .isLength({ min: 6})
+        .withMessage("Password needs to be longer than 6 characters")
+        // .custom((value, { req }) => {
+        //     if (value !== req.body.confirmPassword) {
+        //       throw new Error('Password confirmation is incorrect');
+        //     }
+        // })
+        // .withMessage("Password confirmation is incorrect")
 ]
 
 
