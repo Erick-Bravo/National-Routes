@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", () => {
         result = await result.json();
 
         if(!result.errors) {
-            location.href = "/routes";
+            location.href = "/my-routes";
             return;
         } else {
             const errorDiv = document.querySelector("#sign-up-form div.errors");
@@ -32,4 +32,24 @@ window.addEventListener("DOMContentLoaded", () => {
             })
         }
     })
+
+    const newRouteForm = document.querySelector("#create-new-route")
+    newRouteForm.addEventListener("submit", async(e) => {
+        e.preventDefault();
+
+        let newRoute = document.querySelector("#create-new-route input[name='new-route']").value;
+        let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value;
+
+        let result = await fetch("/my-routes/add", {
+            init: {credentials: "same-origin"},
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({ newRoute, _csrf})
+        })
+
+        result = await result.json();
+
+    })
+
+
 })
