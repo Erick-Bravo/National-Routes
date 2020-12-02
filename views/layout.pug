@@ -7,17 +7,13 @@ html( lang="en")
         script(src="./scripts.js")
         title National Routes - #{title}
     body
-        header
+        header(id="header")
             div
-                h1= title
-                img(src=`./img/mountains.png` class=`mountains-img`)
+                div(class="title")
+                    h1= title
+                    img(src=`./img/mountains.png` class=`mountains-img`)
                 include login-in.pug
-            nav
-                a(href="/") HOME
-                a(href="/my-routes") MY ROUTES
-                a(href="/") BROWSE
-                input(type="text" placeholder="Search Parks" class="search-bar")
-                button(type="submit" class="search-bar-button") SEARCH
+            include navbar.pug
         main
             block content
         footer

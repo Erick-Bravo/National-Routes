@@ -1,0 +1,18 @@
+form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new-route")
+  div
+    h2 CREATE A NEW A ROUTE
+    input(type="hidden" name="_csrf" value=token)
+    br
+    input(type="text" name="new-route" placeholder="New Route Name")
+    br
+    label Add Routes
+    br
+    select(name="select-routes" placeholder="Select Route")
+        option(value="select")
+        option(value="park-1") Acadia
+        option(value="park-2") American Samoa
+        option(value="park-3") Arches
+        option(value="park-4") Badlands
+        option(value="park-5") Big Bend
+    br
+    button(type="submit" class="create-route-button") CREATE ROUTE
