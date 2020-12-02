@@ -1,8 +1,6 @@
 extends layout
 
 block content
-  include sign-up-form.pug
-
   div.park-list
     each park in parks
       div(id=`park-${park.id}` class='park-list-item')

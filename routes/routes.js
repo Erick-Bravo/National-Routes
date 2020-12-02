@@ -17,6 +17,12 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
   res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken() });
 
 }));
+
+  // FULL PARKS LIST
+router.get('/parks', asyncHandler(async (req, res) => {
+  const parks = await db.Park.findAll();
+  res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
+}));
   //INDIVIDUAL PARK
 router.get('/parks/:id(\\d+)', asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
