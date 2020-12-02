@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING.BINARY,
       allowNull: false
     }
-  }, {});
+  }, {freezeTableName: true});
   User.associate = function(models) {
     User.belongsToMany(models.Park, {
       through: 'Visited',
