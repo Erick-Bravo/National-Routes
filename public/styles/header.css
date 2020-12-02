@@ -27,13 +27,13 @@ header > div {
   height: 70px;
 }
 
-.login-in {
+.login {
   display: flex;
   /* align-self: flex-end; */
   margin: 60px 30px 30px 220px;
 }
 
-.login-in > input {
+.login > input {
   height: 30px;
   margin-left: 10px;
   border-radius: 5px;
