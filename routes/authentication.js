@@ -51,13 +51,15 @@ router.post("/login",
         let errors = []
         const validatorErrors = validationResult(req)
 
+        res.json({})
+
         if(validatorErrors.isEmpty()) {
 
         } else {
             errors = validatorErrors.array().map((error) => error.msg)
             res.json({ errors });
         }
-
+        res.render("user-login", { title: "Login", email, errors, token: req.csrfToken() })
 }))
 
 
