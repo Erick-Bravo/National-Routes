@@ -1,6 +1,6 @@
 const csrf = require("csurf");
 const { check, validationResult } = require("express-validator")
-const { User } = require("../db/models")
+const db = require("../db/models")
 
 
 const asyncHandler = (handler) =>
@@ -16,7 +16,7 @@ const signUpValidator = [
         .isLength({ min: 3, max: 50 })
         .withMessage("Username needs to be 3 to 50 characters long")
         .custom(value => {
-            return User.findOne({ where: { username: value } }).then(user => {
+            return db.User.findOne({ where: { username: value } }).then(user => {
                 if (user) {
                     return Promise.reject('Username already in use');
                 }
@@ -26,7 +26,7 @@ const signUpValidator = [
         .exists({ checkFalsy: true })
         .withMessage("Please Provide Valid Email")
         .custom(value => {
-            return User.findOne({ where: { email: value } }).then(user => {
+            return db.User.findOne({ where: { email: value } }).then(user => {
                 if (user) {
                     return Promise.reject('E-mail already in use');
                 }
@@ -48,6 +48,20 @@ const signUpValidator = [
         // .withMessage("Password confirmation is incorrect")
 ]
 
+const checkAuth = (req, res, next) => {
+    if (req.session.auth) {
+        const id = parseInt(req.session.auth.userId);
+        const user = db.User.findByPk(id)
+        if (user)
+            return next();
+    }
+
+    delete req.session.auth
+    const err = new Error("Page not found");
+    err.status = 404;
+    next(err);
+
+}
 
 
 
@@ -56,5 +70,6 @@ module.exports = {
     asyncHandler,
     csrfProtection,
     signUpValidator,
-    validationResult
+    validationResult,
+    checkAuth
 }

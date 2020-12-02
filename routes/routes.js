@@ -4,9 +4,8 @@ const express = require("express");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection } = require("./utiles");
+const { asyncHandler, csrfProtection, checkAuth } = require("./utiles");
 const { route } = require("./authentication");
-
 
 //defining global variables and helper functions
 const router = express.Router();
@@ -26,15 +25,10 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
 
 // }));
 
-router.get("/my-routes", asyncHandler(async (req, res) => {
-    let userId = 2; //temporary
-    if (req.session.auth) {
-        const id = parseInt(req.session.auth.userId);
-        const user = db.User.findByPk(id)
-        if (user) userId = id;
-    }
+router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+    const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
-        where: { id: userId },
+        where: { id },
         include: db.Park,
     });
 
