@@ -1,53 +1,64 @@
-.visited-list {
+.visited-list,
+.custom-routes-list {
   margin: 60px;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  width: 100%;
-  height: auto;
+  /* width: 400px; */
+  /* height: auto; */
   /* margin: 60px 50px 50px 50px; */
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 25px;
   padding: 20px;
 }
 
-.visited-list > h1 {
+.visited-list > h1,
+.custom-routes-list > h1 {
   font-family: Park-Thin;
-  font-size: 35px;
+  font-size: 30px;
   align-self: flex-start;
-  padding-left: 35px;
+  padding-left: 25px;
 }
 
-.visited-list-item {
+.custom-route {
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 10px 20px 10px 10px;
+}
+
+.custom-routes-list > h2 {
+  font-family: Park-Thin;
+  font-size: 15px;
+  align-self: flex-start;
+  padding-left: 25px;
+}
+.visited-list-item,
+.custom-routes-list-item {
   display: flex;
   flex-direction: row;
-  padding: 0px 20px 12px 50px;
+  padding: 10px 20px 12px 30px;
   /* justify-content: space-between; */
   align-items: center;
   align-content: flex-start;
 }
 
-.park-image {
+.visited-list-item > a > img,
+.custom-routes-list-item > a > img {
   width: 80px;
   height: auto;
   box-sizing: border-box;
   margin-right: 25px;
 }
 
-.visited-list-item > p {
+.visited-list-item > p,
+.custom-routes-list-item > p {
   font-family: Park-Thin;
-  font-size: 25px;
-  margin-right: 25px;
+  font-size: 20px;
+  margin-right: 20px;
 }
 
 .date {
   font-family: Park-Thin;
   font-size: 10px;
-}
-
-.visited-list-item > img {
-  max-width: 100%;
-  max-height: 100%;
-  filter: drop-shadow(6px 6px 10px #404040);
 }
 
 .remove {
@@ -63,9 +74,10 @@
 }
 
 .create-new-route {
-  width: 350px;
-  height: 350px;
-  margin: 60px 160px 50px 80px;
+  display: inline-flex;
+  width: 300px;
+  height: 300px;
+  margin: 60px 50px 50px 80px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 25px;
   font-family: Park-Thin;
@@ -85,7 +97,7 @@
 }
 
 .create-new-route > div > h2 {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .create-route-button {

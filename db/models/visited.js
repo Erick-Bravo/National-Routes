@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         min: 1
       }
     }
-  }, {});
+  }, {freezeTableName: true,});
+
   Visited.associate = function(models) {
     Visited.hasMany(models.Review, {
       foreignKey: 'visitedId'

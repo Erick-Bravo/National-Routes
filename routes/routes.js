@@ -5,6 +5,7 @@ const express = require("express");
 const db = require("../db/models");
 const { environment } = require("../config");
 const { asyncHandler, csrfProtection } = require("./utiles");
+const { route } = require("./authentication");
 
 
 //defining global variables and helper functions
@@ -39,14 +40,29 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 
 }));
 
-  // MY ROUTES
-router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
-    const parks = await db.Park.findAll();
-    res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
+// // MY ROUTES
+// router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
+//     const parks = await db.Park.findAll();
+//     res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
 
-}));
+// }));
 
+router.get("/my-routes", asyncHandler(async (req, res) => {
+    let userId = 2; //temporary
+    if (req.session.auth) {
+        const id = parseInt(req.session.auth.userId);
+        const user = db.User.findByPk(id)
+        if (user) userId = id;
+    }
+    let user = await db.User.findOne({
+        where: { id: userId },
+        include: db.Park,
+    });
 
+    user = await user.toJSON()
+    console.log(user.Parks[0])
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks })
+}))
 
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
