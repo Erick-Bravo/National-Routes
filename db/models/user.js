@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING.BINARY,
       allowNull: false
     }
-  }, {});
+  },{});
   User.associate = function(models) {
     User.belongsToMany(models.Park, {
-      through: 'Visiteds',
+      through: 'Visited',
       foreignKey: 'userId',
       otherKey: 'parkId'
     });
