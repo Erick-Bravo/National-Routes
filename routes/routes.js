@@ -27,7 +27,12 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
 // }));
 
 router.get("/my-routes", asyncHandler(async (req, res) => {
-    const userId = 2;
+    let userId = 2; //temporary
+    if (req.session.auth) {
+        const id = parseInt(req.session.auth.userId);
+        const user = db.User.findByPk(id)
+        if (user) userId = id;
+    }
     let user = await db.User.findOne({
         where: { id: userId },
         include: db.Park,

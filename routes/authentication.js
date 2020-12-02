@@ -25,9 +25,21 @@ router.post("/sign-up", csrfProtection, signUpValidator, asyncHandler(async(req,
     }
 }))
 
-router.get("/routes", (req, res) => {
-    res.send("Welcome !#$%^&");
-})
+router.get("/demo", asyncHandler( async (req, res) => {
+    const user = await db.User.findOne({
+        where: {
+            username: "DemoUser",
+            email: "DemoUser@NatlRoutes.com"
+        }
+    });
+    console.log(user);
+    if (!user) {
+        res.send("Please seed all files");
+    } else {
+        req.session.auth = {userId: user.id, username: user.username};
+        res.redirect('/my-routes');
+    }
+}))
 
 
 
