@@ -27,13 +27,13 @@ header > div {
   height: 70px;
 }
 
-.login {
+.login-user {
   display: flex;
   /* align-self: flex-end; */
   margin: 60px 30px 30px 220px;
 }
 
-.login > input {
+.login-user > input {
   height: 30px;
   margin-left: 10px;
   border-radius: 5px;
@@ -52,14 +52,14 @@ header > div {
   border: 1px solid white;
 }
 
-.login-in > a {
+.login-user > a, .logout-button {
   font-size: 11px;
   font-family: Park;
   text-decoration: none;
   color: black;
 }
 
-.demo-user-button {
+.demo-user-button, .logout-button {
   box-sizing: border-box;
   padding: 6px;
   height: 30px;

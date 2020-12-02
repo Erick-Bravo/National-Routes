@@ -50,6 +50,10 @@ router.get("/demo", asyncHandler( async (req, res) => {
     }
 }))
 
+router.get("/logout", asyncHandler( async (req, res) => {
+    delete req.session.auth;
+    res.redirect("/");
+}))
 //Login
 
 router.post("/login",
