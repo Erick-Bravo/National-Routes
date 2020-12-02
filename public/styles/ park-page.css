@@ -1,0 +1,19 @@
+.park-image{
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.park-image > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.park-full{
+  display: flex;
+  /* max-width: 800px; */
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 60px;
