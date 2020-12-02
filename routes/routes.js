@@ -10,6 +10,8 @@ const { asyncHandler, csrfProtection } = require("./utiles");
 //defining global variables and helper functions
 const router = express.Router();
 
+// router.use(express.static('public'));
+
 // entry points like:
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
@@ -25,7 +27,7 @@ router.get('/parks', asyncHandler(async (req, res) => {
 }));
 
   //INDIVIDUAL PARK
-router.get('/parks/:id(\\d+)', csrfProtection, asyncHandler(async (req, res) => {
+router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
   console.log(parkId)
   let park = await db.Park.findByPk(parkId, {
