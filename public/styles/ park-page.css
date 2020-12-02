@@ -1,4 +1,4 @@
-.park-image{
+.park-image {
   width: 150px;
   height: 150px;
   box-sizing: border-box;
@@ -7,13 +7,20 @@
 }
 
 .park-image > img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 200px;
   max-height: 100%;
+  /* filter: drop-shadow(6px 6px 10px #404040); */
 }
 
-.park-full{
+/* .park-details{
+
+} */
+
+.park-full {
   display: flex;
   /* max-width: 800px; */
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 60px;
+}
