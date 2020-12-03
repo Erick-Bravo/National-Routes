@@ -31,6 +31,7 @@
   align-self: flex-start;
   padding-left: 25px;
 }
+
 .visited-list-item,
 .custom-routes-list-item {
   display: flex;
@@ -71,33 +72,6 @@
   font-family: Park;
   font-size: 9px;
   margin-left: 60px;
-}
-
-.create-new-route {
-  display: inline-flex;
-  width: 300px;
-  height: 300px;
-  margin: 60px 50px 50px 80px;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 25px;
-  font-family: Park-Thin;
-}
-
-.create-new-route > div {
-  margin: 40px;
-  width: 300px;
-}
-.create-new-route > div > input {
-  height: 30px;
-  width: 200px;
-  margin-bottom: 10px;
-  padding-left: 5px;
-  border-radius: 5px;
-  border: 1px solid white;
-}
-
-.create-new-route > div > h2 {
-  font-size: 20px;
 }
 
 .create-route-button {
