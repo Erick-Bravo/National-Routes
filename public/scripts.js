@@ -55,9 +55,10 @@ window.addEventListener("DOMContentLoaded", () => {
         result = await result.json()
 
         if(!result.errors) {
-            location.href = "/routes"
+            location.href = "/my-routes"
         } else {
             const errorDiv = document.querySelector("#login div.errors");
+            console.log(errorDiv);
             errorDiv.innerHTML = "";
             result.errors.forEach(error => {
                 const div = document.createElement("div");
@@ -67,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    
+
     const newRouteForm = document.querySelector("#create-new-route")
     newRouteForm.addEventListener("submit", async(e) => {
         e.preventDefault();
