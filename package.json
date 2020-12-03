@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r dotenv/config ./bin/www"
+    "start": "per-env",
+    "start:development":"nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "express-validator": "^6.7.0",
     "g": "^2.0.1",
     "morgan": "^1.10.0",
+    "per-env": "^1.0.2",
     "pg": "^8.5.1",
     "pug": "^2.0.4",
     "pug-cli": "^1.0.0-alpha6",
