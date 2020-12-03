@@ -16,9 +16,8 @@ const router = express.Router();
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-    const user = getUserFromSession(req);
+    const user = await getUserFromSession(req);
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
-
 }));
 
   // FULL PARKS LIST
