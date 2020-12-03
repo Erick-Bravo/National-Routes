@@ -7,12 +7,10 @@ form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new
     br
     label Add Routes
     br
-    select(name="select-routes" placeholder="Select Route")
-        option(value="select")
-        option(value="park-1") Acadia
-        option(value="park-2") American Samoa
-        option(value="park-3") Arches
-        option(value="park-4") Badlands
-        option(value="park-5") Big Bend
+    div.park-options
+    each park in parks
+      input(type="checkbox" id=`park-${park.id}` class='park-options-item')
+      a(href=`/park/${park.id}`)
+          img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     br
     button(type="submit" class="create-route-button") CREATE ROUTE
