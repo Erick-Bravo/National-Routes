@@ -16,9 +16,8 @@ const router = express.Router();
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-    const user = getUserFromSession(req);
+    const user = await getUserFromSession(req);
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
-
 }));
 
   // FULL PARKS LIST
@@ -38,26 +37,28 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const state = park.States.map(state => state.name).join(", ");
 
   let visited = await db.Visited.findAll({
-    where: {parkId: parkId},
-    include: [db.Review, db.User]
+    where: {parkId},
+    include: [db.User, db.Review]
   });
 
-  let reviewsObj = visited.map(visit => {
-    let visitArr = visit.Reviews;
-    let array = [];
-    console.log(visitArr)
-    // visitArr.forEach(visit => array.push(...visit))
-    return visit;
-  })
+  let reviews = [];
+  if (visited)
+    visited.forEach(park => {
+        park = park.toJSON();
+        const user = {username: park.User.username, userId: park.User.id};
+        park.Reviews.forEach(review => {
+          review.user = user;
+          reviews.push(review);
+        })
+    });
 
-  const users = visited.map(visit => visit.User.toJSON())
-  // const users = visited.User
-  console.log();
-  console.log("THIS IS VISITED RETURN TYPE ======", typeof reviewsObj);
-  console.log(reviewsObj)
-  console.log()
-  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), users });
-
+  reviews.sort((a,b) => {
+    if (a.createdAt < b.createdAt) return 1
+    else if (a.createdAt > b.createdAt) return -1
+    else return 0
+  });
+  const user = await getUserFromSession(req);
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
 }));
 

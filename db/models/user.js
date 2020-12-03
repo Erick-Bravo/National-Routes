@@ -22,12 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       otherKey: 'parkId'
     });
+
     User.hasMany(models.Route, {
       foreignKey: 'userId'
-    })
+    });
+
     User.hasMany(models.Visited, {
-      foreignKey: "userId"
-    })
+      foreignKey: 'userId'
+    });
   };
   return User;
 };
