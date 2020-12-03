@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  div.park-full
+    div(class="park-image")
+      img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+    div(class="park-details")
+        div(class="park-name")
+            h1= park.name
+
+        div(class= "park-location")
+            h3= state
+        div(class="park-info")
+            p= park.description
+    div
+      h2 Rate!
+      span(class="fa fa-star star-1")
+      span(class="fa fa-star star-2")
+      span(class="fa fa-star star-3")
+      span(class="fa fa-star star-4")
+      span(class="fa fa-star star-5")
+    div.reviews
+      h2 Reviews
+      ul
+        each review in reviews
+          li #{review.text}
