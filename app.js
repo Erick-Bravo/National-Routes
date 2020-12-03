@@ -35,14 +35,14 @@ const app = express();
 app.set('view engine', 'pug');
 
 //entry points
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sessionSettings));  //setting a session
 app.use(morgan('dev'));             //request logs in terminal
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));     //all req.body encoded
 app.use(cookieParser());            //cookie-check
 app.use(router);                    //sending request to check on router
-app.use(authRouter)
+app.use(express.static('public'));
+app.use(authRouter);
 
 //error handlers
 //if none of the routes and methodes matched - create 404 error
