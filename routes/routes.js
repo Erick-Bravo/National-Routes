@@ -37,15 +37,22 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   park = await park.toJSON();
   const state = park.States.map(state => state.name).join(", ");
 
-  let visited = await db.Visited.findOne({
+  let visited = await db.Visited.findAll({
     where: {parkId: parkId},
     include: db.Review
   });
 
-  const reviews = visited.toJSON().Reviews
+  let reviews = [];
+  if (visited)
+    visited.forEach(park => {
+        const reviewList = park.toJSON().Reviews;
+
+        reviews.push(...reviewList);
+    });
+
+  console.log(reviews);
 
   res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews });
-
 
 }));
 
