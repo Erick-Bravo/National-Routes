@@ -6,5 +6,20 @@ main {
 body {
   padding: 0;
   margin: 0;
-  background-image: linear-gradient(to bottom right, #8e9473, #e4fa78);
+  /* background-image: linear-gradient(to bottom right, #8e9473, #e4fa78); */
+  background-image: linear-gradient(
+    to left bottom,
+    #d16ba5,
+    #ee7488,
+    #f7896b,
+    #eda657,
+    #d3c458,
+    #bdd469,
+    #a3e282,
+    #85eea2,
+    #76f2b7,
+    #69f6cc,
+    #60f9df,
+    #5ffbf1
+  );
 }
