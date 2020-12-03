@@ -11,20 +11,22 @@
 .park-full{
   display: grid;
   margin-top: 60px;
+  margin-left: 60px;
   grid-template-columns: 50% 50%;
   grid-template:
     "picture picture details details"
     "picture picture details details"
+    "visit visit details details"
     "rating rating details details"
     "reviews reviews reviews reviews";
-  justify-content: center;
+  align-items: stretch;
+  justify-self: stretch;
   background-color: yellow;
 }
 
 .park-image {
   grid-area: picture;
-  max-width: 400px;
-  align-items: center;
+  align-items: stretch;
   margin-right: 30px;
   background-color: blue;
 }
@@ -35,9 +37,12 @@
 
 .park-details {
   grid-area: details;
-  max-width: 400px;
-  align-items: stretch;
+  align-items: start;
   background-color: purple;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .rating {
@@ -53,6 +58,15 @@
   background-color: pink;
 }
 
-.park-name > h1{
-  justify-content: start;
+p {
+  background-color: orange;
+}
+
+.visited {
+  grid-area: visit;
+}
+
+.park-header{
+  align-self: start;
+  background-color: gray;
 }
