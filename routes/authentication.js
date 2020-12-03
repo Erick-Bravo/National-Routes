@@ -57,13 +57,12 @@ router.get("/logout", asyncHandler( async (req, res) => {
 //Login
 router.post("/login", csrfProtection, loginValidators, asyncHandler (async(req, res) => {
 
-        const { email, password} = req.body;
+        const { email } = req.body;
 
         const validatorErrors = validationResult(req);
 
         if(validatorErrors.isEmpty()) {
             let user = await getUserByEmailCaseInsensitive(email);
-            console.log({userId: user.id, username: user.username});
             req.session.auth = {userId: user.id, username: user.username};
             res.json({})
         } else {

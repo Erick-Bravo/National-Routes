@@ -56,6 +56,7 @@ const signUpValidator = [
         .isLength({ min: 3, max: 50 })
         .withMessage("Username needs to be 3 to 50 characters long")
         .custom(value => {
+            //checkin if username exist case insensitive
             return db.User.findOne({ where: { username: { [Op.iLike]: value } } }).then(user => {
                 if (user) {
                     return Promise.reject('Username already in use');
@@ -109,9 +110,7 @@ const loginValidators = [
         .withMessage("Please Enter Your Password")
         .custom(async(value, {req}) => {
             let user = await getUserByEmailCaseInsensitive(req.body.email);
-            // db.User.findOne({ where: { email: req.body.email } });
             if(user){
-                // user = await user.toJSON();
                 const isPassword = await bcrypt.compare(value, user.password.toString());
                 if (!isPassword)
                     throw new Error('Invalid password');
