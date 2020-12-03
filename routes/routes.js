@@ -57,8 +57,8 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
     else if (a.createdAt > b.createdAt) return -1
     else return 0
   });
-
-  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews });
+  const user = await getUserFromSession(req);
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
 }));
 
