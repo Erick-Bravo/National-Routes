@@ -1,3 +1,11 @@
+@media screen and (max-width: 800px) {
+  .header,
+  .mountains-img,
+  .navbar {
+    width: 100%;
+  }
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -17,7 +25,7 @@ header > div {
   flex-direction: row;
   font-family: Park-Thin;
   color: black;
-  font-size: 25px;
+  font-size: 1.7vw;
   padding-left: 50px;
 }
 
@@ -27,13 +35,13 @@ header > div {
   height: 70px;
 }
 
-.login-in {
+.login-user {
   display: flex;
   /* align-self: flex-end; */
-  margin: 60px 30px 30px 220px;
+  margin: 60px 30px 30px 0px;
 }
 
-.login-in > input {
+.login-user > input {
   height: 30px;
   margin-left: 10px;
   border-radius: 5px;
@@ -52,14 +60,16 @@ header > div {
   border: 1px solid white;
 }
 
-.login-in > a {
+.login-user > a,
+.logout-button {
   font-size: 11px;
   font-family: Park;
   text-decoration: none;
   color: black;
 }
 
-.demo-user-button {
+.demo-user-button,
+.logout-button {
   box-sizing: border-box;
   padding: 6px;
   height: 30px;
@@ -75,10 +85,10 @@ header > div {
   height: 100px;
   width: auto;
 }
-
 nav {
-  height: 60px;
+  max-height: 60px;
   display: flex;
+  flex-wrap: no-wrap;
   background-color: rgba(255, 255, 255, 0.4);
   flex-direction: row;
   justify-content: space-between;
@@ -89,28 +99,47 @@ nav {
 }
 
 .nav-links {
+  display: flex;
+  white-space: nowrap;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .nav-links > a {
   color: #3b3b3b;
-  font-size: 25px;
+  font-size: 1.6vw;
   text-decoration: none;
   margin-left: 50px;
 }
 
+.search {
+  display: inline-block;
+  white-space: nowrap;
+  /* position: relative; */
+  width: 100%;
+  /* max-width: 600px; */
+  text-align: right;
+  /* flex-grow: 1; */
+  /* overflow: hidden; */
+}
+
 .search-bar {
-  width: 550px;
+  display: inline-block;
+  width: 100%;
+  max-width: 650px;
+  /* min-width: 350px; */
   height: 30px;
   border-radius: 5px;
   padding-left: 10px;
-  margin-left: 120px;
+  margin-left: 20px;
   border: 1px solid white;
+  /* overflow: hidden; */
 }
 
 .search-bar-button {
-  width: 70px;
+  display: inline-block;
+  width: 100%;
+  max-width: 70px;
   height: 25px;
   border-radius: 4px;
   font-size: 13px;
@@ -118,4 +147,5 @@ nav {
   background-color: rgba(255, 255, 255, 0.8);
   margin: 0 10px 0 10px;
   border: 1px solid white;
+  /* overflow: hidden; */
 }

@@ -1,7 +1,8 @@
-nav
+nav(class="navbar")
     div(class="nav-links")
         a(href="/") HOME
-        a(href="/my-routes") MY ROUTES
+        if user
+            a(href="/my-routes") MY ROUTES
         a(href="/") BROWSE
     div(class="search")
         input(type="text" placeholder="Search Parks" class="search-bar")

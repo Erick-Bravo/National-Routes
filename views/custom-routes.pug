@@ -1,12 +1,11 @@
 ul.custom-routes-list
     h1="Custom Routes"
     div(class="custom-route")
-        h2="Anna's COVID Adventure"
         //- each route in routes
-            div(id=`park-${park.id}` class='custom-routes-list-item')
-                a(href=`/parks/${park.id}`)
-                    img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
-                p #{park.name}
+        //-     div(id=`park-${park.id}` class='custom-routes-list-item')
+        //-         a(href=`/parks/${park.id}`)
+        //-             img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+        //-         p #{park.name}
         div
             span(class="fa fa-star star-1")
             span(class="fa fa-star star-2")

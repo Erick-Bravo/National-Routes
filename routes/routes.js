@@ -4,55 +4,79 @@ const express = require("express");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection } = require("./utiles");
+const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require("./utiles");
 const { route } = require("./authentication");
-
 
 //defining global variables and helper functions
 const router = express.Router();
+
+// router.use(express.static('public'));
 
 // entry points like:
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-    res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken()})
+    const user = await getUserFromSession(req);
+    res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
+}));
+
+  // FULL PARKS LIST
+router.get('/parks', asyncHandler(async (req, res) => {
+  const parks = await db.Park.findAll();
+  res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
+}));
+
+  //INDIVIDUAL PARK
+router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
+  const parkId = parseInt(req.params.id);
+  let park = await db.Park.findByPk(parkId, {
+    include: db.State
+  });
+
+  park = await park.toJSON();
+  const state = park.States.map(state => state.name).join(", ");
+
+  let visited = await db.Visited.findOne({
+    where: {parkId: parkId},
+    include: db.Review
+  });
+
+  const reviews = visited.toJSON().Reviews
+
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews });
+
 
 }));
 
 // // MY ROUTES
-// router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
-//     const parks = await db.Park.findAll();
-//     res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
 
-// }));
-
-router.get("/my-routes", asyncHandler(async (req, res) => {
-    const userId = 2;
+router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+    const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
-        where: { id: userId },
+        where: { id },
         include: db.Park,
     });
 
     user = await user.toJSON()
     console.log(user.Parks[0])
-    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks })
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 
-
-
-
 //TEMPORARY CHECKS SESSION
-router.get("/sessionCheck", (req,res) => {
+router.get("/sessionCheck", (req, res) => {
   if (req.session.views) {
-      req.session.views++
-      res.setHeader('Content-Type', 'text/html')
-      res.write('<p>views: ' + req.session.views + '</p>')
-      res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
-      res.end()
-    } else {
-      req.session.views = 1
-      res.end('welcome to the session demo. refresh!')
-    }
-})
+    req.session.views++
+    res.setHeader('Content-Type', 'text/html');
+    res.write('<p>views: ' + req.session.views + '</p>');
+    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>');
+    res.end();
+  } else {
+    req.session.views = 1
+    res.end('welcome to the session demo. refresh!');
+  };
+});
+
+
+
 //exporting router
 module.exports = router;

@@ -1,0 +1,16 @@
+form(action="/login" method="post" id="login" class="login-user")
+    if !user
+        div.errors
+        div
+        input(type="hidden" name="_csrf" value=token)
+        br
+        input(type="email" name="email" placeholder="Email")
+        br
+        input(type="password" name="password" placeholder="Password")
+        br
+        button(type="submit" class="login-button") LOGIN
+        br
+        a(href="/demo" class="demo-user-button") DEMO LOGIN
+    else
+        span Welcome, #{user.username}!
+        a(href="/logout" class="logout-button") LOGOUT
