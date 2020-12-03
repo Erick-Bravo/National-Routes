@@ -23,4 +23,5 @@ block content
       h2 Reviews
       ul
         each review in reviews
-          li #{review.text}
+          li #{review.user.username} said:
+            p #{review.text}
