@@ -55,7 +55,7 @@ const signUpValidator = [
         .isLength({ min: 3, max: 50 })
         .withMessage("Username needs to be 3 to 50 characters long")
         .custom(value => {
-            return db.User.findOne({ where: { username: value } }).then(user => {
+            return db.User.findOne({ where: { username: { [Op.iLike]: value } } }).then(user => {
                 if (user) {
                     return Promise.reject('Username already in use');
                 }
@@ -65,7 +65,7 @@ const signUpValidator = [
         .exists({ checkFalsy: true })
         .withMessage("Please provide valid email")
         .custom(value => {
-            return db.User.findOne({ where: { email: value } }).then(user => {
+            return getUserByEmailCaseInsensitive(value).then(user => {
                 if (user) {
                     return Promise.reject('E-mail already in use');
                 }
