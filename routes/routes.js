@@ -36,15 +36,29 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   park = await park.toJSON();
   const state = park.States.map(state => state.name).join(", ");
 
-  let visited = await db.Visited.findOne({
-    where: {parkId: parkId},
-    include: db.Review
+  let visited = await db.Visited.findAll({
+    where: {parkId},
+    include: [db.User, db.Review]
   });
 
-  const reviews = visited.toJSON().Reviews
+  let reviews = [];
+  if (visited)
+    visited.forEach(park => {
+        park = park.toJSON();
+        const user = {username: park.User.username, userId: park.User.id};
+        park.Reviews.forEach(review => {
+          review.user = user;
+          reviews.push(review);
+        })
+    });
 
-  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews });
-
+  reviews.sort((a,b) => {
+    if (a.createdAt < b.createdAt) return 1
+    else if (a.createdAt > b.createdAt) return -1
+    else return 0
+  });
+  const user = await getUserFromSession(req);
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
 }));
 
