@@ -1,0 +1,58 @@
+@media screen and (max-width: 800px) {
+  .park-full,
+  .header,
+  .mountains-img,
+  .navbar {
+    width: 100%;
+
+  }
+}
+
+.park-full{
+  display: grid;
+  margin-top: 60px;
+  grid-template-columns: 50% 50%;
+  grid-template:
+    "picture picture details details"
+    "picture picture details details"
+    "rating rating details details"
+    "reviews reviews reviews reviews";
+  justify-content: center;
+  background-color: yellow;
+}
+
+.park-image {
+  grid-area: picture;
+  max-width: 400px;
+  align-items: center;
+  margin-right: 30px;
+  background-color: blue;
+}
+
+.park-image > img {
+  max-width: 100%;
+}
+
+.park-details {
+  grid-area: details;
+  max-width: 400px;
+  align-items: stretch;
+  background-color: purple;
+}
+
+.rating {
+  grid-area: rating;
+  align-items: center;
+  margin-right: 30px;
+  background-color: cyan;
+
+}
+
+.reviews {
+  grid-area: reviews;
+  background-color: pink;
+}
+
+.park-name > h1{
+  justify-content: start;
+}

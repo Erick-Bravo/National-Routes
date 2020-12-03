@@ -6,13 +6,13 @@ block content
       img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
         div(class="park-name")
-            h1= park.name
+            h1 #{park.name} National Park
 
         div(class= "park-location")
-            h3= state
+            h3 #{state}, USA
         div(class="park-info")
             p= park.description
-    div
+    div.rating
       h2 Rate!
       span(class="fa fa-star star-1")
       span(class="fa fa-star star-2")
