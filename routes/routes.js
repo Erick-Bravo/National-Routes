@@ -92,5 +92,44 @@ router.get("/sessionCheck", (req, res) => {
 
 
 
+// Review
+
+router.post("/reviews", csrfProtection, asyncHandler(async(req, res) => {
+  const { parkId, text } = req.body
+
+  const user = await getUserFromSession(req)
+
+  const userId = user.userId
+  let visited = await db.Visited.findOne({ where: { parkId, userId } })
+  if (!visited) {
+    visited = await db.Visited.create({
+      userId,
+      parkId
+    })
+  }
+  const visitedId = visited.toJSON().id
+  console.log("AHHHHHH!!!!!!!!!", visitedId)
+  await db.Review.create({
+    visitedId,
+    text
+   })
+   res.redirect(`/parks/${ parkId }`)
+}))
+
+
+
+router.get("/reviews/delete/:id(\\d+)", asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id)
+  const review = await db.Review.findByPk( id, { include: db.Visited  })
+  const parkId = review.Visited.parkId
+  if(review.Visited.userId === req.session.auth.userId) {
+    await review.destroy()
+  }
+   res.redirect('/parks/' + parkId);
+}))
+
+
+
+
 //exporting router
 module.exports = router;

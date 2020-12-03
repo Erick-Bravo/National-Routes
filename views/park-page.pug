@@ -21,7 +21,12 @@ block content
       span(class="fa fa-star star-5")
     div.reviews
       h2 Reviews
+      if user
+        include review-form.pug
       ul
         each review in reviews
           li #{review.user.username} said:
             p #{review.text}
+            if(review.user.username === user.username)
+              a(href="/reviews/update") Edit
+              a(href="/reviews/delete/" + review.id) Delete
