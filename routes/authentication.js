@@ -5,7 +5,8 @@ const bcrypt = require("bcryptjs");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection, signUpValidator, validationResult, loginValidators } = require("./utiles");
+const { asyncHandler, csrfProtection, signUpValidator,
+        validationResult, loginValidators, getUserByEmailCaseInsensitive } = require("./utiles");
 
 //Sing-Up
 
@@ -61,8 +62,7 @@ router.post("/login", csrfProtection, loginValidators, asyncHandler (async(req, 
         const validatorErrors = validationResult(req);
 
         if(validatorErrors.isEmpty()) {
-            let user = await db.User.findOne({where: {email}});
-            user = await user.toJSON();
+            let user = await getUserByEmailCaseInsensitive(email);
             console.log({userId: user.id, username: user.username});
             req.session.auth = {userId: user.id, username: user.username};
             res.json({})

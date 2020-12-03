@@ -1,6 +1,7 @@
 const csrf = require("csurf");
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const { Op } = require('sequelize');
 
 const db = require("../db/models");
 
@@ -9,6 +10,43 @@ const asyncHandler = (handler) =>
 (req, res, next) => handler(req, res, next).catch(next);
 
 const csrfProtection = csrf( {cookie: true} );
+
+const getUserFromSession = (req) => {
+    if (req.session.auth) {
+        const id = parseInt(req.session.auth.userId);
+        const user = db.User.findByPk(id)
+        if (user)
+            return user;
+        else
+            delete req.session.auth;
+    }
+    return false;
+}
+
+const checkAuth = (req, res, next) => {
+    let user = getUserFromSession(req);
+    if (user) next();
+    else {
+        const err = new Error("Page not found");
+        err.status = 404;
+        next(err);
+    }
+}
+
+const getUserByEmailCaseInsensitive = async email => {
+    let user = await db.User.findOne({
+        where: {
+            email: {
+                [Op.iLike]: email
+            }
+        }
+    });
+    if (user) {
+        user = await user.toJSON();
+        return user;
+    }
+    return false;
+}
 
 const signUpValidator = [
     check("username")
@@ -51,33 +89,12 @@ const signUpValidator = [
         .withMessage("Password confirmation is incorrect")
 ]
 
-const getUserFromSession = (req) => {
-    if (req.session.auth) {
-        const id = parseInt(req.session.auth.userId);
-        const user = db.User.findByPk(id)
-        if (user)
-            return user;
-        else
-            delete req.session.auth;
-    }
-    return false;
-}
-
-const checkAuth = (req, res, next) => {
-    let user = getUserFromSession(req);
-    if (user) next();
-    else {
-        const err = new Error("Page not found");
-        err.status = 404;
-        next(err);
-    }
-}
 const loginValidators = [
     check("email")
         .exists({ checkFalsy: true })
         .withMessage("Please nter your email address")
         .custom(value => {
-            return db.User.findOne({ where: { email: value } }).then(user => {
+            return getUserByEmailCaseInsensitive(value).then(user => {
                 if(!user) {
                     return Promise.reject("The email entered does not exist")
                 }
@@ -90,9 +107,10 @@ const loginValidators = [
         .exists({ checkFalsy: true })
         .withMessage("Please Enter Your Password")
         .custom(async(value, {req}) => {
-            let user = await db.User.findOne({ where: { email: req.body.email } });
+            let user = await getUserByEmailCaseInsensitive(req.body.email);
+            // db.User.findOne({ where: { email: req.body.email } });
             if(user){
-                user = await user.toJSON();
+                // user = await user.toJSON();
                 const isPassword = await bcrypt.compare(value, user.password.toString());
                 if (!isPassword)
                     throw new Error('Invalid password');
@@ -105,8 +123,9 @@ module.exports = {
     asyncHandler,
     csrfProtection,
     signUpValidator,
+    loginValidators,
     validationResult,
     getUserFromSession,
     checkAuth,
-    loginValidators
+    getUserByEmailCaseInsensitive
 }
