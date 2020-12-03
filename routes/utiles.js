@@ -11,12 +11,13 @@ const asyncHandler = (handler) =>
 
 const csrfProtection = csrf( {cookie: true} );
 
-const getUserFromSession = (req) => {
+const getUserFromSession = async req => {
     if (req.session.auth) {
         const id = parseInt(req.session.auth.userId);
-        const user = db.User.findByPk(id)
+        let user = await db.User.findByPk(id);
+        user = user.toJSON();
         if (user)
-            return user;
+            return {userId: user.id, username: user.username};
         else
             delete req.session.auth;
     }
