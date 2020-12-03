@@ -4,9 +4,8 @@ const express = require("express");
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection } = require("./utiles");
+const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require("./utiles");
 const { route } = require("./authentication");
-
 
 //defining global variables and helper functions
 const router = express.Router();
@@ -17,7 +16,8 @@ const router = express.Router();
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const parks = await db.Park.findAll(); //maybe order the list by average rating.
-  res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken() });
+    const user = getUserFromSession(req);
+    res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
 
 }));
 
@@ -30,38 +30,36 @@ router.get('/parks', asyncHandler(async (req, res) => {
   //INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
-  console.log(parkId)
   let park = await db.Park.findByPk(parkId, {
     include: db.State
   });
+
   park = await park.toJSON();
-  const state = park.States.map( state => state.name).join(", ");
-  res.render('park-page', { park, state, title: park.name, token: req.csrfToken() });
+  const state = park.States.map(state => state.name).join(", ");
+
+  let visited = await db.Visited.findAll({
+    where: { parkId: parkId },
+    include: db.Review
+  });
+  visited = visited.map(visit => visit.toJSON())
+  console.log(visited[0]);
+  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(),  });
+
 
 }));
 
 // // MY ROUTES
-// router.get("/my-routes", csrfProtection, asyncHandler(async (req, res) => {
-//     const parks = await db.Park.findAll();
-//     res.render('my-routes', {title: 'MY ROUTES', parks, token: req.csrfToken()})
 
-// }));
-
-router.get("/my-routes", asyncHandler(async (req, res) => {
-    let userId = 2; //temporary
-    if (req.session.auth) {
-        const id = parseInt(req.session.auth.userId);
-        const user = db.User.findByPk(id)
-        if (user) userId = id;
-    }
+router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+    const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
-        where: { id: userId },
+        where: { id },
         include: db.Park,
     });
 
     user = await user.toJSON()
     console.log(user.Parks[0])
-    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks })
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 
 //TEMPORARY CHECKS SESSION
