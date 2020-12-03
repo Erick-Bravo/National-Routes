@@ -1,13 +1,14 @@
 const csrf = require("csurf");
-const { check, validationResult } = require("express-validator")
-const db = require("../db/models")
+const { check, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+
+const db = require("../db/models");
 
 
 const asyncHandler = (handler) =>
 (req, res, next) => handler(req, res, next).catch(next);
 
 const csrfProtection = csrf( {cookie: true} );
-
 
 const signUpValidator = [
     check("username")
@@ -40,12 +41,14 @@ const signUpValidator = [
         .withMessage("Please provide a valid password")
         .isLength({ min: 6})
         .withMessage("Password needs to be longer than 6 characters")
-        // .custom((value, { req }) => {
-        //     if (value !== req.body.confirmPassword) {
-        //       throw new Error('Password confirmation is incorrect');
-        //     }
-        // })
-        // .withMessage("Password confirmation is incorrect")
+        .custom((value, { req }) => {
+            if (value !== req.body.confirmPassword) {
+                console.log("value:", value, "req.body.confirmPassword:", req.body.confirmPassword)
+                throw new Error('Password confirmation is incorrect');
+            }
+            return true;
+        })
+        .withMessage("Password confirmation is incorrect")
 ]
 
 const getUserFromSession = (req) => {
@@ -74,7 +77,7 @@ const loginValidators = [
         .exists({ checkFalsy: true })
         .withMessage("Please nter your email address")
         .custom(value => {
-            return User.findOne({ where: { email: value } }).then(user => {
+            return db.User.findOne({ where: { email: value } }).then(user => {
                 if(!user) {
                     return Promise.reject("The email entered does not exist")
                 }
@@ -85,10 +88,18 @@ const loginValidators = [
         .withMessage("Please enter a valid email"),
     check("password")
         .exists({ checkFalsy: true })
-        .withMessage("Please Enter Your Password"),
+        .withMessage("Please Enter Your Password")
+        .custom(async(value, {req}) => {
+            let user = await db.User.findOne({ where: { email: req.body.email } });
+            if(user){
+                user = await user.toJSON();
+                const isPassword = await bcrypt.compare(value, user.password.toString());
+                if (!isPassword)
+                    throw new Error('Invalid password');
+            }
+            return true;
+        }),
 ]
-
-
 
 module.exports = {
     asyncHandler,
