@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Route, {
       foreignKey: 'userId'
     })
+    User.hasMany(models.Visited, {
+      foreignKey: "userId"
+    })
   };
   return User;
 };

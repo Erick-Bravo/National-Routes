@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     Visited.hasMany(models.Review, {
       foreignKey: 'visitedId'
     })
+
+    Visited.belongsTo(models.User, {
+      foreignKey: 'userId'
+    })
   };
   return Visited;
 };
