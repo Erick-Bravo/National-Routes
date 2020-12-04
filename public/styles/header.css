@@ -9,7 +9,6 @@
 header {
   display: flex;
   flex-direction: column;
-  /* background-color: #989e78; */
   box-sizing: border-box;
   height: 160px;
 }

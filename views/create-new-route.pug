@@ -1,16 +1,21 @@
-form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new-route")
-  div
-    h2 CREATE A NEW A ROUTE
-    input(type="hidden" name="_csrf" value=token)
-    br
-    input(type="text" name="new-route" placeholder="New Route Name")
-    br
-    label Add Routes
-    br
-    div.park-options
-    each park in parks
-      input(type="checkbox" id=`park-${park.id}` class='park-options-item')
-      a(href=`/park/${park.id}`)
-          img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
-    br
-    button(type="submit" class="create-route-button") CREATE ROUTE
+extends layout
+
+block content
+
+  form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new-route")
+    div
+      h2 CREATE A NEW A ROUTE
+      input(type="hidden" name="_csrf" value=token)
+      br
+      input(type="text" name="newroute" placeholder="New Route Name")
+      br
+      label ADD ROUTES
+      br
+      div.park-options
+        each park in parks
+          div(class="park-option")
+            label #{park.name}
+            input(type="checkbox" name=`park-item` value=park.id id=`park-${park.id}` class='park-options-item')
+            img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
+      br
+      button(type="submit" class="submit-route-button") CREATE ROUTE

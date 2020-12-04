@@ -79,6 +79,29 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 
+// ADD CUSTOM ROUTE FORM PAGE
+router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
+    const parks = await db.Park.findAll();
+
+    res.render("create-new-route", {title: "CREATE NEW ROUTE",  parks, token: req.csrfToken() })
+
+}))
+
+// Create New Route
+// check auth????
+router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
+    // grab user from session
+    // create record in Routes table with userId and new route name & assign to variable (route)
+
+    //iterate through park list (req.body.park-list)
+        // forEach element parseInt to get parkId
+        // create record for RoutesParks with parkId and routeId ^^ access route.id
+
+    const {newroute, parkId} = req.body;
+    console.log(req.body)
+    res.redirect("/my-routes")
+}))
+
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
   if (req.session.views) {
