@@ -17,7 +17,7 @@
 }
 
 .visited-list {
-  margin: 60px 10px 60px 60px;
+  margin: 60px 10px 60px 80px;
   flex-direction: column;
   display: inline-flex;
   background-color: rgba(255, 255, 255, 0.4);
