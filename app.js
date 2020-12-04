@@ -52,20 +52,21 @@ app.use((req, res, next)=>{
     next(error);
 });
 
-//render page for 404 error, else pass to generic error handler
-app.use((err, req, res, next) => {
-    if (err.status === 404){
-        res.status(404);
-        res.render('page-not-found', {title: 'Page Not Found'});
-    } else {
-        next(err);
-    }
-});
-
 //log error in terminal
 app.use((err, req, res, next) => {
     console.error(err);
     next(err);
+});
+
+//render page for 404 error, else pass to generic error handler
+app.use((err, req, res, next) => {
+    if (err.status === 404){
+        res.status(404);
+        const user = req.session.auth;
+        res.render('page-not-found', {title: 'Page Not Found', user});
+    } else {
+        next(err);
+    }
 });
 
 //render error page for other errors
@@ -74,8 +75,9 @@ app.use((err, req, res, next) => {
         err.message = null,
         err.stack = null
     }
+    const user = req.session.auth;
     res.status(err.status);
-    res.render('error', {title: 'Server Error', err} )
+    res.render('error', {title: 'Server Error', err, user} )
 });
 
 //export app

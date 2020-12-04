@@ -4,14 +4,26 @@ const { Op } = require('sequelize');
 
 //importing local files
 const db = require("../db/models");
-const { environment } = require("../config");
 const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require("./utiles");
-const { route } = require("./authentication");
 
 //defining global variables and helper functions
 const router = express.Router();
-
-// router.use(express.static('public'));
+const getCustomRoutes = async req => {
+  if (req.session.auth) {
+    const userId = parseInt(req.session.auth.userId);
+    let routes = await db.Route.findAll({
+      where: {
+        userId
+      },
+      order: [["name", "ASC"]]
+    });
+    if (routes) {
+      routes = routes.map(route => route.toJSON());
+    }
+    return routes;
+  }
+  return false;
+}
 
 // entry points like:
     //HOMEPAGE
@@ -88,9 +100,12 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
     }
   }
 
+  //ROUTES
+  const routes = await getCustomRoutes(req);
+
   res.render('park-page', {
     park, state, title: park.name,
-    token: req.csrfToken(), reviews, user,
+    token: req.csrfToken(), reviews, user, routes,
     isVisited, rate:{userRate, rateAvg, ratedBy:rates.length} });
 
 }));
@@ -179,7 +194,8 @@ router.post("/search", csrfProtection, asyncHandler(async (req, res) => {
   if (parks.length === 1) {
     res.redirect(`/parks/${parks[0].id}`);
   }else {
-    res.render('search',{title:`Search for "${searchStr}":`,token: req.csrfToken(), states, parks})
+    const user = req.session.auth;
+    res.render('search',{title:`Search for "${searchStr}":`,token: req.csrfToken(), states, parks,user})
   }
 
 }))
@@ -194,8 +210,32 @@ router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, r
   let parks = false
   if (state.Parks.length) parks = state.Parks
 
-  res.render('search',{title:`Search by state: ${state.name}`,token: req.csrfToken(), parks})
+  const user = req.session.auth;
+  res.render('search',{title:`Search by state: ${state.name}`,token: req.csrfToken(), parks, user})
 }));
 
+//ADD/DELETE PARK TO THE ROUTE FROM PARK PAGE
+router.get("/parks/:parkId(\\d+)/route/:routeId(\\d+)", asyncHandler(async (req, res) => {
+  const parkId = parseInt(req.params.parkId);
+  const routeId = parseInt(req.params.routeId);
+
+  const routesPark = await db.RoutesPark.findOne({
+    where: {
+      parkId,
+      routeId
+    }
+  });
+
+  if (routesPark) {
+    await routesPark.destroy;
+    res.redirect(`parks/${parkId}`);
+  } else {
+    await db.RoutesPark.create({
+      parkId,
+      routeId
+    })
+    res.redirect("/my-routes");
+  }
+}))
 //exporting router
 module.exports = router;

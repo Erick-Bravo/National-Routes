@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes"
             } else {
                 const errorDiv = document.querySelector("#login div.errors");
-                
+
                 errorDiv.innerHTML = "";
                 result.errors.forEach(error => {
                     const div = document.createElement("div");
@@ -93,4 +93,14 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+//Add Park to the Rout on park page
+    const myRoutesatParkPage = document.querySelector(".my-routes");
+    const addToRoute = document.querySelector(".my-routes .add-to-route");
+    if (addToRoute) {
+        addToRoute.addEventListener("click", e => {
+            myRoutesatParkPage.classList.toggle("open");
+        })
+    }
+
+    
 })
