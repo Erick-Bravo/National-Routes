@@ -108,14 +108,12 @@ router.post("/reviews", csrfProtection, asyncHandler(async(req, res) => {
     })
   }
   const visitedId = visited.toJSON().id
-  console.log("AHHHHHH!!!!!!!!!", visitedId)
   await db.Review.create({
     visitedId,
     text
    })
    res.redirect(`/parks/${ parkId }`)
 }))
-
 
 
 router.get("/reviews/delete/:id(\\d+)", asyncHandler(async(req, res) => {
@@ -126,6 +124,21 @@ router.get("/reviews/delete/:id(\\d+)", asyncHandler(async(req, res) => {
     await review.destroy()
   }
    res.redirect('/parks/' + parkId);
+}))
+
+
+router.post("/reviews/edit/:id(\\d+)", asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id)
+  const review = await db.Review.findByPk( id, { include: db.Visited } )
+  const parkId = review.Visited.parkId
+
+  const { text } = req.body
+  if(review.Visited.userId === req.session.auth.userId) {
+    await review.update({
+      text
+    })
+  }
+  res.redirect(`/parks/${ parkId }`)
 }))
 
 
