@@ -268,7 +268,8 @@ router.post("/search", csrfProtection, asyncHandler(async (req, res) => {
     if (parks.length === 1) {
       res.redirect(`/parks/${parks[0].id}`);
     } else {
-      res.render('search', { title: `Search for "${searchStr}":`, token: req.csrfToken(), states, parks });
+      const user = req.session.auth
+      res.render('search', { title: `Search for "${searchStr}":`, token: req.csrfToken(), states, parks, user });
     };
 
   }));

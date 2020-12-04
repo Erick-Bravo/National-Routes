@@ -145,8 +145,7 @@ h2 {
   box-sizing: border-box;
   padding: 3px;
   display: inline-block;
-  width: 100%;
-  max-width: 30px;
+  width: auto;
   height: auto;
   color: black;
   margin-left: 10px;
@@ -162,8 +161,7 @@ h2 {
   box-sizing: border-box;
   padding: 3px;
   display: inline-block;
-  width: 100%;
-  max-width: 45px;
+  width: auto;
   height: auto;
   color: black;
   margin-left: 10px;
