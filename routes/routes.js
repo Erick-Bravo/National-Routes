@@ -20,11 +20,11 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
 }));
 
-  // FULL PARKS LIST
-router.get('/parks', asyncHandler(async (req, res) => {
-  const parks = await db.Park.findAll();
-  res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
-}));
+//   // FULL PARKS LIST
+// router.get('/parks', asyncHandler(async (req, res) => {
+//   const parks = await db.Park.findAll();
+//   res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
+// }));
 
   //INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
@@ -95,7 +95,6 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 }));
 
 // // MY ROUTES
-
 router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
@@ -104,7 +103,7 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     });
 
     user = await user.toJSON()
-    
+
     res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 
@@ -138,5 +137,10 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (r
 
 }));
 
+//TEAM
+router.get("/team", (req, res) => {
+  const user = req.session.auth?req.session.auth:false;
+  res.render("team", {title: "Team", user});
+})
 //exporting router
 module.exports = router;
