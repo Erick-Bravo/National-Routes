@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1=`${route.name}`
+        each routepark in routesParks
+            div(class="routes-parks")
+                p #{routepark.name}

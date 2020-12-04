@@ -4,13 +4,12 @@
   .mountains-img,
   .navbar {
     width: 100%;
-
   }
 }
 
-.park-full{
+.park-full {
   display: grid;
-  margin-top: 60px;
+  margin-top: 40px;
   margin-left: 60px;
   margin-right: 60px;
   grid-template-columns: 50% 50%;
@@ -30,10 +29,10 @@
   grid-area: picture;
   align-items: stretch;
   margin-right: 30px;
-  position: relative
+  position: relative;
 }
 
-.park-image .visited-stamp{
+.park-image .visited-stamp {
   position: absolute;
   max-width: 70%;
 }
@@ -50,28 +49,30 @@
   border: 1px solid green;
 }
 
-.park-header{
+.park-header {
   font-size: 1.5vw;
   margin: 0;
   max-width: auto;
 }
-.park-name, .location{
+.park-name,
+.location {
   font-family: Park;
   margin: 0;
   width: auto;
   border-bottom: 1px solid green;
 }
 
-.park-info{
+.park-info {
   font-family: Park-thin;
   font-size: 1.5vw;
 }
 
-.park-name, .location , .park-info{
+.park-name,
+.location,
+.park-info {
   box-sizing: border-box;
   padding-left: 10px;
   padding-right: 5px;
-
 }
 
 /* RATING AND COMMUNITY REVIEWS STYLES */
@@ -99,10 +100,10 @@ h2 {
 }
 
 .community-reviews {
-  background-color:  rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-.review-form{
+.review-form {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -128,15 +129,16 @@ h2 {
   font-family: Park-thin;
 }
 
-.review-edit, .review-delete {
-    display: inline-block;
-    width: 100%;
-    max-width: 50px;
-    height: auto;
-    border-radius: 4px;
-    font-family: Park;
-    background-color: rgba(255, 255, 255, 0.8);
-    margin: 0 10px 0 10px;
-    border: 1px solid white;
-    text-align: center;
+.review-edit,
+.review-delete {
+  display: inline-block;
+  width: 100%;
+  max-width: 50px;
+  height: auto;
+  border-radius: 4px;
+  font-family: Park;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 0 10px 0 10px;
+  border: 1px solid white;
+  text-align: center;
 }

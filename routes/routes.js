@@ -54,6 +54,15 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
   res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user });
 }));
 
+  // INDIVIDUAL ROUTES
+// router.get('/my-routes/:id', csrfProtection, asyncHandler(async (req, res) => {
+
+
+//   res.render('custom-route-page' {})
+
+// }))
+
+
   //INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
@@ -131,12 +140,13 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
   });
 
   let routes = await getCustomRoutes(req);
-  let routesParks = await getCustomRoutesParks(req,1);
+  let routesParks = await getCustomRoutesParks(req, 7);
 
-  console.log('================================ROUTESPARKS!!!!!!!!!!!!!', routesParks)
+  console.log('================================ROUTESPARKS!!!!!!!!!!!!!', routesParks.Parks)
+
 
   user = await user.toJSON();
-  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, user: { userId: user.id, username: user.username }, token: req.csrfToken() });
+  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, routesParks: routesParks.Parks , user: { userId: user.id, username: user.username }, token: req.csrfToken() });
 }));
 
 // ADD CUSTOM ROUTE FORM PAGE

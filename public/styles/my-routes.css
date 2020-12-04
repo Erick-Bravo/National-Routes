@@ -4,9 +4,8 @@
   justify-content: space-between;
 } */
 
-.visited-list,
 .custom-routes-list {
-  margin: 60px;
+  margin: 60px 10px 60px 60px;
   display: inline-flex;
   flex-direction: column;
   width: 500px;
@@ -17,19 +16,28 @@
   padding: 20px;
 }
 
+.visited-list {
+  margin: 60px 10px 60px 60px;
+  flex-direction: column;
+  display: inline-flex;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  padding: 20px;
+  width: 700px;
+}
 .visited-list > h1,
 .custom-routes-list > h1 {
   font-family: Park-Thin;
-  font-size: 30px;
+  font-size: 35px;
   align-self: flex-start;
   padding-left: 25px;
 }
 
-.custom-route {
+/* .custom-route {
   border: 1px solid grey;
   border-radius: 8px;
   padding: 10px 20px 10px 10px;
-}
+} */
 
 .custom-routes-list > h2 {
   font-family: Park-Thin;
@@ -59,7 +67,7 @@
 .visited-list-item > p,
 .custom-routes-list-item > p {
   font-family: Park-Thin;
-  font-size: 20px;
+  font-size: 25px;
   margin-right: 20px;
 }
 
@@ -82,28 +90,32 @@
 
 .custom-route {
   font-family: Park-Thin;
+  font-size: 20px;
   border: 0.1px solid white;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.4);
+  margin: 10px 10px 10px 10px;
+  padding-left: 10px;
 }
 
 .create-route-button {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   width: 100%;
   max-width: 130px;
   height: 25px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.8);
-  margin: 20px 10px 0 10px;
+  margin: 20px 10px 0 20px;
   border: 1px solid white;
 }
 
-.custom-routes-list > div > a {
+.custom-routes-list > a {
   font-size: 13px;
   font-family: Park;
   color: black;
   text-decoration: none;
-  padding: 4px;
+  padding: 4px 4px 4px 10px;
 }
 
 .checked {
