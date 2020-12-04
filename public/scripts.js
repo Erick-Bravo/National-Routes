@@ -108,6 +108,16 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+//Add Park to the Rout on park page
+    const myRoutesatParkPage = document.querySelector(".my-routes");
+    const addToRoute = document.querySelector(".my-routes .add-to-route");
+    if (addToRoute) {
+        addToRoute.addEventListener("click", e => {
+            myRoutesatParkPage.classList.toggle("open");
+        })
+    }
+
+
     const editReviewButtons = document.querySelectorAll(".reviews a.review-edit")
     if(editReviewButtons) {
         editReviewButtons.forEach(button => {

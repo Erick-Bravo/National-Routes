@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 
 const db = require("../db/models");
 
-
 const asyncHandler = (handler) =>
 (req, res, next) => handler(req, res, next).catch(next);
 
@@ -28,8 +27,8 @@ const getUserFromSession = async req => {
     return false;
 }
 
-const checkAuth = (req, res, next) => {
-    let user = getUserFromSession(req);
+const checkAuth = async (req, res, next) => {
+    let user = await getUserFromSession(req);
     if (user) next();
     else {
         const err = new Error("Page not found");
