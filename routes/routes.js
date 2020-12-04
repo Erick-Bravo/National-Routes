@@ -232,5 +232,58 @@ router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, r
   res.render('search',{title:`Search by state: ${state.name}`,token: req.csrfToken(), parks})
 }));
 
+// Review
+
+router.post("/reviews", csrfProtection, asyncHandler(async(req, res) => {
+  const { parkId, text } = req.body
+
+  const user = await getUserFromSession(req)
+
+  const userId = user.userId
+  // let visited = await db.Visited.findOne({ where: { parkId, userId } })
+  let visited = await db.Visited.findAll()
+  if (!visited) {
+    visited = await db.Visited.create({
+      userId,
+      parkId
+    })
+  }
+  const visitedId = visited.toJSON().id
+  await db.Review.create({
+    visitedId,
+    text
+   })
+   res.redirect(`/parks/${ parkId }`)
+}))
+
+
+router.get("/reviews/delete/:id(\\d+)", asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id)
+  const review = await db.Review.findByPk( id, { include: db.Visited  })
+  const parkId = review.Visited.parkId
+  if(review.Visited.userId === req.session.auth.userId) {
+    await review.destroy()
+  }
+   res.redirect('/parks/' + parkId);
+}))
+
+
+router.post("/reviews/edit/:id(\\d+)", asyncHandler(async(req, res) => {
+  const id = parseInt(req.params.id)
+  const review = await db.Review.findByPk( id, { include: db.Visited } )
+  const parkId = review.Visited.parkId
+
+  const { text } = req.body
+  if(review.Visited.userId === req.session.auth.userId) {
+    await review.update({
+      text
+    })
+  }
+  res.redirect(`/parks/${ parkId }`)
+}))
+
+
+
+
 //exporting router
 module.exports = {router};
