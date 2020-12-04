@@ -62,3 +62,7 @@
 .my-route-item:hover {
     background-color: rgba(0, 255, 0, 0.6);
 }
+
+.my-route-item.in-route::before {
+    content: "🚩"
+}

@@ -1,4 +1,5 @@
 //importing modules
+const { next } = require("cli");
 const express = require("express");
 const { Op } = require('sequelize');
 
@@ -8,21 +9,36 @@ const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require(
 
 //defining global variables and helper functions
 const router = express.Router();
-const getCustomRoutes = async req => {
-  if (req.session.auth) {
-    const userId = parseInt(req.session.auth.userId);
+//parkId is optional, to check if this park in the route
+const getCustomRoutes = async (req, parkId) => {
+  const user = await getUserFromSession(req);
+  if (user) {
     let routes = await db.Route.findAll({
       where: {
-        userId
+        userId: user.userId
       },
       order: [["name", "ASC"]]
     });
     if (routes) {
       routes = routes.map(route => route.toJSON());
+      if (parkId){
+        for (let i = 0; i < routes.length; i++) {
+          let routesPark = await db.RoutesPark.findOne({
+            where: {
+              parkId,
+              routeId: routes[i].id
+            }
+          })
+          if (routesPark) routes[i].isParkInRoute = true;
+        }
+      }
+    } else {
+      routes = [];
     }
     return routes;
+  } else {
+    return false;
   }
-  return false;
 }
 
 // entry points like:
@@ -33,12 +49,6 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     res.render('park-list', {title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user})
 }));
 
-//   // FULL PARKS LIST
-// router.get('/parks', asyncHandler(async (req, res) => {
-//   const parks = await db.Park.findAll();
-//   res.render('park-list-full', { title: 'NATIONAL ROUTES', parks });
-// }));
-
   //INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
@@ -48,7 +58,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 
   park = await park.toJSON();
   const state = park.States.map(state => state.name).join(", ");
-
+  //PARK AVG RATES AND REVIEWS
   let visited = await db.Visited.findAll({
     where: {parkId},
     include: [db.User, db.Review]
@@ -83,10 +93,13 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   if (rates.length){
     rateAvg = rates.reduce((sum, rate) => sum + parseInt(rate), 0.0)/rates.length;
   }
+  //RATE AND VISITED STATUS PER USER
   //if park was visited
   let isVisited = false;
   //if park was rated
   let userRate = null;
+  //custom routes if user provided
+  let routes = null;
   if (user) {
     userRate = await db.Visited.findOne({
       where: {
@@ -98,10 +111,9 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
       isVisited = true;
       userRate = userRate.toJSON().rate;
     }
-  }
-
   //ROUTES
-  const routes = await getCustomRoutes(req);
+    routes = await getCustomRoutes(req, parkId);
+  }
 
   res.render('park-page', {
     park, state, title: park.name,
@@ -227,15 +239,14 @@ router.get("/parks/:parkId(\\d+)/route/:routeId(\\d+)", asyncHandler(async (req,
   });
 
   if (routesPark) {
-    await routesPark.destroy;
-    res.redirect(`parks/${parkId}`);
+    await routesPark.destroy();
   } else {
     await db.RoutesPark.create({
       parkId,
       routeId
     })
-    res.redirect("/my-routes");
   }
+  res.redirect(`/parks/${parkId}`);
 }))
 //exporting router
 module.exports = router;
