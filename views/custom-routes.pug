@@ -2,6 +2,6 @@ ul.custom-routes-list
     h1="Custom Routes"
     each route in routes
         div(class="custom-route")
-            a(href=`/parks/${route.name}`) #{route.name}
+            a(href=`/my-routes/${route.id}`) #{route.name}
 
     a(href="/my-routes/add" class="create-route-button") CREATE NEW ROUTE

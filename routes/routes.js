@@ -54,15 +54,6 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
   res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user });
 }));
 
-  // INDIVIDUAL ROUTES
-// router.get('/my-routes/:id', csrfProtection, asyncHandler(async (req, res) => {
-
-
-//   res.render('custom-route-page' {})
-
-// }))
-
-
   //INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
@@ -192,6 +183,15 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
   // forEach element parseInt to get parkId
   // create record for RoutesParks with parkId and routeId ^^ access route.id;
   res.redirect("/my-routes");
+}));
+
+// INDIVIDUAL ROUTES
+router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
+  let user = req.session.auth;
+  let routeId = parseInt(req.params.id);
+  let routesParks = await getCustomRoutesParks(req, routeId);
+  console.log ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`", routesParks);
+  res.render('custom-route-page', {title: "Here we go again", route:{id: routeId, name: routesParks.name}, routesParks: routesParks.Parks , user, token: req.csrfToken()});
 }));
 
 //TEMPORARY CHECKS SESSION
