@@ -11,6 +11,7 @@ header {
   flex-direction: column;
   box-sizing: border-box;
   height: 160px;
+  margin-bottom: 50px;
 }
 header > div {
   display: flex;

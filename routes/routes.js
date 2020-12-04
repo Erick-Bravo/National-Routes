@@ -28,6 +28,9 @@ const getCustomRoutes = async req => {
   return routes;
 }
 
+
+
+
 // router.use(express.static('public'));
 
 // entry points like:
@@ -84,10 +87,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 }));
 
 // // MY ROUTES
-
-
-
-router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
     const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
         where: { id },
@@ -95,10 +95,9 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     });
 
     let routes = await getCustomRoutes(req)
-    console.log('ROUTES!!!!!!!!!', routes)
 
     user = await user.toJSON()
-    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, routes, user: {userId: user.id, username: user.username} })
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, routes, user: {userId: user.id, username: user.username} , token: req.csrfToken()})
 }))
 
 // ADD CUSTOM ROUTE FORM PAGE
@@ -111,7 +110,7 @@ router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req,
 
 // Create New Route
 // check auth????
-router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
+router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler( async(req, res) => {
     const { newRoute, parkItem } = req.body;
 
   // grab user from session
@@ -141,9 +140,6 @@ router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
         updatedAt: new Date()
       })
     })
-
-
-
         // forEach element parseInt to get parkId
         // create record for RoutesParks with parkId and routeId ^^ access route.id;
     res.redirect("/my-routes")

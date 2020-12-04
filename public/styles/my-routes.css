@@ -1,9 +1,15 @@
+/* .my-routes-lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+
 .visited-list,
 .custom-routes-list {
   margin: 60px;
   display: inline-flex;
   flex-direction: column;
-  /* width: 400px; */
+  width: 500px;
   /* height: auto; */
   /* margin: 60px 50px 50px 50px; */
   background-color: rgba(255, 255, 255, 0.4);
@@ -72,6 +78,13 @@
   font-family: Park;
   font-size: 9px;
   margin-left: 60px;
+}
+
+.custom-route {
+  font-family: Park-Thin;
+  border: 0.1px solid white;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .create-route-button {
