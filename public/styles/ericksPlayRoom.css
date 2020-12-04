@@ -1,1 +1,40 @@
 
+.review-edit {
+    box-sizing: border-box;
+    color:black;
+    text-decoration: underline;
+    padding: 3px;
+    margin-left: 10px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid white;
+}
+
+.review-delete {
+    box-sizing: border-box;
+    padding: 3px;
+    color: black;
+    margin-left: 10px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid white;
+}
+
+.review-edit:hover {
+    background-color: rgb(192, 192, 192);
+}
+
+.review-delete:hover {
+    background-color: rgb(192, 192, 192);
+}
+
+#review textarea {
+    display: block;
+    width: 100%;
+    border: 2px solid;
+    padding: .5rem
+}
+
+.li-comments {
+    list-style-type: none;
+}

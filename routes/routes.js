@@ -199,7 +199,7 @@ router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, r
 
 // Review
 
-router.post("/reviews", csrfProtection, asyncHandler(async(req, res) => {
+router.post("/reviews", checkAuth, csrfProtection, asyncHandler(async(req, res) => {
   const { parkId, text } = req.body
 
   const user = await getUserFromSession(req)

@@ -23,10 +23,8 @@ block content
         else
           ul
           each review in reviews
-            li(id="review" + review.id )
-              h4.comments #{review.user.username} said :
-              p #{review.text}
-              if(review.user.username === user.username)
-                a(class="review-edit" id="review-edit" + review.id) Edit
-                a(href="/reviews/delete/" + review.id) Delete
-
+            h4.comments #{review.user.username} said :
+            p #{review.text}
+            if(review.user.username === user.username)
+              a(class="review-edit" id="review-edit" + review.id) Edit
+              a(href="/reviews/delete/" + review.id class="review-delete") Delete

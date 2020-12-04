@@ -117,8 +117,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const form = document.createElement("form")
                 form.setAttribute("action", "/reviews/edit/" + id)
-
                 form.setAttribute("method", "post")
+                form.setAttribute("class", "review-form")
+
+                
 
                 const csrfToken = document.querySelector("#csrfToken").value
                 const review = document.querySelector("#review" + id + " p").innerText
