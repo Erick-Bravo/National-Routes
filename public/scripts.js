@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Sign-Up
     const signUpForm = document.querySelector("#sign-up-form")
-    if(signUpForm) {
+    if (signUpForm) {
         signUpForm.addEventListener("submit", async(e) => {
             e.preventDefault();
 
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 //Login
     const logInForm = document.querySelector("#login")
-    if(logInForm) {
+    if (logInForm) {
         logInForm.addEventListener("submit", async(e) => {
             e.preventDefault();
 
@@ -61,7 +61,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes"
             } else {
                 const errorDiv = document.querySelector("#login div.errors");
-                console.log(errorDiv);
                 errorDiv.innerHTML = "";
                 result.errors.forEach(error => {
                     const div = document.createElement("div");
@@ -71,7 +70,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         })
     }
-
 
     // const newRouteForm = document.querySelector("#create-new-route")
     // newRouteForm.addEventListener("submit", async(e) => {
@@ -90,9 +88,27 @@ window.addEventListener("DOMContentLoaded", () => {
     //     result = await result.json();
 
     // })
+    const newRouteForm = document.querySelector("#create-new-route")
+    if (newRouteForm) {
+        newRouteForm.addEventListener("submit", async(e) => {
+            e.preventDefault();
+
+            let newRoute = document.querySelector("#create-new-route input[name='new-route']").value;
+            let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value;
+
+            let result = await fetch("/my-routes/add", {
+                init: {credentials: "same-origin"},
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({ newRoute, _csrf})
+            })
+
+            result = await result.json();
+
+        })
+    }
 
     const editReviewButtons = document.querySelectorAll(".reviews a.review-edit")
-    console.log(editReviewButtons)
     if(editReviewButtons) {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {

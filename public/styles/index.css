@@ -5,6 +5,9 @@
 @import "create-route-form.css";
 @import "park-page.css";
 @import "ericksPlayRoom.css";
+@import "rate.css";
+@import "team.css";
+@import "search.css";
 
 @font-face {
   font-family: Park;

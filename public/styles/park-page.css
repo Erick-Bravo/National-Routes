@@ -30,6 +30,12 @@
   grid-area: picture;
   align-items: stretch;
   margin-right: 30px;
+  position: relative
+}
+
+.park-image .visited-stamp{
+  position: absolute;
+  max-width: 70%;
 }
 
 .park-image > img {
