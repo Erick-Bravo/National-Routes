@@ -1,7 +1,8 @@
 .create-new-route {
   display: inline-flex;
-  width: 300px;
-  height: 300px;
+  align-items: center;
+  width: 1500px;
+  max-height: 2000px;
   margin: 60px 50px 50px 80px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 25px;
@@ -37,12 +38,29 @@
 }
 
 .park-options {
-  display: grid;
+  display: inline-grid;
+  grid-template-columns: repeat(5, 220px);
+  grid-template-rows: repeat(10, auto);
   grid-auto-flow: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .park-option {
   display: inline-block;
-  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+  /* border: 1px solid white; */
+}
+
+.submit-route-button {
+  display: inline-block;
+  width: 100%;
+  max-width: 150px;
+  height: 50px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: Park;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 0 10px 0 10px;
+  border: 1px solid white;
 }

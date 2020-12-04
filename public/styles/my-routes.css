@@ -75,13 +75,22 @@
 }
 
 .create-route-button {
-  width: 75px;
+  display: inline-block;
+  width: 100%;
+  max-width: 130px;
   height: 25px;
-  margin-top: 30px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 20px 10px 0 10px;
   border: 1px solid white;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.7);
-  font-size: 8px;
+}
+
+.custom-routes-list > div > a {
+  font-size: 13px;
+  font-family: Park;
+  color: black;
+  text-decoration: none;
+  padding: 4px;
 }
 
 .checked {

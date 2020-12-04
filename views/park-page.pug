@@ -2,15 +2,10 @@ extends layout
 
 block content
   div.park-full
-<<<<<<< HEAD
-    div(class="park-image")
-      img(src=`/img/park-page-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
-=======
     div(class=`park-image${isVisited?" visited-park":""}`)
       if isVisited
         img(src="/img/stamp.png" class="visited-stamp")
-      img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
->>>>>>> main
+      img(src=`/img/park-page-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
       div.park-header
         span: h1.park-name #{park.name} National Park
@@ -34,4 +29,3 @@ block content
               if(review.user.username === user.username)
                 a(class="review-edit" id="review-edit" + review.id) Edit
                 a(href="/reviews/delete/" + review.id) Delete
-

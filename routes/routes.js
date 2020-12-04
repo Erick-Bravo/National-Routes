@@ -11,6 +11,24 @@ const { route } = require("./authentication");
 //defining global variables and helper functions
 const router = express.Router();
 
+// custom routes list helper function
+const getCustomRoutes = async req => {
+  const userId = parseInt(req.session.auth.userId);
+  let routes = await db.Route.findAll({
+    where: {
+      userId
+    },
+    order: [["name", "ASC"]]
+  });
+  if (routes) {
+    routes = routes.map(route => route.toJSON());
+  } else {
+    routes = false;
+  }
+
+  return routes;
+}
+
 // router.use(express.static('public'));
 
 // entry points like:
@@ -103,10 +121,28 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
     include: db.Park,
   });
 
+<<<<<<< HEAD
   user = await user.toJSON();
 
   res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, user: { userId: user.id, username: user.username }, token: req.csrfToken() });
 }));
+=======
+
+
+router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+    const id = parseInt(req.session.auth.userId);
+    let user = await db.User.findOne({
+        where: { id },
+        include: db.Park
+    });
+
+    let routes = await getCustomRoutes(req)
+    console.log('ROUTES!!!!!!!!!', routes)
+
+    user = await user.toJSON()
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, routes, user: {userId: user.id, username: user.username} })
+}))
+>>>>>>> myroutes
 
 // ADD CUSTOM ROUTE FORM PAGE
 router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
@@ -118,6 +154,7 @@ router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req,
 
 // Create New Route
 // check auth????
+<<<<<<< HEAD
 router.post("/my-routes/add", csrfProtection, asyncHandler(async (req, res) => {
   // grab user from session
   // create record in Routes table with userId and new route name & assign to variable (route)
@@ -129,6 +166,45 @@ router.post("/my-routes/add", csrfProtection, asyncHandler(async (req, res) => {
   // const { newroute, parkId } = req.body;
   res.redirect("/my-routes");
 }));
+=======
+router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
+    const { newRoute, parkItem } = req.body;
+
+  // grab user from session
+    // can also look for parkId
+    const id = parseInt(req.session.auth.userId);
+    let user = await db.User.findOne({
+      where: { id },
+      include: db.Park,
+    });
+
+    // create record in Routes table with userId and new route name & assign to variable (route)
+    const route = await db.Route.create({
+      name: newRoute,
+      userId: user.id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+
+    //iterate through park list (req.body.parkItem)
+    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', parkItem)
+    parkItem.forEach(async(park) => {
+      let parkId = parseInt(park);
+      await db.RoutesPark.create({
+        routeId: route.id,
+        parkId,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+    })
+
+
+
+        // forEach element parseInt to get parkId
+        // create record for RoutesParks with parkId and routeId ^^ access route.id;
+    res.redirect("/my-routes")
+}))
+>>>>>>> myroutes
 
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
