@@ -28,9 +28,12 @@ const getUserFromSession = async req => {
     return false;
 }
 
-const checkAuth = (req, res, next) => {
-    let user = getUserFromSession(req);
-    if (user) next();
+const checkAuth = async (req, res, next) => {
+    let user = await getUserFromSession(req);
+    if (user) {
+        console.log("...........................................")
+        next();
+    }
     else {
         const err = new Error("Page not found");
         err.status = 404;

@@ -29,23 +29,14 @@ const getCustomRoutes = async req => {
   return routes;
 };
 
-const getCustomRoutesParks = async req => {
+const getCustomRoutesParks = async (req, routeId) => {
   const userId = parseInt(req.session.auth.userId);
-  let routesParks = await db.Route.findAll({
-    where: {
-      userId
-    }
+  let routesParks = await db.Route.findByPk(routeId, {
+    include: db.Park
   });
-  // let routesParks = await db.RoutesPark.findAll({
-  //   where: {
-  //     routeId: routes.id
-  //   },
-  //   include: db.Park
-  // })
-
 
   if (routesParks) {
-    routesParks = routesParks.map(route => route.toJSON());
+    routesParks = routesParks.toJSON();
   } else {
     routesParks = false;
   }
@@ -140,9 +131,9 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
   });
 
   let routes = await getCustomRoutes(req);
-  let routesParks = await getCustomRoutesParks(req)
+  let routesParks = await getCustomRoutesParks(req,1);
 
-  console.log('ROUTESPARKS!!!!!!!!!!!!!', routesParks)
+  console.log('================================ROUTESPARKS!!!!!!!!!!!!!', routesParks)
 
   user = await user.toJSON();
   res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, user: { userId: user.id, username: user.username }, token: req.csrfToken() });
