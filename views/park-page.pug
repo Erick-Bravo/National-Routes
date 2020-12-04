@@ -28,7 +28,7 @@ block content
         else
           each review in reviews
             h4.comments #{review.user.username} said :
-              p #{review.text}
-              if(review.user.username === user.username)
-                a(href="#" class="review-edit" id="review-edit" + review.id) Edit
-                a(href="/reviews/delete/" + review.id) Delete
+            p #{review.text}
+            if(review.user.username === user.username)
+              a(class="review-edit" id="review-edit" + review.id) Edit
+              a(href="/reviews/delete/" + review.id) Delete

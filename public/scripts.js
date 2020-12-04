@@ -92,6 +92,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // })
 
     const editReviewButtons = Array.from(document.querySelectorAll(".review .review-edit"))
+    console.log(editReviewButtons)
     if(editReviewButtons.length > 0) {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {
