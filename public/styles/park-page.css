@@ -102,11 +102,19 @@ h2 {
   background-color:  rgba(255, 255, 255, 0.4);
 }
 
+.review-form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
 .comments {
   border-top: 1px solid green;
   box-sizing: border-box;
   padding-top: 5px;
   padding-left: 10px;
+  padding-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 0;
   font-size: 1.5vw;
@@ -118,4 +126,17 @@ h2 {
   margin: 0;
   padding-bottom: 5px;
   font-family: Park-thin;
+}
+
+.review-edit, .review-delete {
+    display: inline-block;
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    font-family: Park;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0 10px 0 10px;
+    border: 1px solid white;
+    text-align: center;
 }

@@ -1,4 +1,4 @@
-form(action="/reviews" method="post" id="review-form")
+form(action="/reviews" method="post" id="review-form" class="review-form")
     input(type="hidden" name="_csrf" value=token)
     input(type="hidden" name="parkId" value=park.id)
     textarea(name="text")
