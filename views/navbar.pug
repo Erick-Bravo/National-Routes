@@ -4,6 +4,7 @@ nav(class="navbar")
         if user
             a(href="/my-routes") MY ROUTES
         a(href="/team") TEAM
-    div(class="search")
-        input(type="text" placeholder="Search Parks" class="search-bar")
+    form(class="search" method="post" action="/search")
+        input(type="hidden" name="_csrf" value=token)
+        input(type="text" placeholder="Search Parks" class="search-bar" name="searchStr")
         button(type="submit" class="search-bar-button") SEARCH

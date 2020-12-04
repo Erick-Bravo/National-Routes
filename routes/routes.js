@@ -1,5 +1,6 @@
 //importing modules
 const express = require("express");
+const { Op } = require('sequelize');
 
 //importing local files
 const db = require("../db/models");
@@ -95,7 +96,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 }));
 
 // // MY ROUTES
-router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
+router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
     const id = parseInt(req.session.auth.userId);
     let user = await db.User.findOne({
         where: { id },
@@ -104,7 +105,7 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
 
     user = await user.toJSON()
 
-    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
+    res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username}, token: req.csrfToken() })
 }))
 
 //RATE PARK/ADD TO VISITED
@@ -138,9 +139,63 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (r
 }));
 
 //TEAM
-router.get("/team", (req, res) => {
+router.get("/team", csrfProtection, (req, res) => {
   const user = req.session.auth?req.session.auth:false;
-  res.render("team", {title: "Team", user});
+  res.render("team", {title: "Team", user, token: req.csrfToken()});
 })
+
+//SEARCH
+router.post("/search", csrfProtection, asyncHandler(async (req, res) => {
+  let { searchStr } = req.body;
+  searchStr = searchStr.replace(/[^\w\s]/ig,"").replace(/\s+/ig, " ").trim();
+
+  let states = await db.State.findAll({where:{
+    name: {
+      [Op.iLike]: `%${searchStr}%`
+    }},
+    include: db.Park});
+
+  if (states) {
+    states = states.map(state => state.toJSON()).filter(state => {
+      return (state.Parks.length > 0);
+    })
+  }
+
+  if (!states) {
+    states = false;
+  }
+
+  let parks = await db.Park.findAll({where:{
+    name: {
+      [Op.iLike]: `%${searchStr}%`
+    }
+  }});
+  if (parks) {
+    parks = parks.map(park => park.toJSON());
+  } else {
+    parks = false;
+  }
+
+  if (parks.length === 1) {
+    res.redirect(`/parks/${parks[0].id}`);
+  }else {
+    res.render('search',{title:`Search for "${searchStr}":`,token: req.csrfToken(), states, parks})
+  }
+
+}))
+
+router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
+  const stateId = parseInt(req.params.id);
+  let state = await db.State.findOne({
+    where: {id: stateId},
+    include: [db.Park]
+  });
+  state = state.toJSON();
+  let parks = false
+  if (state.Parks.length) parks = state.Parks
+
+  res.render('search',{title:`Search by state: ${state.name}`,token: req.csrfToken(), parks})
+}));
+
 //exporting router
 module.exports = router;
