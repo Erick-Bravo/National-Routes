@@ -58,8 +58,6 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
       else return 0
     });
 
-  console.log("================", reviews, "================");
-
   const user = await getUserFromSession(req);
   res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
@@ -98,7 +96,6 @@ router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
         // create record for RoutesParks with parkId and routeId ^^ access route.id
 
     const {newroute, parkId} = req.body;
-    console.log(req.body)
     res.redirect("/my-routes")
 }))
 

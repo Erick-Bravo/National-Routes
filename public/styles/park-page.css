@@ -89,6 +89,7 @@ h2 {
   grid-area: reviews;
   border: 1px solid green;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .community-reviews {

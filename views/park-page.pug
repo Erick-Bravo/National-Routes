@@ -3,7 +3,7 @@ extends layout
 block content
   div.park-full
     div(class="park-image")
-      img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+      img(src=`/img/park-page-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
       div.park-header
         span: h1.park-name #{park.name} National Park
