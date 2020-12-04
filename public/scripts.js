@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             let email = document.querySelector("#login input[name='email']").value;
             let password = document.querySelector("#login input[name='password']").value;
-            let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value;
+            let _csrf = document.querySelector("#login input[name='_csrf']").value;
 
             let result = await fetch("/login", {
                 init: {credentials: "same-origin"},
@@ -127,8 +127,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const form = document.createElement("form")
                 form.setAttribute("action", "/reviews/edit/" + id)
-
                 form.setAttribute("method", "post")
+                form.setAttribute("class", "review-form")
+
+
 
                 const csrfToken = document.querySelector("#csrfToken").value
                 const review = document.querySelector("#review" + id + " p").innerText
@@ -139,4 +141,40 @@ window.addEventListener("DOMContentLoaded", () => {
             })
         })
     }
+
+
+//     const logInMessage = document.getElementById("review-form")
+//     if(logInMessage) {
+//         logInMessage.addEventListener("submit", async(e) => {
+//         e.preventDefault();
+
+//         let text = document.querySelector("#review-text input[name='text']").value;
+//         let _csrf = document.querySelector("#review-form input[name='_csrf']").value;
+//         let parkId = document.querySelector("#review-form input[name='parkId']").value;
+//         let reqAuth = document.querySelector("#review-form input[name='reqAuth']").value;
+
+//         let result = await fetch("/reviews", {
+//             init: {credentials: "same-origin"},
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ parkId, text, _csrf })
+//         })
+
+//         result = await result.json()
+
+//         if(!result.errors) {
+//             location.href = "/parks"
+//         } else {
+//             const errorDiv = document.querySelector("#login div.errors");
+//             errorDiv.innerHTML = "";
+//             result.errors.forEach(error => {
+//                 const div = document.createElement("div");
+//                 div.innerHTML = error;
+//                 errorDiv.appendChild(div);
+//         })
+//     }
+// })
+//     }
+
+
 })

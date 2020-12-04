@@ -5,3 +5,4 @@ if user && routes
             each route in routes
                 a.my-route-item(href=`/parks/${park.id}/route/${route.id}` class=`${route.isParkInRoute? "in-route" : ""}`)= route.name
             a.my-route-item.add-route(href="/my-routes/add") + Add New Route
+

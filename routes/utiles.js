@@ -96,7 +96,7 @@ const signUpValidator = [
 const loginValidators = [
     check("email")
         .exists({ checkFalsy: true })
-        .withMessage("Please nter your email address")
+        .withMessage("Please enter your email address")
         .custom(value => {
             return getUserByEmailCaseInsensitive(value).then(user => {
                 if(!user) {
@@ -121,6 +121,20 @@ const loginValidators = [
         }),
 ]
 
+
+const reviewValidators = [
+    check("reqAuth")
+        .custom(async(value, {req}) => {
+            if(!req.session.auth) {
+                return Promise.reject("This wont show, maybe in the console")
+            }
+            return true
+        })
+        .withMessage("Please login or sign-up!")
+
+]
+
+
 module.exports = {
     asyncHandler,
     csrfProtection,
@@ -129,5 +143,6 @@ module.exports = {
     validationResult,
     getUserFromSession,
     checkAuth,
-    getUserByEmailCaseInsensitive
+    getUserByEmailCaseInsensitive,
+    reviewValidators
 }

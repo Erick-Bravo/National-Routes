@@ -5,28 +5,24 @@ block content
     div(class=`park-image${isVisited?" visited-park":""}`)
       if isVisited
         img(src="/img/stamp.png" class="visited-stamp")
-      img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+      img(src=`/img/park-page-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
       div.park-header
         span: h1.park-name #{park.name} National Park
         h3.location #{state}, USA
       p.park-info= park.description
-    div.visited
     include rates.pug
     div.reviews
       h2.community-reviews COMMUNITY REVIEWS
-        if user
+      if user
         include review-form.pug
-        input(type="hidden" id="csrfToken" value=token)
-        if (!reviews.length)
-          h4.comments Sorry, no one has made a review.
-        else
-          ul
-          each review in reviews
-            li(id="review" + review.id )
-              h4.comments #{review.user.username} said :
-              p #{review.text}
-              if(review.user.username === user.username)
-                a(class="review-edit" id="review-edit" + review.id) Edit
-                a(href="/reviews/delete/" + review.id) Delete
-
+      input(type="hidden" id="csrfToken" value=token)
+      if (!reviews.length)
+        h4.comments Sorry, no one has made a review.
+      else
+        each review in reviews
+          h4(id="review" + review.id, class="comments") #{review.user.username} said :
+            p #{review.text}
+            if(review.user.username === user.username)
+              a(class="review-edit" id="review-edit" + review.id) Edit
+              a(class="review-delete" href="/reviews/delete/" + review.id) Delete
