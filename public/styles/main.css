@@ -1,25 +1,47 @@
 main {
   display: flex;
   /* flex-direction: row-reverse; */
+  position: relative;
 }
 
 body {
   padding: 0;
   margin: 0;
-  /* background-image: linear-gradient(to bottom right, #8e9473, #e4fa78); */
-  background-image: linear-gradient(
-    to left bottom,
-    #d16ba5,
-    #ee7488,
-    #f7896b,
-    #eda657,
-    #d3c458,
-    #bdd469,
-    #a3e282,
-    #85eea2,
-    #76f2b7,
-    #69f6cc,
-    #60f9df,
-    #5ffbf1
-  );
+  background-image: linear-gradient(to bottom right, #8e9473, #e4fa78);
+  /* background-image:
+  ); */
+  /* background-image: url(/img/trees.png); */
+  /* linear-gradient(
+      to left bottom,
+      #ed684b,
+      #f0813a,
+      #ec9a29,
+      #e1b520,
+      #cfce2b,
+      #abdb48,
+      #81e66b,
+      #45ee92,
+      #00e9be,
+      #00e1e2,
+      #00d6f8,
+      #00c8ff
+    ); */
+  /* linear-gradient(
+        to left bottom,
+        #d16ba5,
+        #ee7488,
+        #f7896b,
+        #eda657,
+        #d3c458,
+        #bdd469,
+        #a3e282,
+        #85eea2,
+        #76f2b7,
+        #69f6cc,
+        #60f9df,
+        #5ffbf1
+      ); */
+  /* linear-gradient(to right top, #053723, #106232, #368f38, #69bd32, #a8eb12); */
+  /* background-size: 100% 40%;
+  background-repeat: no-repeat; */
 }

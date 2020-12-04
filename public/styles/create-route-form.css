@@ -38,4 +38,11 @@
 
 .park-options {
   display: grid;
+  grid-auto-flow: row;
+  justify-content: space-evenly;
+}
+
+.park-option {
+  display: inline-block;
+  flex-direction: column;
 }

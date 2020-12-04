@@ -87,6 +87,13 @@ router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req,
 // Create New Route
 // check auth????
 router.post("/my-routes/add", csrfProtection, asyncHandler( async(req, res) => {
+    // grab user from session
+    // create record in Routes table with userId and new route name & assign to variable (route)
+
+    //iterate through park list (req.body.park-list)
+        // forEach element parseInt to get parkId
+        // create record for RoutesParks with parkId and routeId ^^ access route.id
+
     const {newroute, parkId} = req.body;
     console.log(req.body)
     res.redirect("/my-routes")

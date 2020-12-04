@@ -9,12 +9,13 @@ block content
       br
       input(type="text" name="newroute" placeholder="New Route Name")
       br
-      label Add Routes
+      label ADD ROUTES
       br
       div.park-options
         each park in parks
-          label #{park.name}
-          input(type="checkbox" name=`park-${park.id}` id=`park-${park.id}` class='park-options-item')
-          img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
+          div(class="park-option")
+            label #{park.name}
+            input(type="checkbox" name=`park-item` value=park.id id=`park-${park.id}` class='park-options-item')
+            img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
       br
       button(type="submit" class="submit-route-button") CREATE ROUTE
