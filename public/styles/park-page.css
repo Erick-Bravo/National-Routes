@@ -30,6 +30,12 @@
   grid-area: picture;
   align-items: stretch;
   margin-right: 30px;
+  position: relative
+}
+
+.park-image .visited-stamp{
+  position: absolute;
+  max-width: 70%;
 }
 
 .park-image > img {
@@ -89,10 +95,18 @@ h2 {
   grid-area: reviews;
   border: 1px solid green;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .community-reviews {
   background-color:  rgba(255, 255, 255, 0.4);
+}
+
+.review-form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5px;
 }
 
 .comments {
@@ -100,6 +114,7 @@ h2 {
   box-sizing: border-box;
   padding-top: 5px;
   padding-left: 10px;
+  padding-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 0;
   font-size: 1.5vw;
@@ -111,4 +126,17 @@ h2 {
   margin: 0;
   padding-bottom: 5px;
   font-family: Park-thin;
+}
+
+.review-edit, .review-delete {
+    display: inline-block;
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    font-family: Park;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0 10px 0 10px;
+    border: 1px solid white;
+    text-align: center;
 }

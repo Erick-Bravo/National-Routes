@@ -1,0 +1,31 @@
+.search-container > h1,
+.search-container > h2 {
+    display: block;
+    font-family: Park-Thin;
+    width: 100%;
+    text-align: center;
+}
+.search-container > h2 {
+    font-size: 25px;
+    margin-top: 25px;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    margin: 20px auto;
+}
+.states-list {
+    text-align: center;
+}
+
+.states-list a {
+    color: black;
+    font-family: Park-Thin;
+}
+
+.states-list a + a {
+    margin-left: 5px;
+    border-left: 1px solid black;
+    padding: 5px;
+}

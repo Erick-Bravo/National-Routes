@@ -6,6 +6,6 @@ block content
     each park in parks
       div(id=`park-${park.id}` class='park-list-item')
         a(href=`/parks/${park.id}`)
-          img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+          img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
   if !user
     include sign-up-form.pug

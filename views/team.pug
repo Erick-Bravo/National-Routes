@@ -1,0 +1,15 @@
+extends layout
+mixin teamMember(name, description, imgUrl)
+    div.team-member
+        div.team-img
+            img(src=imgUrl)
+        div.team-info
+            h2= name
+            span= description
+
+block content
+    div.team
+        +teamMember("Anna Bullard", "I broke it, I'd fix it!","https://avatars3.githubusercontent.com/u/70282021?s=460&u=203359870d6d3c5753f5bd4d42fd8d4a88efae57&v=4")
+        +teamMember("Eric Bravo", "Bcrypt Master", "https://avatars3.githubusercontent.com/u/67840199?s=460&u=12c960159ff664ce3121ac7d90fd5a0c37fb67ac&v=4")
+        +teamMember("Kristen Florey", "CSS Fairy", "https://avatars2.githubusercontent.com/u/64163075?s=460&u=62eda28abc8ce8f23db48c87caf11efa5b61c7eb&v=4")
+        +teamMember("Thanh Nguyen", "Queen of Sequelize", "https://avatars3.githubusercontent.com/u/68927247?s=460&u=4f907d4fc48e1274271950f46a3e1879242bb6e8&v=4")

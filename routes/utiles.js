@@ -15,11 +15,15 @@ const getUserFromSession = async req => {
     if (req.session.auth) {
         const id = parseInt(req.session.auth.userId);
         let user = await db.User.findByPk(id);
-        user = user.toJSON();
-        if (user)
+        if (user) {
+            user = user.toJSON();
             return {userId: user.id, username: user.username};
-        else
-            delete req.session.auth;
+        }else {
+            req.session.save(err => {
+                if (err) return next(err);
+                delete req.session.auth;
+            })
+        }
     }
     return false;
 }
@@ -83,7 +87,6 @@ const signUpValidator = [
         .withMessage("Password needs to be longer than 6 characters")
         .custom((value, { req }) => {
             if (value !== req.body.confirmPassword) {
-                console.log("value:", value, "req.body.confirmPassword:", req.body.confirmPassword)
                 throw new Error('Password confirmation is incorrect');
             }
             return true;
