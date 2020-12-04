@@ -46,15 +46,15 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 
   if (visited) {
     visited.forEach(park => {
-        park = park.toJSON();
-        if(park.rate){
-          rates.push(park.rate);
-        }
-        const user = {username: park.User.username, userId: park.User.id};
-        park.Reviews.forEach(review => {
-          review.user = user;
-          reviews.push(review);
-        })
+      park = park.toJSON();
+      if(park.rate){
+        rates.push(park.rate);
+      }
+      const user = {username: park.User.username, userId: park.User.id};
+      park.Reviews.forEach(review => {
+        review.user = user;
+        reviews.push(review);
+      })
     });
   }
 
@@ -65,27 +65,33 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   });
 
   const user = await getUserFromSession(req);
-
+  //average rating for park
   let rateAvg = false;
   if (rates.length){
     rateAvg = rates.reduce((sum, rate) => sum + parseInt(rate), 0.0)/rates.length;
   }
-
-  let rate = await db.Visited.findOne({
-    where: {
-      userId: user.userId,
-      parkId
+  //if park was visited
+  let isVisited = false;
+  //if park was rated
+  let userRate = null;
+  if (user) {
+    userRate = await db.Visited.findOne({
+      where: {
+        userId: parseInt(user.userId),
+        parkId
+      }
+    });
+    if (userRate) {
+      isVisited = true;
+      userRate = userRate.toJSON().rate;
     }
-  });
-
-  if (rate) {
-    rate = rate.toJSON().rate;
   }
 
   res.render('park-page', {
     park, state, title: park.name,
     token: req.csrfToken(), reviews, user,
-    rate:{userRate: rate, rateAvg, ratedBy:rates.length} });
+    isVisited, rate:{userRate, rateAvg, ratedBy:rates.length} });
+
 }));
 
 // // MY ROUTES
@@ -102,21 +108,35 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 
-//TEMPORARY CHECKS SESSION
-router.get("/sessionCheck", (req, res) => {
-  if (req.session.views) {
-    req.session.views++
-    res.setHeader('Content-Type', 'text/html');
-    res.write('<p>views: ' + req.session.views + '</p>');
-    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>');
-    res.end();
+//RATE PARK/ADD TO VISITED
+router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect("/")
   } else {
-    req.session.views = 1
-    res.end('welcome to the session demo. refresh!');
-  };
-});
+    const parkId = parseInt(req.params.parkId);
+    const rate = parseInt(req.params.rate);
+    const userId = parseInt(req.session.auth.userId);
 
+    const visited = await db.Visited.findOne({
+      where: {
+        userId,
+        parkId
+      }
+    })
 
+    if (visited) {
+      await visited.update({ rate });;
+    } else {
+      await db.Visited.create({
+        userId,
+        parkId,
+        rate
+      })
+    }
+    res.redirect(`/parks/${parkId}`);
+  }
+
+}));
 
 //exporting router
 module.exports = router;

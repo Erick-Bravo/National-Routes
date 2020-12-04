@@ -2,7 +2,9 @@ extends layout
 
 block content
   div.park-full
-    div(class="park-image")
+    div(class=`park-image${isVisited?" visited-park":""}`)
+      if isVisited
+        img(src="/img/stamp.png" class="visited-stamp")
       img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
       div.park-header
