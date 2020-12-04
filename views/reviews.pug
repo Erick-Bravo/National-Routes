@@ -1,11 +1,1 @@
-h2 Reviews
-    if user
-    include review-form.pug
-    input(type="hidden" id="csrfToken" value=token)
-    ul
-    each review in reviews
-        li(class="review" id="review" + review.id) #{review.user.username} said:
-        p #{review.text}
-        if(review.user.username === user.username)
-            a(href="#" class="review-edit" id="review-edit" + review.id) Edit
-            a(href="/reviews/delete/" + review.id) Delete
+

@@ -52,11 +52,14 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
         })
     });
 
-  reviews.sort((a,b) => {
-    if (a.createdAt < b.createdAt) return 1
-    else if (a.createdAt > b.createdAt) return -1
-    else return 0
-  });
+    reviews.sort((a,b) => {
+      if (a.createdAt < b.createdAt) return 1
+      else if (a.createdAt > b.createdAt) return -1
+      else return 0
+    });
+
+  console.log("================", reviews, "================");
+
   const user = await getUserFromSession(req);
   res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
@@ -100,7 +103,8 @@ router.post("/reviews", csrfProtection, asyncHandler(async(req, res) => {
   const user = await getUserFromSession(req)
 
   const userId = user.userId
-  let visited = await db.Visited.findOne({ where: { parkId, userId } })
+  // let visited = await db.Visited.findOne({ where: { parkId, userId } })
+  let visited = await db.Visited.findAll()
   if (!visited) {
     visited = await db.Visited.create({
       userId,

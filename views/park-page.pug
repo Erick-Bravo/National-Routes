@@ -5,19 +5,30 @@ block content
     div(class="park-image")
       img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
-        div(class="park-name")
-            h1= park.name
+      div.park-header
+        span: h1.park-name #{park.name} National Park
+        h3.location #{state}, USA
+      p.park-info= park.description
+    div.visited
+    div.rating
+      h2 RATING
+        span(class="fa fa-star star-1")
+        span(class="fa fa-star star-2")
+        span(class="fa fa-star star-3")
+        span(class="fa fa-star star-4")
+        span(class="fa fa-star star-5")
 
-        div(class= "park-location")
-            h3= state
-        div(class="park-info")
-            p= park.description
-    div
-      h2 Rate!
-      span(class="fa fa-star star-1")
-      span(class="fa fa-star star-2")
-      span(class="fa fa-star star-3")
-      span(class="fa fa-star star-4")
-      span(class="fa fa-star star-5")
     div.reviews
-      include reviews.pug
+      h2.community-reviews COMMUNITY REVIEWS
+        if user
+        include review-form.pug
+        input(type="hidden" id="csrfToken" value=token)
+        if (!reviews.length)
+          h4.comments Sorry, no one has made a review.
+        else
+          each review in reviews
+            h4.comments #{review.user.username} said :
+              p #{review.text}
+              if(review.user.username === user.username)
+                a(href="#" class="review-edit" id="review-edit" + review.id) Edit
+                a(href="/reviews/delete/" + review.id) Delete
