@@ -6,14 +6,16 @@ block content
       img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
     div(class="park-details")
       div.park-header
-        h1 #{park.name} National Park
-        h3 #{state}, USA
-      p= park.description
+        span: h1.park-name #{park.name} National Park
+        h3.location #{state}, USA
+      p.park-info= park.description
     div.visited
     include rates.pug
     div.reviews
-      h2 Reviews
-      ul
-        each review in reviews
-          li #{review.user.username} said:
-            p #{review.text}
+      h2.community-reviews COMMUNITY REVIEWS
+        if (!reviews.length)
+          h4.comments Sorry, no one has made a review.
+        else
+          each review in reviews
+            h4.comments #{review.user.username} said :
+              p #{review.text}
