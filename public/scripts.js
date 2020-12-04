@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes"
             } else {
                 const errorDiv = document.querySelector("#login div.errors");
-                console.log(errorDiv);
+                
                 errorDiv.innerHTML = "";
                 result.errors.forEach(error => {
                     const div = document.createElement("div");

@@ -104,7 +104,7 @@ router.get("/my-routes", checkAuth, asyncHandler(async (req, res) => {
     });
 
     user = await user.toJSON()
-    console.log(user.Parks[0])
+    
     res.render("my-routes", {title: 'MY ROUTES', parks: user.Parks, user: {userId: user.id, username: user.username} })
 }))
 

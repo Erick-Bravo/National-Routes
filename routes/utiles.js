@@ -83,7 +83,6 @@ const signUpValidator = [
         .withMessage("Password needs to be longer than 6 characters")
         .custom((value, { req }) => {
             if (value !== req.body.confirmPassword) {
-                console.log("value:", value, "req.body.confirmPassword:", req.body.confirmPassword)
                 throw new Error('Password confirmation is incorrect');
             }
             return true;

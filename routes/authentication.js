@@ -41,7 +41,7 @@ router.get("/demo", asyncHandler( async (req, res) => {
             email: "DemoUser@NatlRoutes.com"
         }
     });
-    console.log(user);
+    
     if (!user) {
         res.send("Please seed all files");
     } else {
