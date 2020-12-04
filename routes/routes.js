@@ -5,7 +5,7 @@ const { Op } = require('sequelize');
 //importing local files
 const db = require("../db/models");
 const { environment } = require("../config");
-const { asyncHandler, csrfProtection, getUserFromSession, checkAuth } = require("./utiles");
+const { asyncHandler, csrfProtection, getUserFromSession, checkAuth, reviewValidators } = require("./utiles");
 const { route } = require("./authentication");
 
 //defining global variables and helper functions
@@ -201,24 +201,34 @@ router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, r
 
 router.post("/reviews", checkAuth, csrfProtection, asyncHandler(async(req, res) => {
   const { parkId, text } = req.body
-
   const user = await getUserFromSession(req)
 
-  const userId = user.userId
-  // let visited = await db.Visited.findOne({ where: { parkId, userId } })
-  let visited = await db.Visited.findAll()
-  if (!visited) {
-    visited = await db.Visited.create({
-      userId,
-      parkId
-    })
-  }
-  const visitedId = visited.toJSON().id
-  await db.Review.create({
-    visitedId,
-    text
-   })
-   res.redirect(`/parks/${ parkId }`)
+  // const validatorError = validationResult(req);
+
+  // if(validatorError.isEmpty()) {
+    const userId = user.userId
+    let visited = await db.Visited.findOne({ where: { parkId, userId } })
+    // let visited = await db.Visited.findAll()
+    if (!visited) {
+      visited = await db.Visited.create({
+        userId,
+        parkId,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+    }
+    const visitedId = visited.toJSON().id
+    await db.Review.create({
+      visitedId,
+      text,
+      createdAt: new Date(),
+      updatedAt: new Date()
+     })
+     res.redirect(`/parks/${ parkId }`)
+  // } else {
+  //   const errors = validatorError.array().map((error) => error.msg);
+  //   res.json({ errors });
+  // }
 }))
 
 
