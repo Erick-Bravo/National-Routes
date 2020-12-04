@@ -42,24 +42,50 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   });
 
   let reviews = [];
-  if (visited)
+  let rates =[];
+
+  if (visited) {
     visited.forEach(park => {
         park = park.toJSON();
+        if(park.rate){
+          rates.push(park.rate);
+        }
         const user = {username: park.User.username, userId: park.User.id};
         park.Reviews.forEach(review => {
           review.user = user;
           reviews.push(review);
         })
     });
+  }
 
   reviews.sort((a,b) => {
     if (a.createdAt < b.createdAt) return 1
     else if (a.createdAt > b.createdAt) return -1
     else return 0
   });
-  const user = await getUserFromSession(req);
-  res.render('park-page', { park, state, title: park.name, token: req.csrfToken(), reviews, user });
 
+  const user = await getUserFromSession(req);
+
+  let rateAvg = false;
+  if (rates.length){
+    rateAvg = rates.reduce((sum, rate) => sum + parseInt(rate), 0.0)/rates.length;
+  }
+
+  let rate = await db.Visited.findOne({
+    where: {
+      userId: user.userId,
+      parkId
+    }
+  });
+
+  if (rate) {
+    rate = rate.toJSON().rate;
+  }
+
+  res.render('park-page', {
+    park, state, title: park.name,
+    token: req.csrfToken(), reviews, user,
+    rate:{userRate: rate, rateAvg, ratedBy:rates.length} });
 }));
 
 // // MY ROUTES
