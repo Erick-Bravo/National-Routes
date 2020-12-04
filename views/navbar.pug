@@ -3,7 +3,8 @@ nav(class="navbar")
         a(href="/") HOME
         if user
             a(href="/my-routes") MY ROUTES
-        a(href="/") BROWSE
-    div(class="search")
-        input(type="text" placeholder="Search Parks" class="search-bar")
+        a(href="/team") TEAM
+    form(class="search" method="post" action="/search")
+        input(type="hidden" name="_csrf" value=token)
+        input(type="text" placeholder="Search Parks" class="search-bar" name="searchStr")
         button(type="submit" class="search-bar-button") SEARCH

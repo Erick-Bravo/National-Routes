@@ -1,1 +1,15 @@
 //- the rates are under div.rating in park-page.pug
+div.rating(class=rate.userRate?`star-rate-${rate.userRate}`:false)
+    div.stars
+        a(href=(user?`/visited/${park.id}/rate/1`:false)): span(class="fa fa-star star-1")
+        a(href=(user?`/visited/${park.id}/rate/2`:false)): span(class="fa fa-star star-2")
+        a(href=(user?`/visited/${park.id}/rate/3`:false)): span(class="fa fa-star star-3")
+        a(href=(user?`/visited/${park.id}/rate/4`:false)): span(class="fa fa-star star-4")
+        a(href=(user?`/visited/${park.id}/rate/5`:false)): span(class="fa fa-star star-5")
+    if rate.rateAvg
+        div.rated Rated #{rate.rateAvg} by #{rate.ratedBy}
+    else
+        if user
+            div.rated Be the first one to rate this park!
+        else
+            div.rated Sign-in to rate this park!

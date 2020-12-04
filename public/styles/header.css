@@ -120,6 +120,7 @@ nav {
   text-align: right;
   /* flex-grow: 1; */
   /* overflow: hidden; */
+  margin: 5px 0;
 }
 
 .search-bar {
