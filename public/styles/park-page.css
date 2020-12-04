@@ -95,10 +95,18 @@ h2 {
   grid-area: reviews;
   border: 1px solid green;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .community-reviews {
   background-color:  rgba(255, 255, 255, 0.4);
+}
+
+.review-form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5px;
 }
 
 .comments {
@@ -106,6 +114,7 @@ h2 {
   box-sizing: border-box;
   padding-top: 5px;
   padding-left: 10px;
+  padding-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 0;
   font-size: 1.5vw;
@@ -117,4 +126,59 @@ h2 {
   margin: 0;
   padding-bottom: 5px;
   font-family: Park-thin;
+}
+
+/* .review-edit, .review-delete {
+    display: inline-block;
+    width: 100%;
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    font-family: Park;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0 10px 0 10px;
+    border: 1px solid white;
+    text-align: center;
+} */
+
+.review-edit {
+  box-sizing: border-box;
+  padding: 3px;
+  display: inline-block;
+  width: 100%;
+  max-width: 30px;
+  height: auto;
+  color: black;
+  margin-left: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+  text-align: center;
+}
+
+.review-delete {
+  box-sizing: border-box;
+  padding: 3px;
+  display: inline-block;
+  width: 100%;
+  max-width: 45px;
+  height: auto;
+  color: black;
+  margin-left: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+  text-align: center;
+}
+
+.review-edit:hover {
+  background-color: rgb(192, 192, 192);
+}
+
+.review-delete:hover {
+  background-color: rgb(192, 192, 192);
 }
