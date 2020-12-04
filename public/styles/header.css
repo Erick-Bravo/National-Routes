@@ -80,6 +80,12 @@ header > div {
   border: 1px solid white;
 }
 
+.login-user > span {
+  font-family: Park-Thin;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
 /* NAVI BAR */
 .navbar {
   height: 100px;
