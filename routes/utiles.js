@@ -14,14 +14,15 @@ const getUserFromSession = async req => {
     if (req.session.auth) {
         const id = parseInt(req.session.auth.userId);
         let user = await db.User.findByPk(id);
-        user = user.toJSON();
-        if (user)
+        if (user) {
+            user = user.toJSON();
             return {userId: user.id, username: user.username};
-        else
+        }else {
             req.session.save(err => {
                 if (err) return next(err);
                 delete req.session.auth;
             })
+        }
     }
     return false;
 }
