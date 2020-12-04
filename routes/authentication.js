@@ -27,6 +27,10 @@ router.post("/sign-up", csrfProtection, signUpValidator, asyncHandler(async(req,
         });
 
         req.session.auth = {userId: user.id, username:user.username};
+        req.session.save(err => {
+            if (err) return next(err);
+            res.json({}); // Authentication Token to be inserted in the future
+        });
         res.json({}); // Authentication Token to be inserted in the future
     } else {
         const errors = validatorError.array().map((error) => error.msg);
@@ -41,17 +45,24 @@ router.get("/demo", asyncHandler( async (req, res) => {
             email: "DemoUser@NatlRoutes.com"
         }
     });
-    
+
     if (!user) {
         res.send("Please seed all files");
     } else {
         req.session.auth = {userId: user.id, username: user.username};
-        res.redirect('/my-routes');
+        req.session.save(err => {
+            if (err) return next(err);
+            res.redirect("/my-routes");
+        });
     }
 }))
 
 router.get("/logout", asyncHandler( async (req, res) => {
     delete req.session.auth;
+    req.session.save(err => {
+        if (err) return next(err);
+        res.redirect("/");
+    });
     res.redirect("/");
 }))
 //Login
@@ -64,7 +75,10 @@ router.post("/login", csrfProtection, loginValidators, asyncHandler (async(req, 
         if(validatorErrors.isEmpty()) {
             let user = await getUserByEmailCaseInsensitive(email);
             req.session.auth = {userId: user.id, username: user.username};
-            res.json({})
+            req.session.save(err => {
+                if (err) return next(err);
+                res.json({});
+            })
         } else {
             const errors = validatorErrors.array().map((error) => error.msg);
             res.json({ errors });

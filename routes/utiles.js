@@ -19,7 +19,10 @@ const getUserFromSession = async req => {
         if (user)
             return {userId: user.id, username: user.username};
         else
-            delete req.session.auth;
+            req.session.save(err => {
+                if (err) return next(err);
+                delete req.session.auth;
+            })
     }
     return false;
 }
