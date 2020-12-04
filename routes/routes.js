@@ -41,6 +41,22 @@ const getCustomRoutes = async (req, parkId) => {
   }
 }
 
+const getCustomRoutesParks = async (req, routeId) => {
+  const userId = parseInt(req.session.auth.userId);
+  let routesParks = await db.Route.findByPk(routeId, {
+    include: db.Park
+  });
+
+  if (routesParks) {
+    routesParks = routesParks.toJSON();
+  } else {
+    routesParks = false;
+  }
+
+  return routesParks;
+}
+
+
 // entry points like:
     //HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
@@ -130,9 +146,11 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
   });
 
   let routes = await getCustomRoutes(req);
+  let routesParks = await getCustomRoutesParks(req, 7);
+
 
   user = await user.toJSON();
-  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, user: { userId: user.id, username: user.username }, token: req.csrfToken() });
+  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, routesParks: routesParks.Parks , user: { userId: user.id, username: user.username }, token: req.csrfToken() });
 }));
 
 // ADD CUSTOM ROUTE FORM PAGE
@@ -178,6 +196,15 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
   // forEach element parseInt to get parkId
   // create record for RoutesParks with parkId and routeId ^^ access route.id;
   res.redirect("/my-routes");
+}));
+
+// INDIVIDUAL ROUTES
+router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
+  let user = req.session.auth;
+  let routeId = parseInt(req.params.id);
+  let routesParks = await getCustomRoutesParks(req, routeId);
+
+  res.render('custom-route-page', {title: "Here we go again", route:{id: routeId, name: routesParks.name}, routesParks: routesParks.Parks , user, token: req.csrfToken()});
 }));
 
 //TEMPORARY CHECKS SESSION

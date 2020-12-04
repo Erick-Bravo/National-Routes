@@ -36,7 +36,7 @@
 .register-new-user > div > input {
   height: 30px;
   width: 200px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding-left: 5px;
   border-radius: 5px;
   border: 1px solid white;
@@ -45,6 +45,8 @@
 .register-new-user > div > h2 {
   font-family: Park-Thin;
   font-size: 25px;
+  padding-right: 110px;
+  padding-bottom: 20px;
 }
 
 .sign-up-button {

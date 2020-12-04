@@ -29,7 +29,7 @@ const getUserFromSession = async req => {
 
 const checkAuth = async (req, res, next) => {
     let user = await getUserFromSession(req);
-    if (user) next();
+    if (user) next()
     else {
         const err = new Error("Page not found");
         err.status = 404;

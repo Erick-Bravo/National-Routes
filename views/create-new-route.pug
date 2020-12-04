@@ -4,18 +4,18 @@ block content
 
   form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new-route")
     div()
-      h2 CREATE A NEW A ROUTE
+      h1 CREATE NEW ROUTE
       input(type="hidden" name="_csrf" value=token)
       br
       input(type="text" name="newRoute" placeholder="New Route Name")
       br
-      label ADD ROUTES
+      label(class="add-routes-label") ADD PARKS TO YOUR ROUTE:
       br
       div.park-options
         each park in parks
           div(class="park-option")
             img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
             label #{park.name}
-            input(type="checkbox" name=`parkItem` value=park.id id=`park-${park.id}` class='park-options-item')
+            input(type="checkbox" name=`parkItem` value=park.id id=`park-${park.id}` class='park-option-checkbox')
       br
-      button(type="submit" class="submit-route-button") CREATE ROUTE
+      button(type="submit" class="submit-route-button") CREATE NEW ROUTE

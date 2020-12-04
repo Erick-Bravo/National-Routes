@@ -1,6 +1,7 @@
 extends layout
 
 block content
-    include custom-routes.pug
+    div(class="my-routes-lists")
+        include visited.pug
 
-    include visited.pug
+        include custom-routes.pug
