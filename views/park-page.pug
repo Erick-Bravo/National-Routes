@@ -26,9 +26,12 @@ block content
         if (!reviews.length)
           h4.comments Sorry, no one has made a review.
         else
+          ul
           each review in reviews
-            h4.comments #{review.user.username} said :
-            p #{review.text}
-            if(review.user.username === user.username)
-              a(class="review-edit" id="review-edit" + review.id) Edit
-              a(href="/reviews/delete/" + review.id) Delete
+            li(id="review" + review.id )
+              h4.comments #{review.user.username} said :
+              p #{review.text}
+              if(review.user.username === user.username)
+                a(class="review-edit" id="review-edit" + review.id) Edit
+                a(href="/reviews/delete/" + review.id) Delete
+

@@ -91,9 +91,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // })
 
-    const editReviewButtons = Array.from(document.querySelectorAll(".review .review-edit"))
+    const editReviewButtons = document.querySelectorAll(".reviews a.review-edit")
     console.log(editReviewButtons)
-    if(editReviewButtons.length > 0) {
+    if(editReviewButtons) {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {
                 console.log(e.target.id)
@@ -106,7 +106,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const csrfToken = document.querySelector("#csrfToken").value
                 const review = document.querySelector("#review" + id + " p").innerText
-                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" class="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`
+                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`
 
                 form.innerHTML = inputs
                 document.querySelector("#review" + id).appendChild(form)
