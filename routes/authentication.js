@@ -65,6 +65,7 @@ router.get("/logout", asyncHandler( async (req, res) => {
     });
     res.redirect("/");
 }))
+
 //Login
 router.post("/login", csrfProtection, loginValidators, asyncHandler (async(req, res) => {
 

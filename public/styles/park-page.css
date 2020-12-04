@@ -129,16 +129,42 @@ h2 {
   font-family: Park-thin;
 }
 
-.review-edit,
-.review-delete {
+.review-edit {
+  box-sizing: border-box;
+  padding: 3px;
   display: inline-block;
-  width: 100%;
-  max-width: 50px;
+  width: auto;
   height: auto;
+  color: black;
+  margin-left: 10px;
+  text-decoration: none;
   border-radius: 4px;
-  font-family: Park;
-  background-color: rgba(255, 255, 255, 0.8);
   margin: 0 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid white;
   text-align: center;
+}
+
+.review-delete {
+  box-sizing: border-box;
+  padding: 3px;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  color: black;
+  margin-left: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+  text-align: center;
+}
+
+.review-edit:hover {
+  background-color: rgb(192, 192, 192);
+}
+
+.review-delete:hover {
+  background-color: rgb(192, 192, 192);
 }

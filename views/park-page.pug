@@ -15,7 +15,7 @@ block content
     div.reviews
       h2.community-reviews COMMUNITY REVIEWS
       if user
-      include review-form.pug
+        include review-form.pug
       input(type="hidden" id="csrfToken" value=token)
       if (!reviews.length)
         h4.comments Sorry, no one has made a review.
