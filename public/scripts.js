@@ -96,9 +96,9 @@ window.addEventListener("DOMContentLoaded", () => {
     if(editReviewButtons) {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {
-                console.log(e.target.id)
+
                 const id = parseInt(e.target.id.slice(11))
-                console.log(id)
+
                 const form = document.createElement("form")
                 form.setAttribute("action", "/reviews/edit/" + id)
 
@@ -113,6 +113,4 @@ window.addEventListener("DOMContentLoaded", () => {
             })
         })
     }
-
-
 })
