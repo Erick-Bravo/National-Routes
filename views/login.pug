@@ -11,5 +11,6 @@ form(action="/login" method="post" id="login" class="login-user")
         br
         a(href="/demo" class="demo-user-button") DEMO LOGIN
     else
-        span Welcome, #{user.username}!
-        a(href="/logout" class="logout-button") LOGOUT
+        div.welcome
+            span Welcome, #{user.username}!
+            a(href="/logout" class="logout-button") LOGOUT

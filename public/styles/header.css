@@ -90,10 +90,11 @@ header > div {
   border: 1px solid white;
 }
 
-.login-user > span {
-  font-family: Park-Thin;
+.welcome > span {
+  font-family: Park;
   font-size: 20px;
-  margin-right: 20px;
+  height: 30px;
+  /* margin-right: 10px; */
 }
 
 .login-user > .errors {
