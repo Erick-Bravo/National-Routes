@@ -21,18 +21,36 @@
 }
 
 .register-new-user {
+  display: flex;
   width: 400px;
-  height: 400px;
+  height: 550px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 2;
   /* box-shadow: 8px 8px 10px grey; */
   margin: 70px 50px 50px 50px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
 }
 
-.register-new-user > div {
-  margin: 40px;
-  width: 400px;
+.errors{
+  /* display: none; */
+  color: red;
+  margin: 0 40px;
+  width: auto;
 }
+
+.errors > p {
+  margin-bottom: 0;
+  font-family: Park-Thin;
+}
+
+.sign-up {
+  margin: 0 40px;
+  width: auto;
+  height: auto;
+}
+
 .register-new-user > div > input {
   height: 30px;
   width: 200px;
@@ -45,8 +63,6 @@
 .register-new-user > div > h2 {
   font-family: Park-Thin;
   font-size: 25px;
-  padding-right: 110px;
-  padding-bottom: 20px;
 }
 
 .sign-up-button {
