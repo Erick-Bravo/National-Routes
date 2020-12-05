@@ -4,11 +4,11 @@
 @import "my-routes.css";
 @import "create-route-form.css";
 @import "park-page.css";
-@import "ericksPlayRoom.css";
 @import "rate.css";
 @import "team.css";
 @import "search.css";
-@import "add-park to-route.css";
+@import "add-park-to-route.css";
+@import "visited-list.css";
 
 @font-face {
   font-family: Park;

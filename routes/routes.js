@@ -146,11 +146,11 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
   });
 
   let routes = await getCustomRoutes(req);
-  let routesParks = await getCustomRoutesParks(req, 7);
-
 
   user = await user.toJSON();
-  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, routesParks: routesParks.Parks , user: { userId: user.id, username: user.username }, token: req.csrfToken() });
+
+  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, isMyRoutePage: true,
+  user: { userId: user.id, username: user.username }, token: req.csrfToken() });
 }));
 
 // ADD CUSTOM ROUTE FORM PAGE
@@ -243,7 +243,12 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (r
         rate
       })
     };
-    res.redirect(`/parks/${parkId}`);
+
+    if (req.query.visited === 'true'){
+      res.redirect("/my-routes")
+    } else {
+      res.redirect(`/parks/${parkId}`);
+    }
   };
 
 }));

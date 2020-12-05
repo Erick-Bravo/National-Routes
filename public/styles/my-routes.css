@@ -23,7 +23,7 @@
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 25px;
   padding: 20px;
-  width: 700px;
+  width: 500px;
 }
 .visited-list > h1,
 .custom-routes-list > h1 {
@@ -46,7 +46,7 @@
   padding-left: 25px;
 }
 
-.visited-list-item,
+/* .visited-list-item, */
 .custom-routes-list-item {
   display: flex;
   flex-direction: row;

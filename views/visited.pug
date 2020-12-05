@@ -5,11 +5,7 @@ ul.visited-list
             a(href=`/parks/${park.id}`)
                 img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
             p #{park.name}
-            div
-                span(class="fa fa-star star-1")
-                span(class="fa fa-star star-2")
-                span(class="fa fa-star star-3")
-                span(class="fa fa-star star-4")
-                span(class="fa fa-star star-5")
+            div.visited-list-rating(class=park.Visited.rate?`star-rate-${park.Visited.rate}`:false)
+                include stars.pug
             //- p #{park.createdAt}
             button(type="submit" name="delete" class="remove") REMOVE
