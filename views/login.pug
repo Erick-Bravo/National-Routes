@@ -1,12 +1,11 @@
 form(action="/login" method="post" id="login" class="login-user")
     if !user
         div.errors
-        div
         input(type="hidden" name="_csrf" value=token)
         br
-        input(type="email" name="email" placeholder="Email")
+        input(type="email" name="email" placeholder="Email" class="email")
         br
-        input(type="password" name="password" placeholder="Password")
+        input(type="password" name="password" placeholder="Password" class="password")
         br
         button(type="submit" class="login-button") LOGIN
         br

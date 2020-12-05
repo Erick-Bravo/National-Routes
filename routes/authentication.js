@@ -81,7 +81,8 @@ router.post("/login", csrfProtection, loginValidators, asyncHandler (async(req, 
                 res.json({});
             })
         } else {
-            const errors = validatorErrors.array().map((error) => error.msg);
+            // const errors = validatorErrors.array().map((error) => error.msg);
+            const errors = ["Invalid Email/Password. Please try again"]
             res.json({ errors });
         }
 

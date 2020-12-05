@@ -110,6 +110,7 @@ const loginValidators = [
     check("password")
         .exists({ checkFalsy: true })
         .withMessage("Please Enter Your Password")
+        .withMessage("Please enter a valid login")
         .custom(async(value, {req}) => {
             let user = await getUserByEmailCaseInsensitive(req.body.email);
             if(user){
