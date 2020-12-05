@@ -1,3 +1,15 @@
+.team-block {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    align-items: center;
+    margin: auto;
+}
+
+.team-block > h1{
+    margin: 0;
+    font-family: Park;
+}
 div.team {
     display: grid;
     box-sizing: border-box;
@@ -42,11 +54,19 @@ div.team-info h2 {
     border-radius: 0 5px 0 0;
 }
 
-div.team-info span {
+span.details {
     display: block;
     position: relative;
-    top: 50px;
+    top: 25px;
     text-align: center;
     font-family: Park-Thin;
     font-size: 20px;
+}
+
+.github-link{
+    text-align: left;
+}
+.github-logo {
+    height: 50px;
+    width: 50px;
 }
