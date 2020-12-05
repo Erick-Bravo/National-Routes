@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     errorDiv.innerHTML = "";
                     const p = document.createElement("p");
                     errorContent = `${errorContent}
-                    -${error}
+                    - ${error}
                     </br>`;
                     p.innerHTML = errorContent;
                     errorDiv.appendChild(p);
