@@ -36,7 +36,7 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 - ### Login
 	A function integrated into our homepage that will allow the user to login and not disrupt their current viewing experience.
 
-	[insert gif or pic of user logging in]
+	![](./assets/Login-SignUp.gif)[insert gif or pic of user logging in]
 
 - ### Parks
 	Visitors to the site will be able to view images and details about the National Park they are interested in. The details will include: A snippet of the park, location, average rate, reviews, ...[insert what types of information the user will see]
