@@ -53,7 +53,6 @@ const getCustomRoutesParks = async (req, routeId) => {
   } else {
     routesParks = false;
   };
-
   return routesParks;
 };
 

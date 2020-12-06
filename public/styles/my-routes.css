@@ -42,11 +42,15 @@
 }
 
 .visited-list-item > a > img,
-.custom-routes-list-item > a > img {
+.custom-routes-list-item > a > img,
+.routes-parks > a > img {
   width: 80px;
   height: auto;
   box-sizing: border-box;
   margin-right: 25px;
+}
+.routes-parks {
+  display: flex;
 }
 
 .visited-list-item > p,
