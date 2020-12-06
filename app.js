@@ -58,27 +58,18 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
-//render page for 404 error, else pass to generic error handler
-app.use((err, req, res, next) => {
-    if (err.status === 404){
-        res.status(404);
-        const user = req.session.auth;
-        res.render('page-not-found', {title: 'Page Not Found', user});
-    } else {
-        next(err);
-    }
+//render error page
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    const user = req.session.auth;
+
+    const status = err.status || 500;
+    res.redirect("/error/"+ status);
 });
 
-//render error page for other errors
-app.use((err, req, res, next) => {
-    if (environment === "production") {
-        err.message = null,
-        err.stack = null
-    }
-    const user = req.session.auth;
-    res.status(err.status);
-    res.render('error', {title: 'Server Error', err, user} )
-});
 
 //export app
 module.exports = app;

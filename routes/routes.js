@@ -2,6 +2,7 @@
 const { next } = require("cli");
 const express = require("express");
 const { Op } = require('sequelize');
+const { sequelize } = require("../db/models");
 
 //importing local files
 const db = require("../db/models");
@@ -52,7 +53,6 @@ const getCustomRoutesParks = async (req, routeId) => {
   } else {
     routesParks = false;
   };
-
   return routesParks;
 };
 
@@ -147,10 +147,11 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
   });
 
   let routes = await getCustomRoutes(req);
-  let routesParks = await getCustomRoutesParks(req, 7);
 
   user = await user.toJSON();
-  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, routesParks: routesParks.Parks , user: { userId: user.id, username: user.username }, token: req.csrfToken() });
+
+  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, isMyRoutePage: true,
+  user: { userId: user.id, username: user.username }, token: req.csrfToken() });
 }));
 
 // ADD CUSTOM ROUTE FORM PAGE
@@ -207,6 +208,30 @@ router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async
   res.render('custom-route-page', {title: "Here we go again", route:{id: routeId, name: routesParks.name}, routesParks: routesParks.Parks , user, token: req.csrfToken()});
 }));
 
+// REMOVE ROUTE
+router.get("/my-routes/:id(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) =>{
+  const id = parseInt(req.params.id);
+  const userId = parseInt(req.session.auth.userId);
+
+  let route = await db.Route.findOne({where: {
+    id,
+    userId
+  }})
+
+  if (route) {
+    await sequelize.transaction(async tx => {
+      await db.RoutesPark.destroy({where: {
+        routeId: id
+      }}, {transaction: tx});
+
+      await route.destroy({transaction: tx});
+    })
+  }
+
+  res.redirect("/my-routes");
+
+}));
+
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
   if (req.session.views) {
@@ -219,7 +244,7 @@ router.get("/sessionCheck", (req, res) => {
 });
 
 //RATE PARK/ADD TO VISITED
-router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (req, res) => {
+router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", checkAuth, asyncHandler(async (req, res) => {
   if (!req.session.auth) {
     return res.redirect("/");
   } else {
@@ -243,11 +268,55 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (r
         rate
       })
     };
-    res.redirect(`/parks/${parkId}`);
+
+    if (req.query.visited === 'true'){
+      res.redirect("/my-routes")
+    } else {
+      res.redirect(`/parks/${parkId}`);
+    }
   };
 
 }));
 
+router.get("/visited/:parkId(\\d+)/delete", checkAuth, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.session.auth.userId);
+  const parkId = parseInt(req.params.parkId);
+
+  let visited = await db.Visited.findOne({
+    where: {
+      parkId,
+      userId
+    }});
+  visitedJSON = visited.toJSON();
+
+  await sequelize.transaction(async tx => {
+    await db.Review.destroy({where:{
+      visitedId: visitedJSON.id
+    }},{transaction:tx});
+
+    await visited.destroy({transaction:tx});
+
+  })
+
+  res.redirect("/my-routes");
+}));
+
+router.get("/visited/:parkId(\\d+)/clear-rate", checkAuth, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.session.auth.userId);
+  const parkId = parseInt(req.params.parkId);
+
+  let visited = await db.Visited.findOne({
+    where: {
+      parkId,
+      userId
+    }});
+
+  await visited.update({
+    rate: null
+  })
+
+  res.redirect("/my-routes");
+}));
 //TEAM
 router.get("/team", csrfProtection, (req, res) => {
     const user = req.session.auth ? req.session.auth : false;
@@ -400,5 +469,16 @@ router.post("/reviews/edit/:id(\\d+)", asyncHandler(async (req, res) => {
   res.redirect(`/parks/${parkId}`);
 }));
 
+router.get("/error/:code(\\d+)", asyncHandler(async (req, res) => {
+  const status = parseInt(req.params.code);
+  const user = req.session.auth;
+  res.status(status || 500);
+  if (status === 404) {
+    const randomNum = Math.floor(Math.random()*100) % 7;
+    res.render('page-not-found', {title: 'Page Not Found', user, randomNum});
+  } else {
+    res.render('error', {title: "Server Error", user});
+  }
+}));
 //exporting router
   module.exports = router;

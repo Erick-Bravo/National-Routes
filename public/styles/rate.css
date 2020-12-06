@@ -34,6 +34,11 @@
   font-size: 40px;
 }
 
+.stars .fa-star {
+    color: lightgray;
+    font-size: 40px;
+}
+
 .stars:hover a .fa-star {
   color: yellow;
 }

@@ -75,24 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // const newRouteForm = document.querySelector("#create-new-route")
-    // newRouteForm.addEventListener("submit", async(e) => {
-    //     e.preventDefault();
-
-    //     let newRoute = document.querySelector("#create-new-route input[name='new-route']").value;
-    //     let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value;
-
-    //     let result = await fetch("/my-routes/add", {
-    //         init: {credentials: "same-origin"},
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json"},
-    //         body: JSON.stringify({ newRoute, _csrf})
-    //     })
-
-    //     result = await result.json();
-
-    // })
-    const newRouteForm = document.querySelector("#create-new-route");
+    const newRouteForm = document.querySelector("#create-new-route")
     if (newRouteForm) {
         newRouteForm.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -127,20 +110,49 @@ window.addEventListener("DOMContentLoaded", () => {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {
 
-                const id = parseInt(e.target.id.slice(11));
+                const id = parseInt(e.target.id.slice(11))
 
-                const form = document.createElement("form");
-                form.setAttribute("action", "/reviews/edit/" + id);
+                const form = document.createElement("form")
+                form.setAttribute("action", "/reviews/edit/" + id)
+                form.setAttribute("method", "post")
+                form.setAttribute("class", "review-form")
 
-                form.setAttribute("method", "post");
 
-                const csrfToken = document.querySelector("#csrfToken").value;
-                const review = document.querySelector("#review" + id + " p").innerText;
-                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`;
 
-                form.innerHTML = inputs;
-                document.querySelector("#review" + id).appendChild(form);
-            });
-        });
-    };
+                const csrfToken = document.querySelector("#csrfToken").value
+                const review = document.querySelector("#review" + id + " p").innerText
+                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`
+
+                form.innerHTML = inputs
+                document.querySelector("#review" + id).appendChild(form)
+            })
+        })
+    }
+
+    const removeVisitedButtons = document.querySelectorAll(".remove-button a");
+    const removeButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.innerHTML = "";
+        let parkId = parseInt(parent.id.slice(7));
+        let confirmation = `<span>Removing park from Visited would remove your Reviews for this park.</span>
+                            <a href="/visited/${parkId}/delete">Confirm</a>
+                            <a href="/visited/${parkId}/clear-rate">Remove Rate</a>`;
+        parent.innerHTML = confirmation;
+        let cancel = document.createElement("a");
+        cancel.innerHTML = "Cancel";
+        parent.appendChild(cancel);
+        cancel.addEventListener("click", cancelButtonClick)
+    }
+    const cancelButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.innerHTML = "";
+        let remove = document.createElement("a");
+        remove.innerHTML = "REMOVE";
+        parent.appendChild(remove);
+        remove.addEventListener("click", removeButtonClick);
+    }
+    removeVisitedButtons.forEach(button => {
+        button.addEventListener("click", removeButtonClick);
+    });
+
 });
