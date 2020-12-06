@@ -2,33 +2,33 @@
   margin: 60px 10px 60px 60px;
   display: inline-flex;
   flex-direction: column;
-  width: 500px;
-  background-color: rgba(255, 255, 255, 0.4);
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
   padding: 20px;
+  align-items: center;
 }
 
 .visited-list {
-  margin: 60px 10px 60px 80px;
+  margin: 60px 60px 60px 80px;
   flex-direction: column;
   display: inline-flex;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
+  min-width: 650px;
   border-radius: 25px;
   padding: 20px;
-  width: 700px;
+  align-items: center;
 }
 .visited-list > h1,
 .custom-routes-list > h1 {
   font-family: Park-Thin;
   font-size: 35px;
-  align-self: flex-start;
   padding-left: 25px;
 }
 
 .custom-routes-list > h2 {
   font-family: Park-Thin;
   font-size: 15px;
-  align-self: flex-start;
   padding-left: 25px;
 }
 
@@ -38,7 +38,7 @@
   flex-direction: row;
   padding: 10px 20px 12px 30px;
   align-items: center;
-  align-content: flex-start;
+  align-content: center;
 }
 
 .visited-list-item > a > img,
@@ -78,9 +78,9 @@
   height: 30px;
   font-size: 20px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   margin: 10px 10px 30px 10px;
-  padding: 10px 10px 10px 30px;
+  padding: 8px 20px 8px 20px;
 }
 
 .custom-routes-list > div > a {
@@ -93,17 +93,17 @@
 .create-route-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 130px;
-  height: 25px;
+  max-width: 200px;
+  height: 40px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: 20px 10px 0 20px;
-  border: 1px solid white;
+  background-color: rgba(248, 148, 6, 0.7);
+  margin: 20px 10px 20px 20px;
 }
 
 .custom-routes-list > a {
-  font-size: 13px;
+  font-size: 17px;
   font-family: Park;
   color: black;
   text-decoration: none;

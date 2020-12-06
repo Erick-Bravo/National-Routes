@@ -14,7 +14,6 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 10px 0 10px 0;
 }
 
 .title > h1 {
@@ -26,20 +25,14 @@ header {
   flex-direction: row;
   font-family: Park-Thin;
   color: black;
-  font-size: 1.7vw;
+  font-size: 1.6vw;
   padding-left: 50px;
-}
-
-.mountains-img {
-  margin-top: 30px;
-  width: 120px;
-  height: 70px;
 }
 
 .login-user {
   display: flex;
   align-self: flex-end;
-  margin: 60px 30px 30px 0px;
+  margin: 30px 30px 50px 30px;
 }
 
 .login-user > input {
@@ -141,26 +134,20 @@ nav {
 .search {
   display: inline-block;
   white-space: nowrap;
-  /* position: relative; */
   width: 100%;
-  /* max-width: 600px; */
   text-align: right;
-  /* flex-grow: 1; */
-  /* overflow: hidden; */
-  margin: 5px 0;
+  margin: 5px 10px 0 0;
 }
 
 .search-bar {
   display: inline-block;
   width: 100%;
   max-width: 650px;
-  /* min-width: 350px; */
   height: 30px;
   border-radius: 5px;
   padding-left: 10px;
   margin-left: 20px;
   border: 1px solid white;
-  /* overflow: hidden; */
 }
 
 .search-bar-button {
@@ -174,5 +161,4 @@ nav {
   background-color: rgba(255, 255, 255, 0.8);
   margin: 0 10px 0 10px;
   border: 1px solid white;
-  /* overflow: hidden; */
 }
