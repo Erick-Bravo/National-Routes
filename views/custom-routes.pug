@@ -3,5 +3,6 @@ ul.custom-routes-list
     each route in routes
         div(class="custom-route")
             a(href=`/my-routes/${route.id}`) #{route.name}
+            a(href=`/my-routes/${route.id}/delete` class="remove-button-a") Remove
 
     a(href="/my-routes/add" class="create-route-button") CREATE NEW ROUTE

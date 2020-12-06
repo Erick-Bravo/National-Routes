@@ -71,23 +71,6 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    // const newRouteForm = document.querySelector("#create-new-route")
-    // newRouteForm.addEventListener("submit", async(e) => {
-    //     e.preventDefault();
-
-    //     let newRoute = document.querySelector("#create-new-route input[name='new-route']").value;
-    //     let _csrf = document.querySelector("#sign-up-form input[name='_csrf']").value;
-
-    //     let result = await fetch("/my-routes/add", {
-    //         init: {credentials: "same-origin"},
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json"},
-    //         body: JSON.stringify({ newRoute, _csrf})
-    //     })
-
-    //     result = await result.json();
-
-    // })
     const newRouteForm = document.querySelector("#create-new-route")
     if (newRouteForm) {
         newRouteForm.addEventListener("submit", async(e) => {
@@ -142,39 +125,31 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-
-//     const logInMessage = document.getElementById("review-form")
-//     if(logInMessage) {
-//         logInMessage.addEventListener("submit", async(e) => {
-//         e.preventDefault();
-
-//         let text = document.querySelector("#review-text input[name='text']").value;
-//         let _csrf = document.querySelector("#review-form input[name='_csrf']").value;
-//         let parkId = document.querySelector("#review-form input[name='parkId']").value;
-//         let reqAuth = document.querySelector("#review-form input[name='reqAuth']").value;
-
-//         let result = await fetch("/reviews", {
-//             init: {credentials: "same-origin"},
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({ parkId, text, _csrf })
-//         })
-
-//         result = await result.json()
-
-//         if(!result.errors) {
-//             location.href = "/parks"
-//         } else {
-//             const errorDiv = document.querySelector("#login div.errors");
-//             errorDiv.innerHTML = "";
-//             result.errors.forEach(error => {
-//                 const div = document.createElement("div");
-//                 div.innerHTML = error;
-//                 errorDiv.appendChild(div);
-//         })
-//     }
-// })
-//     }
+    const removeVisitedButtons = document.querySelectorAll(".remove-button a");
+    const removeButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.innerHTML = "";
+        let parkId = parseInt(parent.id.slice(7));
+        let confirmation = `<span>Removing park from Visited would remove your Reviews for this park.</span>
+                            <a href="/visited/${parkId}/delete">Confirm</a>
+                            <a href="/visited/${parkId}/clear-rate">Remove Rate</a>`;
+        parent.innerHTML = confirmation;
+        let cancel = document.createElement("a");
+        cancel.innerHTML = "Cancel";
+        parent.appendChild(cancel);
+        cancel.addEventListener("click", cancelButtonClick)
+    }
+    const cancelButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.innerHTML = "";
+        let remove = document.createElement("a");
+        remove.innerHTML = "REMOVE";
+        parent.appendChild(remove);
+        remove.addEventListener("click", removeButtonClick);
+    }
+    removeVisitedButtons.forEach(button => {
+        button.addEventListener("click", removeButtonClick);
+    });
 
 
 })

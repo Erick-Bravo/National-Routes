@@ -8,4 +8,5 @@ ul.visited-list
             div.visited-list-rating(class=park.Visited.rate?`star-rate-${park.Visited.rate}`:false)
                 include stars.pug
             //- p #{park.createdAt}
-            button(type="submit" name="delete" class="remove") REMOVE
+            .remove-button(id=`remove-${park.id}`)
+                a REMOVE

@@ -2,6 +2,7 @@
 const { next } = require("cli");
 const express = require("express");
 const { Op } = require('sequelize');
+const { sequelize } = require("../db/models");
 
 //importing local files
 const db = require("../db/models");
@@ -207,6 +208,30 @@ router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async
   res.render('custom-route-page', {title: "Here we go again", route:{id: routeId, name: routesParks.name}, routesParks: routesParks.Parks , user, token: req.csrfToken()});
 }));
 
+// REMOVE ROUTE
+router.get("/my-routes/:id(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) =>{
+  const id = parseInt(req.params.id);
+  const userId = parseInt(req.session.auth.userId);
+
+  let route = await db.Route.findOne({where: {
+    id,
+    userId
+  }})
+
+  if (route) {
+    await sequelize.transaction(async tx => {
+      await db.RoutesPark.destroy({where: {
+        routeId: id
+      }}, {transaction: tx});
+
+      await route.destroy({transaction: tx});
+    })
+  }
+
+  res.redirect("/my-routes");
+
+}));
+
 //TEMPORARY CHECKS SESSION
 router.get("/sessionCheck", (req, res) => {
   if (req.session.views) {
@@ -219,7 +244,7 @@ router.get("/sessionCheck", (req, res) => {
 });
 
 //RATE PARK/ADD TO VISITED
-router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (req, res) => {
+router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", checkAuth, asyncHandler(async (req, res) => {
   if (!req.session.auth) {
     return res.redirect("/");
   } else {
@@ -253,6 +278,45 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", asyncHandler(async (r
 
 }));
 
+router.get("/visited/:parkId(\\d+)/delete", checkAuth, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.session.auth.userId);
+  const parkId = parseInt(req.params.parkId);
+
+  let visited = await db.Visited.findOne({
+    where: {
+      parkId,
+      userId
+    }});
+  visitedJSON = visited.toJSON();
+
+  await sequelize.transaction(async tx => {
+    await db.Review.destroy({where:{
+      visitedId: visitedJSON.id
+    }},{transaction:tx});
+
+    await visited.destroy({transaction:tx});
+
+  })
+
+  res.redirect("/my-routes");
+}));
+
+router.get("/visited/:parkId(\\d+)/clear-rate", checkAuth, asyncHandler(async (req, res) => {
+  const userId = parseInt(req.session.auth.userId);
+  const parkId = parseInt(req.params.parkId);
+
+  let visited = await db.Visited.findOne({
+    where: {
+      parkId,
+      userId
+    }});
+
+  await visited.update({
+    rate: null
+  })
+
+  res.redirect("/my-routes");
+}));
 //TEAM
 router.get("/team", csrfProtection, (req, res) => {
     const user = req.session.auth ? req.session.auth : false;
