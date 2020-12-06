@@ -13,24 +13,25 @@
 .star-rate-5 .fa.fa-star.star-3,
 .star-rate-5 .fa.fa-star.star-4,
 .star-rate-5 .fa.fa-star.star-5 {
-    color: yellow;
+  color: yellow;
 }
 
 .rating {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .rated {
   font-family: Park-thin;
   text-transform: uppercase;
   text-align: center;
+  margin-top: 10px;
 }
 
 .stars .fa-star {
-    color: lightgray;
-    font-size: 40px;
+  color: lightgray;
+  font-size: 40px;
 }
 
 .stars .fa-star {
@@ -39,9 +40,9 @@
 }
 
 .stars:hover a .fa-star {
-    color: yellow;
+  color: yellow;
 }
 
-.stars:hover a:hover ~ a .fa-star{
-    color:lightgray;
+.stars:hover a:hover ~ a .fa-star {
+  color: lightgray;
 }

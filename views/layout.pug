@@ -9,10 +9,10 @@ html( lang="en")
         title #{title}
     body
         header(id="header")
-            div
+            div(class="title-login")
                 div(class="title")
                     h1 NATIONAL ROUTES
-                    img(src=`/img/mountains.png` class=`mountains-img`)
+                    //- img(src=`/img/mountains.png` class=`mountains-img`)
                 include login.pug
             include navbar.pug
         main

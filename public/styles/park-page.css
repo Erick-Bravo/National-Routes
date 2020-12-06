@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
   .park-full,
   .header,
   .mountains-img,
@@ -9,10 +9,8 @@
 
 .park-full {
   display: grid;
-  margin-top: 40px;
-  margin-left: 60px;
-  margin-right: 60px;
-  grid-template-columns: 50% 50%;
+  margin: 50px 75px 70px 75px;
+  grid-template-columns: 40% 60%;
   grid-template:
     "picture picture details details"
     "picture picture details details"
@@ -28,7 +26,7 @@
 .park-image {
   grid-area: picture;
   align-items: stretch;
-  margin-right: 30px;
+  margin-right: 40px;
   position: relative;
 }
 
@@ -45,34 +43,37 @@
 .park-details {
   grid-area: details;
   margin: 0;
+  height: 90%;
   width: 100%;
-  border: 1px solid green;
+  /* border: 0.1px solid white; */
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
 }
 
 .park-header {
   font-size: 1.5vw;
   margin: 0;
   max-width: auto;
+  padding: 20px 0px 20px 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
+.park-name {
+  padding-bottom: 10px;
+}
+
 .park-name,
 .location {
   font-family: Park;
   margin: 0;
   width: auto;
-  border-bottom: 1px solid green;
 }
 
 .park-info {
   font-family: Park-thin;
-  font-size: 1.5vw;
-}
-
-.park-name,
-.location,
-.park-info {
-  box-sizing: border-box;
-  padding-left: 10px;
-  padding-right: 5px;
+  font-size: 1.6vw;
+  padding: 0px 20px 0px 30px;
 }
 
 /* RATING AND COMMUNITY REVIEWS STYLES */
@@ -88,19 +89,25 @@ h2 {
 .rating {
   grid-area: rating;
   margin-right: 30px;
-  margin-top: 20px;
+  margin-top: 10px;
+  padding: 5px;
 }
 
 /* REVIEWS SECTION  */
 .reviews {
   grid-area: reviews;
-  border: 1px solid green;
-  margin-top: 50px;
+  /* border: 1px solid white; */
+  background-color: rgba(255, 255, 255, 0.4);
+  margin-top: 30px;
   margin-bottom: 50px;
+  border-radius: 15px;
 }
 
 .community-reviews {
-  background-color: rgba(255, 255, 255, 0.4);
+  padding: 20px 0px 15px 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .review-form {
@@ -110,13 +117,24 @@ h2 {
   margin: 5px;
 }
 
+.submit-review {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  margin: 5px 50px 0 50px;
+  padding: 5px 0 5px 0;
+  border: 1px solid lightgray;
+}
+
+.review-input {
+  border-radius: 10px;
+  min-height: 50px;
+  border: 1px solid white;
+}
+
 .comments {
-  border-top: 1px solid green;
+  /* border-top: 1px solid green; */
   box-sizing: border-box;
-  padding-top: 5px;
-  padding-left: 10px;
-  padding-bottom: 5px;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px 0 20px 40px;
   margin: 0;
   font-size: 1.5vw;
   font-family: Park;
