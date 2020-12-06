@@ -1,16 +1,8 @@
-/* .my-routes-lists {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-} */
-
 .custom-routes-list {
   margin: 60px 10px 60px 60px;
   display: inline-flex;
   flex-direction: column;
   width: 500px;
-  /* height: auto; */
-  /* margin: 60px 50px 50px 50px; */
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 25px;
   padding: 20px;
@@ -33,12 +25,6 @@
   padding-left: 25px;
 }
 
-/* .custom-route {
-  border: 1px solid grey;
-  border-radius: 8px;
-  padding: 10px 20px 10px 10px;
-} */
-
 .custom-routes-list > h2 {
   font-family: Park-Thin;
   font-size: 15px;
@@ -51,7 +37,6 @@
   display: flex;
   flex-direction: row;
   padding: 10px 20px 12px 30px;
-  /* justify-content: space-between; */
   align-items: center;
   align-content: flex-start;
 }

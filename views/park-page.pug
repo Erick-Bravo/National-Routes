@@ -14,9 +14,6 @@ block content
     include rates.pug
     div.reviews
       h2.community-reviews COMMUNITY REVIEWS
-      if user
-        include review-form.pug
-      input(type="hidden" id="csrfToken" value=token)
       if (!reviews.length)
         h4.comments Sorry, no one has made a review.
       else
@@ -26,3 +23,6 @@ block content
             if(review.user.username === user.username)
               a(class="review-edit" id="review-edit" + review.id) Edit
               a(class="review-delete" href="/reviews/delete/" + review.id) Delete
+      if user
+        include review-form.pug
+      input(type="hidden" id="csrfToken" value=token)
