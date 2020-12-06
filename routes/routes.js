@@ -22,25 +22,25 @@ const getCustomRoutes = async (req, parkId) => {
     });
     if (routes) {
       routes = routes.map(route => route.toJSON());
-      if (parkId){
+      if (parkId) {
         for (let i = 0; i < routes.length; i++) {
           let routesPark = await db.RoutesPark.findOne({
             where: {
               parkId,
               routeId: routes[i].id
             }
-          })
+          });
           if (routesPark) routes[i].isParkInRoute = true;
-        }
-      }
+        };
+      };
     } else {
       routes = [];
-    }
+    };
     return routes;
   } else {
     return false;
-  }
-}
+  };
+};
 
 const getCustomRoutesParks = async (req, routeId) => {
   const userId = parseInt(req.session.auth.userId);
@@ -52,10 +52,10 @@ const getCustomRoutesParks = async (req, routeId) => {
     routesParks = routesParks.toJSON();
   } else {
     routesParks = false;
-  }
+  };
 
   return routesParks;
-}
+};
 
 
 // entry points like:
@@ -75,6 +75,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 
   park = await park.toJSON();
   const state = park.States.map(state => state.name).join(", ");
+
   //PARK AVG RATES AND REVIEWS
   let visited = await db.Visited.findAll({
     where: {parkId},
@@ -132,7 +133,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   };
 
   res.render('park-page', {
-    park, state, title: park.name,
+    park, state, title: `${park.name} National Park`,
     token: req.csrfToken(), reviews, user, routes,
     isVisited, rate:{userRate, rateAvg, ratedBy:rates.length} });
 
