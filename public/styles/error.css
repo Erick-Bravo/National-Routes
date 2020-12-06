@@ -4,10 +4,16 @@
     height: 150px;
     flex-direction: column;
     margin: 50px auto;
+    font-family: Park;
 }
 
 .error-puppy{
     position: fixed;
     bottom: 0;
     right: 15%;
+    max-width: 30%;
+}
+
+.error-puppy a, .error-puppy a img {
+    max-width: 100%;
 }
