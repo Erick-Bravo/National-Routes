@@ -469,5 +469,16 @@ router.post("/reviews/edit/:id(\\d+)", asyncHandler(async (req, res) => {
   res.redirect(`/parks/${parkId}`);
 }));
 
+router.get("/error/:code(\\d+)", asyncHandler(async (req, res) => {
+  const status = parseInt(req.params.code);
+  const user = req.session.auth;
+  res.status(status || 500);
+  if (status === 404) {
+    const randomNum = Math.floor(Math.random()*100) % 7;
+    res.render('page-not-found', {title: 'Page Not Found', user, randomNum});
+  } else {
+    res.render('error', {title: "Server Error", user});
+  }
+}));
 //exporting router
   module.exports = router;

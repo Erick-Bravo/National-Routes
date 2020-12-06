@@ -1,4 +1,9 @@
 extends layout
 
 block content
-    h1 Page Not Found
+    div.error-message
+        h3 Oops, it looks like you got lost!
+        p But do not fret! Our resque puppy gonna lead you out of here!
+    div.error-puppy
+        a(href="/")
+            img(src=`/errors/doggy-${randomNum}.png`)

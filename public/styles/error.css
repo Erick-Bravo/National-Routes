@@ -1,0 +1,13 @@
+.error-message {
+    display: flex;
+    width: 300px;
+    height: 150px;
+    flex-direction: column;
+    margin: 50px auto;
+}
+
+.error-puppy{
+    position: fixed;
+    bottom: 0;
+    right: 15%;
+}
