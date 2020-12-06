@@ -1,68 +1,69 @@
 .my-routes {
-    position: relative;
-    display: block;
-    width: 200px;
-    height: 35px;
-    font-family: Park;
-    text-transform: uppercase;
-    margin-top: 15px;
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 35px;
+  font-family: Park;
+  text-transform: uppercase;
+  margin-top: 15px;
 }
 .my-routes div {
-    box-sizing: border-box;
-    width: 100%;
-    cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
 }
 .my-routes a {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    text-decoration: none;
-    color: black;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  text-decoration: none;
+  color: black;
 }
 
 .my-routes a.my-route-item.add-route {
-    color: green;
+  color: green;
 }
 
 .add-to-route {
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 15px;
-    height: 35px;
-    font-size: 25px;
-    text-align: center;
-    padding: 4px auto;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid white;
+  border-radius: 15px;
+  height: 45px;
+  font-size: 25px;
+  text-align: center;
+  padding: 8px 0 8px 0;
 }
 
 .open > .add-to-route {
-    border-radius: 15px 15px 0 0;
-    border-bottom: 1px solid rgba(0,0,0, 0.4);
+  border-radius: 15px 15px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .open > .add-to-route::after {
-    content: " X";
+  content: " X";
 }
 
 .my-routes-list {
-    display: none;
-    position: absolute;
-    top: 30px;
+  display: none;
+  position: absolute;
+  top: 30px;
 }
 .open .my-routes-list {
-    display: block;
-    position: absolute;
-    top: 35px;
-    background-color: rgba(255, 255, 255, 0.6);
+  display: block;
+  position: absolute;
+  top: 35px;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .my-route-item {
-    font-size: 20px;
-    padding: 3px 5px;
+  font-size: 20px;
+  padding: 3px 5px;
 }
 
 .my-route-item:hover {
-    background-color: rgba(0, 255, 0, 0.6);
+  background-color: rgba(0, 255, 0, 0.6);
 }
 
 .my-route-item.in-route::before {
-    content: "🚩"
+  content: "🚩";
 }

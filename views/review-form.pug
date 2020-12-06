@@ -1,5 +1,5 @@
 form(action="/reviews" method="post" id="review-form" class="review-form")
     input(type="hidden" name="_csrf" value=token)
     input(type="hidden" name="parkId" value=park.id)
-    textarea(name="text" id="review-text")
-    input(type="submit" value="Add Review")
+    textarea(name="text" class="review-input" id="review-text")
+    input(type="submit" class="submit-review" value="Add Review")
