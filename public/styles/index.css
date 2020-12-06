@@ -7,7 +7,10 @@
 @import "rate.css";
 @import "team.css";
 @import "search.css";
-@import "add-park to-route.css";
+@import "add-park-to-route.css";
+@import "visited-list.css";
+@import "error.css";
+
 
 @font-face {
   font-family: Park;

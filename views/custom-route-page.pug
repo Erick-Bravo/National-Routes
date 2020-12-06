@@ -5,4 +5,6 @@ block content
         h1=`${route.name}`
             each routepark in routesParks
                 div(class="routes-parks")
+                    a(href=`/parks/${routepark.id}`)
+                        img(src=`/img/park-${routepark.id}.png` alt=`${routepark.name}`)
                     p #{routepark.name}

@@ -1,4 +1,9 @@
 extends layout
 
 block content
-    
+    div.error-message
+        h3 Something went really wrong...
+        p Let's take a deep breath and start over.
+    div.error-puppy
+        a(href="/")
+            img(src=`/errors/bear.png`)
