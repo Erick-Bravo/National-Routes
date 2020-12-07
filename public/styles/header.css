@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1200px) {
   .header,
   .mountains-img,
   .navbar {
@@ -43,6 +43,10 @@ header {
   border: 1px solid white;
 }
 
+.login-user > input:focus {
+  outline: none;
+}
+
 .login-button {
   height: 30px;
   width: 50px;
@@ -53,6 +57,19 @@ header {
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid white;
   grid-area: login;
+}
+
+.login-button:focus {
+  outline: none;
+}
+
+.login-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .login-user > a,
@@ -66,7 +83,7 @@ header {
 .demo-user-button,
 .logout-button {
   box-sizing: border-box;
-  padding: 8px 6px 6px 8px;
+  padding: 7px 6px 6px 8px;
   height: 30px;
   width: 80px;
   margin-left: 10px;
@@ -75,9 +92,14 @@ header {
   border: 1px solid white;
 }
 
+.demo-user-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
 .welcome > span {
   font-family: Park-Thin;
-  font-size: 30px;
+  font-size: 25px;
   height: 30px;
   margin-right: 10px;
 }
@@ -108,7 +130,7 @@ nav {
   max-height: 60px;
   display: flex;
   flex-wrap: no-wrap;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -125,10 +147,14 @@ nav {
 }
 
 .nav-links > a {
-  color: #3b3b3b;
-  font-size: 1.6vw;
+  color: #1c1c1c;
+  font-size: 1.5vw;
   text-decoration: none;
-  margin-left: 50px;
+  margin-left: 80px;
+}
+
+.nav-links > a:hover {
+  transform: scale(1.2);
 }
 
 .search {
@@ -150,15 +176,28 @@ nav {
   border: 1px solid white;
 }
 
+.search-bar:focus {
+  outline: none;
+}
+
 .search-bar-button {
   display: inline-block;
   width: 100%;
   max-width: 70px;
-  height: 25px;
+  height: 30px;
   border-radius: 4px;
   font-size: 13px;
   font-family: Park;
   background-color: rgba(255, 255, 255, 0.8);
   margin: 0 10px 0 10px;
   border: 1px solid white;
+}
+
+.search-bar-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.search-bar-button:focus {
+  outline: none;
 }

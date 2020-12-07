@@ -11,12 +11,6 @@
   padding: 20px;
 }
 
-/* .create-new-route > div {
-  margin: 40px;
-  min-width: 300px;
-  width: 100%;
-  height: auto;
-} */
 .create-new-route > div > input {
   height: 40px;
   width: 300px;
@@ -26,14 +20,18 @@
   border: 1px solid white;
 }
 
+.create-new-route > div > input:focus {
+  outline: none;
+}
+
 .create-new-route > div > h1 {
-  font-size: 25px;
+  font-size: 35px;
   font-family: Park;
-  margin: 50px 0 0 60px;
+  margin: 50px 0 10px 60px;
 }
 .add-routes-label {
   margin-left: 60px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .park-image-option {
@@ -50,27 +48,20 @@
 .park-options {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  margin: 20px 20px 20px 50px;
+  margin: 20px 20px 20px 40px;
   display: inline-grid;
-  grid-template-columns: repeat(6, 220px);
+  grid-template-columns: repeat(6, auto);
   grid-template-rows: repeat(10, auto);
   grid-auto-flow: row;
   justify-content: space-between;
   padding: 20px;
-  min-width: 600px;
-  /* max-width: 600px; */
 }
 
 .park-option {
   display: flex;
   margin: 15px;
-  /* justify-content: space-around; */
   align-items: center;
-  /* border: 1px solid white; */
-}
-
-.park-option-checkbox:checked {
-  background-color: green;
+  font-size: 20px;
 }
 
 .submit-route-button {
@@ -82,6 +73,15 @@
   font-size: 13px;
   font-family: Park;
   background-color: rgba(255, 255, 255, 0.8);
-  margin: 0 10px 20px 60px;
+  margin: 20px 10px 40px 60px;
   border: 1px solid white;
+}
+
+.submit-route-button:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.submit-route-button:focus {
+  outline: none;
 }

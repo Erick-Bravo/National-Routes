@@ -25,7 +25,6 @@ div.team-member {
   box-sizing: border-box;
   width: 95%;
   padding: 15px;
-  /* border: 1px solid #0a3e0a; */
   border-radius: 5px;
   margin: 15px 0;
 }
@@ -72,4 +71,8 @@ span.details {
 .github-logo {
   height: 60px;
   width: 60px;
+}
+
+.github-logo:hover {
+  transform: scale(1.3);
 }

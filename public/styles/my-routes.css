@@ -1,29 +1,33 @@
+.my-routes-lists {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 40px;
+  margin: 40px 60px 30px 60px;
+}
+
 .custom-routes-list {
-  margin: 60px 10px 60px 60px;
-  display: inline-flex;
-  flex-direction: column;
-  width: 600px;
+  grid-area: 1 / 1 / 2 / 2;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
-  padding: 20px;
-  align-items: center;
+  padding: 20 20px 20px 50px;
+  width: 80%;
+  height: 50%;
+  align-items: start;
 }
 
 .visited-list {
-  margin: 60px 60px 60px 80px;
-  flex-direction: column;
-  display: inline-flex;
+  grid-area: 1 / 2 / 2 / 3;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
-  min-width: 650px;
   border-radius: 25px;
   padding: 20px;
-  align-items: center;
 }
 .visited-list > h1,
 .custom-routes-list > h1 {
   font-family: Park-Thin;
   font-size: 35px;
-  padding-left: 25px;
+  padding: 0 0 20px 25px;
 }
 
 .custom-routes-list > h2 {
@@ -32,7 +36,6 @@
   padding-left: 25px;
 }
 
-/* .visited-list-item, */
 .custom-routes-list-item {
   display: flex;
   flex-direction: row;
@@ -49,8 +52,15 @@
   box-sizing: border-box;
   margin-right: 25px;
 }
+
+.visited-list-item > a > img:hover,
+.custom-routes-list-item > a > img:hover,
+.routes-parks > a > img:hover {
+  transform: scale(1.2);
+}
 .routes-parks {
   display: flex;
+  margin: 15px 0 0 30px;
 }
 
 .visited-list-item > p,
@@ -58,6 +68,7 @@
   font-family: Park-Thin;
   font-size: 25px;
   margin-right: 20px;
+  margin-top: 30px;
 }
 
 .date {
@@ -78,40 +89,64 @@
 }
 
 .custom-route {
+  display: inline-flex;
+  justify-content: space-between;
   font-family: Park-Thin;
+  width: 70%;
   height: 30px;
   font-size: 20px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
-  margin: 10px 10px 30px 10px;
+  margin: 10px 10px 30px 30px;
   padding: 8px 20px 8px 20px;
-}
-
-.custom-routes-list > div > a {
-  font-family: Park-Thin;
-  font-size: 20px;
-  color: black;
-  text-decoration: none;
+  align-content: center;
 }
 
 .create-route-button {
+  font-family: Park;
+  color: black;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   max-width: 200px;
-  height: 40px;
+  height: 50px;
   border-radius: 4px;
   background-color: rgba(248, 148, 6, 0.7);
-  margin: 20px 10px 20px 20px;
+  margin: 50px 10px 20px 40px;
 }
 
-.custom-routes-list > a {
-  font-size: 17px;
-  font-family: Park;
+.create-route-button:hover {
+  transform: scale(1.2);
+  background-color: rgba(248, 148, 6, 0.8);
+}
+
+a.custom-route-link {
+  font-size: 25px;
+  font-family: Park-Thin;
   color: black;
   text-decoration: none;
-  padding: 4px 4px 4px 10px;
+}
+
+.custom-route-link:hover {
+  transform: scale(1.1);
+  font-family: Park;
+}
+
+.remove-button-a:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.remove-button-a {
+  box-sizing: border-box;
+  font-family: Park-Thin;
+  font-size: 10px;
+  color: black;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid white;
+  padding: 6px;
 }
 
 .checked {
@@ -124,10 +159,16 @@
   background-color: rgba(255, 255, 255, 0.3);
   margin: 50px 50px 50px 100px;
   width: 700px;
-  height: 700px;
+  height: 100%;
   padding: 30px;
 }
 
+.route-list > h1 {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 .routes-parks > p {
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-top: 30px;
 }

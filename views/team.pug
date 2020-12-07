@@ -6,7 +6,6 @@ mixin teamMember(name, description, imgUrl, githubLink)
         div.team-info
             h2.name= name
             span.details
-                //- p= description
                 a(href=githubLink, class="github-link")
                     img(src="/img/github-logo2.png" class="github-logo")
 block content
