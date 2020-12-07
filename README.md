@@ -107,7 +107,7 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 		```
 	- ### Review Park
 		User will be able to review the park they have visited.
-		![](./assets/AddReview.gif)
+![](./assets/AddReview.gif)
 
 	- ### View
 		Provide the user the ability to view their custom routes and places 	they have visited
