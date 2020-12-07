@@ -3,21 +3,24 @@
   height: 150px;
   box-sizing: border-box;
   margin-bottom: 30px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .park-list-item > a > img {
   max-width: 100%;
   max-height: 100%;
-  /* filter: drop-shadow(6px 6px 10px #404040); */
+}
+
+.park-list-item > a > img:hover {
+  transform: scale(1.2);
 }
 
 .park-list {
   display: flex;
-  /* max-width: 800px; */
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 50px;
+  padding: 20px 30px 20px 30px;
 }
 
 .register-new-user {
@@ -30,7 +33,7 @@
   margin: 70px 20px 0 0;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
-  padding: 60px 0 0 0;
+  padding: 60px 0 60 0;
 }
 
 .errors {
@@ -59,19 +62,31 @@
   border: 1px solid white;
 }
 
+.register-new-user > div > input:focus {
+  outline: none;
+}
+
 .register-new-user > div > h2 {
   font-family: Park-Thin;
   font-size: 30px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .sign-up-button {
-  width: 65px;
-  height: 30px;
+  width: 75px;
+  height: 35px;
   margin-top: 10px;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
   font-family: Park;
-  font-size: 13px;
+  font-size: 14px;
   border: 1px solid white;
+}
+
+.sign-up-button:hover {
+  transform: scale(1.2);
+}
+
+.sign-up-button:focus {
+  outline: none;
 }

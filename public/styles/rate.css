@@ -35,8 +35,8 @@
 }
 
 .stars .fa-star {
-    color: lightgray;
-    font-size: 40px;
+  color: lightgray;
+  font-size: 40px;
 }
 
 .stars:hover a .fa-star {
@@ -45,4 +45,8 @@
 
 .stars:hover a:hover ~ a .fa-star {
   color: lightgray;
+}
+
+.stars:hover {
+  transform: scale(1.1);
 }

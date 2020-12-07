@@ -135,11 +135,11 @@ window.addEventListener("DOMContentLoaded", () => {
         parent.innerHTML = "";
         let parkId = parseInt(parent.id.slice(7));
         let confirmation = `<span>Removing park from Visited would remove your Reviews for this park.</span>
-                            <a href="/visited/${parkId}/delete">Confirm</a>
-                            <a href="/visited/${parkId}/clear-rate">Remove Rate</a>`;
+                            <a href="/visited/${parkId}/delete">CONFIRM</a>
+                            <a href="/visited/${parkId}/clear-rate">REMOVE RATE</a>`;
         parent.innerHTML = confirmation;
         let cancel = document.createElement("a");
-        cancel.innerHTML = "Cancel";
+        cancel.innerHTML = "CANCEL";
         parent.appendChild(cancel);
         cancel.addEventListener("click", cancelButtonClick)
     }

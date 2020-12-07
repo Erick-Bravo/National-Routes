@@ -45,7 +45,6 @@
   margin: 0;
   height: 90%;
   width: 100%;
-  /* border: 0.1px solid white; */
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 25px;
 }
@@ -55,7 +54,7 @@
   margin: 0;
   max-width: auto;
   padding: 20px 0px 20px 30px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
@@ -89,14 +88,13 @@ h2 {
 .rating {
   grid-area: rating;
   margin-right: 30px;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 5px;
 }
 
 /* REVIEWS SECTION  */
 .reviews {
   grid-area: reviews;
-  /* border: 1px solid white; */
   background-color: rgba(255, 255, 255, 0.4);
   margin-top: 30px;
   margin-bottom: 50px;
@@ -105,7 +103,7 @@ h2 {
 
 .community-reviews {
   padding: 20px 0px 15px 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
@@ -113,51 +111,68 @@ h2 {
 .review-form {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin: 5px;
 }
 
 .submit-review {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
-  margin: 5px 50px 0 50px;
+  margin-top: 8px;
+  width: 10%;
+  height: 35px;
   padding: 5px 0 5px 0;
-  border: 1px solid lightgray;
+  border-color: white;
+}
+
+.submit-review:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.submit-review:focus {
+  outline: none;
 }
 
 .review-input {
   border-radius: 10px;
-  min-height: 50px;
+  min-height: 100px;
   border: 1px solid white;
+  width: 100%;
+  padding: 10px 10px 10px 20px;
+  font-family: Park-Thin;
+  font-size: 18px;
+}
+.review-input:focus {
+  outline: none;
 }
 
 .comments {
-  /* border-top: 1px solid green; */
   box-sizing: border-box;
-  padding: 20px 0 20px 40px;
+  padding: 20px 0 40px 40px;
   margin: 0;
   font-size: 1.5vw;
-  font-family: Park;
+  font-family: Park-Thin;
 }
 
 .comments > p {
   font-size: 1.5vw;
   margin: 0;
-  padding-bottom: 5px;
   font-family: Park-thin;
 }
 
 .review-edit {
   box-sizing: border-box;
-  padding: 3px;
+  padding: 5px;
   display: inline-block;
+  font-size: 18px;
   width: auto;
   height: auto;
   color: black;
-  margin-left: 10px;
   text-decoration: none;
   border-radius: 4px;
-  margin: 0 10px 0 10px;
+  margin-left: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid white;
   text-align: center;
@@ -165,24 +180,30 @@ h2 {
 
 .review-delete {
   box-sizing: border-box;
-  padding: 3px;
+  padding: 5px;
+  font-size: 18px;
   display: inline-block;
   width: auto;
   height: auto;
   color: black;
-  margin-left: 10px;
+  margin: 15px;
   text-decoration: none;
   border-radius: 4px;
-  margin: 0 10px 0 10px;
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid white;
   text-align: center;
 }
 
 .review-edit:hover {
-  background-color: rgb(192, 192, 192);
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .review-delete:hover {
-  background-color: rgb(192, 192, 192);
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.review-text-box {
+  font-family: Park-Thin;
 }

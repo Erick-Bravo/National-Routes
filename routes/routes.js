@@ -157,8 +157,10 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
 // ADD CUSTOM ROUTE FORM PAGE
 router.get("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   const parks = await db.Park.findAll();
+  const user = req.session.auth;
 
-  res.render("create-new-route", { title: "CREATE NEW ROUTE", parks, token: req.csrfToken() });
+
+  res.render("create-new-route", { title: "CREATE NEW ROUTE", parks, token: req.csrfToken(), user });
 
 }));
 
