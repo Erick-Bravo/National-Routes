@@ -56,6 +56,7 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 
 - ### Search
 	Visitors will be able to use the search bar to find a National Park. If there is only one result, they will be redirected to the specific park. If they user searched by state, they will be given a list of parks in that state.
+	![](./assets/Search.gif)
 
 - ### User Experience
 	A registered user will be able to gain more functionality to the site.
@@ -72,8 +73,7 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 
 	- ### Rate Park
 		User will be able to click on the park page and add their own rating out of 5 stars.
-
-		![](./assets/VisitedStamp.gif)
+![](./assets/RatePark.gif)
 
 		```javascript
 		const parkId = parseInt(req.params.parkId);
