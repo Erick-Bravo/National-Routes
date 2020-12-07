@@ -70,6 +70,6 @@
   border-radius: 5px;
 }
 
-/* .my-route-item.in-route::before {
+.my-route-item.in-route::before {
   content: "🚩";
-} */
+}
