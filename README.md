@@ -64,6 +64,7 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 	The user can create their own list of places to visit with an add and remove function, rate the park they have visited and write their own review!
 	- ### Create List
 		The user will have their own "Profile" page where they can create their own routes(places they want to visit) and have a custom name to it.
+		![](./assets/AddRoute.gif)
 
 	- ### Add Park
 		The user will be able to view the park's page and add it into their routes.
@@ -112,5 +113,6 @@ National Routes is a clone of [GoodReads](http://goodreads.com) to support hiker
 		Provide the user the ability to view their custom routes and places 	they have visited
 		- ### View Routes
 			User will have access to see all the custom routes they have created as a nav bar on their own "Profile" page.
+			![](./assets/Routes.gif)
 		- ### View Visited
 			There will be a link for the user to access all the locations they have visited.
