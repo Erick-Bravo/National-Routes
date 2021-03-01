@@ -68,11 +68,23 @@ span.details {
 .github-link {
   text-align: center;
 }
+
 .github-logo {
   height: 60px;
   width: 60px;
+  margin-right: 15px;
+}
+
+.linkedIn-logo {
+  height: 55px;
+  width: 55px;
+ margin-left: 15px;
 }
 
 .github-logo:hover {
+  transform: scale(1.3);
+}
+
+.linkedIn-logo:hover {
   transform: scale(1.3);
 }
