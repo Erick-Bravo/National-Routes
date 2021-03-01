@@ -12,12 +12,15 @@ header {
 
 .title-login {
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0 20px;
 }
 
 .title > h1 {
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  font-size: 36px;
 }
 
 .title {
@@ -25,132 +28,46 @@ header {
   flex-direction: row;
   font-family: Park-Thin;
   color: black;
-  font-size: 1.6vw;
-  padding-left: 50px;
-}
-
-.login-user {
-  display: flex;
-  align-self: flex-end;
-  margin: 30px 30px 50px 30px;
-}
-
-.login-user > input {
-  height: 30px;
-  margin-left: 10px;
-  border-radius: 5px;
-  padding-left: 10px;
-  border: 1px solid white;
-}
-
-.login-user > input:focus {
-  outline: none;
-}
-
-.login-button {
-  height: 30px;
-  width: 50px;
-  font-size: 13px;
-  font-family: Park;
-  margin-left: 10px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white;
-  grid-area: login;
-}
-
-.login-button:focus {
-  outline: none;
-}
-
-.login-button:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.logout-button:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.login-user > a,
-.logout-button {
-  font-size: 11px;
-  font-family: Park;
-  text-decoration: none;
-  color: black;
-}
-
-.demo-user-button,
-.logout-button {
-  box-sizing: border-box;
-  padding: 7px 6px 6px 8px;
-  height: 30px;
-  width: 80px;
-  margin-left: 10px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white;
-}
-
-.demo-user-button:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .welcome > span {
   font-family: Park-Thin;
-  font-size: 25px;
+  font-size: 20px;
   height: 30px;
   margin-right: 10px;
 }
 
-.login-user > .errors {
-  font-family: Park-Thin;
-  color: red;
-  grid-area: error;
-  margin: 0 0 5px 10px;
-}
-
-.email {
-  grid-area: email;
-}
-.password {
-  grid-area: password;
-}
-.login-user > a {
-  grid-area: demo;
-}
-
 /* NAVI BAR */
 .navbar {
+  box-sizing: border-box;
   height: 100px;
+  padding: 0 20px;
   width: auto;
 }
 nav {
-  max-height: 60px;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  color: black;
   display: flex;
   flex-wrap: no-wrap;
-  background-color: rgba(255, 255, 255, 0.5);
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   font-family: Park;
-  color: black;
-  border-radius: 2px;
+  justify-content: space-between;
+  max-height: 60px;
 }
 
 .nav-links {
   display: flex;
-  white-space: nowrap;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  flex-direction: row;
 }
 
 .nav-links > a {
   color: #1c1c1c;
-  font-size: 1.5vw;
+  font-size: 16px;
   text-decoration: none;
-  margin-left: 80px;
+  margin: 10px;
+  margin-right: 20px;
 }
 
 .nav-links > a:hover {
@@ -158,46 +75,12 @@ nav {
 }
 
 .search {
-  display: inline-block;
-  white-space: nowrap;
-  width: 100%;
-  text-align: right;
-  margin: 5px 10px 0 0;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 500px;
 }
 
 .search-bar {
-  display: inline-block;
-  width: 100%;
-  max-width: 650px;
-  height: 30px;
-  border-radius: 5px;
-  padding-left: 10px;
-  margin-left: 20px;
-  border: 1px solid white;
-}
-
-.search-bar:focus {
-  outline: none;
-}
-
-.search-bar-button {
-  display: inline-block;
-  width: 100%;
-  max-width: 70px;
-  height: 30px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-family: Park;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: 0 10px 0 10px;
-  border: 1px solid white;
-}
-
-.search-bar-button:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.search-bar-button:focus {
-  outline: none;
+  flex-grow: 2;
 }

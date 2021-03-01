@@ -1,5 +1,7 @@
 main {
+  align-items: flex-start;
   display: flex;
+  padding: 70px 20px;
   position: relative;
 }
 

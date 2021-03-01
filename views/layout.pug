@@ -8,6 +8,9 @@ html( lang="en")
         script(src="/scripts.js" type="module" defer)
         title #{title}
     body
+        div.errors
+            span.close-button Close
+            ul.errors-list
         header(id="header")
             div(class="title-login")
                 div(class="title")

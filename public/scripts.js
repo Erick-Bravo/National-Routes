@@ -1,5 +1,12 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    const closeButton = document.querySelector(".close-button");
+    const errorDiv = document.querySelector("div.errors");
+    const errorList = document.querySelector("ul.errors-list");
+
+    closeButton.addEventListener("click", () => {
+        errorDiv.classList.remove("show");
+    })
 
     // Sign-Up
     const signUpForm = document.querySelector("#sign-up-form");
@@ -26,17 +33,16 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes";
                 return;
             } else {
-                let errorContent = ""
+                errorList.innerHTML = "";
                 result.errors.forEach(error => {
-                    const errorDiv = document.querySelector("#sign-up-form div.errors");
-                    errorDiv.innerHTML = "";
-                    const p = document.createElement("p");
-                    errorContent = `${errorContent}
-                    - ${error}
-                    </br>`;
-                    p.innerHTML = errorContent;
-                    errorDiv.appendChild(p);
+                    const p = document.createElement("li");
+                    p.innerHTML = error;
+                    errorList.appendChild(p);
                 });
+                errorDiv.classList.add("show");
+                setTimeout(()=>{
+                    errorDiv.classList.remove("show");
+                }, 5000)
             };
         });
     };
@@ -64,13 +70,16 @@ window.addEventListener("DOMContentLoaded", () => {
             if (!result.errors) {
                 location.href = "/my-routes";
             } else {
-                const errorDiv = document.querySelector("#login div.errors");
-                errorDiv.innerHTML = "";
+                errorList.innerHTML = "";
                 result.errors.forEach(error => {
                     const div = document.createElement("div");
                     div.innerHTML = error;
-                    errorDiv.appendChild(div);
+                    errorList.appendChild(div);
                 });
+                errorDiv.classList.add("show");
+                setTimeout(()=>{
+                    errorDiv.classList.remove("show");
+                }, 5000)
             };
         });
     };

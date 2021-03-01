@@ -1,0 +1,45 @@
+form {
+    margin: 0;
+}
+
+form input {
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 30px;
+    margin: 10px 10px 10px 0;
+    padding-left: 10px;
+}
+
+form h2 {
+    font-family: Park-Thin;
+    font-size: 30px;
+    padding-bottom: 30px;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+button, .button {
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid white;
+    border-radius: 4px;
+    color: #000;
+    display: flex;
+    font-size: 13px;
+    font-family: Park;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 7px 10px;
+    text-decoration: none;
+}
+
+button:last-child, .button:last-child{
+    margin-right: 0;
+}
+
+button:hover, .button:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
