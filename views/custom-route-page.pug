@@ -3,8 +3,10 @@ extends layout
 block content
     div(class="route-list")
         h1=`${route.name}`
-        each routepark in routesParks
-            div(class="routes-parks")
-                a(href=`/parks/${routepark.id}`)
-                    img(src=`/img/park-${routepark.id}.png` alt=`${routepark.name}`)
-                    span #{routepark.name}
+            each routepark in routesParks
+                div(class="routes-parks")
+                    a(href=`/parks/${routepark.id}`)
+                        img(src=`/img/park-${routepark.id}.png` alt=`${routepark.name}`)
+                        span #{routepark.name}
+                    a(href=`/routepark/${route.id}/${routepark.id}/delete` class="button") REMOVE
+
