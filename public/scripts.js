@@ -149,19 +149,30 @@ window.addEventListener("DOMContentLoaded", () => {
             button.addEventListener("click", (e) => {
 
                 const id = parseInt(e.target.id.slice(11))
+                let form = document.querySelector(`#review${id} form`)
 
-                const form = document.createElement("form")
-                form.setAttribute("action", "/reviews/edit/" + id)
-                form.setAttribute("method", "post")
-                form.setAttribute("class", "review-form")
+                if (!form) {
+                    form = document.createElement("form")
+                    form.setAttribute("action", "/reviews/edit/" + id)
+                    form.setAttribute("method", "post")
+                    form.setAttribute("class", "review-form")
+                    const csrfToken = document.querySelector("#csrfToken").value
+                    const review = document.querySelector("#review" + id + " p").innerText
+                    const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-input ">${review}</textarea>`
+                    form.innerHTML = inputs
+                    const controls = document.createElement("div");
+                    controls.setAttribute("class","review-controls");
+                    controls.innerHTML = `<input type="submit" value="UPDATE REVIEW">`;
+                    const cancelButton = document.createElement("button");
+                    cancelButton.innerHTML = "CANCEL"
+                    cancelButton.addEventListener("click", () => {
+                        form.remove();
+                    })
+                    controls.appendChild(cancelButton);
+                    form.appendChild(controls);
+                }
 
 
-
-                const csrfToken = document.querySelector("#csrfToken").value
-                const review = document.querySelector("#review" + id + " p").innerText
-                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`
-
-                form.innerHTML = inputs
                 document.querySelector("#review" + id).appendChild(form)
             })
         })

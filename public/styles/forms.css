@@ -2,12 +2,17 @@ form {
     margin: 0;
 }
 
-form input {
+form input,
+form textarea {
     border: 1px solid white;
     border-radius: 5px;
-    height: 30px;
+    font-family: Park-Thin;
     margin: 10px 10px 10px 0;
-    padding-left: 10px;
+    padding: 7px 10px;
+}
+
+form textarea {
+    width: 100%;
 }
 
 form h2 {
@@ -21,7 +26,8 @@ input:focus, button:focus {
     outline: none;
 }
 
-button, .button {
+button, .button,
+input[type="submit"] {
     align-items: center;
     background-color: rgba(255, 255, 255, 0.7);
     border: 1px solid white;

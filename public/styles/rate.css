@@ -50,3 +50,10 @@
 .stars:hover {
   transform: scale(1.1);
 }
+
+
+@media screen and (max-width: 670px){
+  .stars .fa-star {
+    font-size: 5vw;
+  }
+}
