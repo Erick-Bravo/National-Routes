@@ -14,6 +14,7 @@ form h2 {
     font-family: Park-Thin;
     font-size: 30px;
     padding-bottom: 30px;
+    width: 100%;
 }
 
 input:focus, button:focus {
@@ -26,6 +27,7 @@ button, .button {
     border: 1px solid white;
     border-radius: 4px;
     color: #000;
+    cursor: pointer;
     display: flex;
     font-size: 13px;
     font-family: Park;

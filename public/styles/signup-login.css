@@ -1,3 +1,9 @@
+form.register-new-user,
+.login-user,
+.search {
+    width: 500px;
+}
+
 form.register-new-user {
     align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
@@ -5,10 +11,20 @@ form.register-new-user {
     box-sizing: border-box;
     display: flex;
     flex: none;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     height: auto;
+    justify-content: space-around;
+    margin-bottom: 50px;
     padding: 60px 0;
-    width: 500px;
+  }
+
+  .register-new-user input {
+      width: 40%;
+    }
+    
+    .register-new-user button{
+      min-width: 30%;
   }
   
   .errors {
@@ -23,6 +39,7 @@ form.register-new-user {
       width: 100%;
       z-index: 100;
   }
+
   .errors-list {
     margin: 0;
     list-style-type: "- ";
@@ -50,13 +67,113 @@ form.register-new-user {
     align-items: center;
     display: flex;
     flex-direction: row;
-    width: 500px;
   }
 
-  .login-user input, .login-user button, .login-user .button {
+  .login-user input {
       width: 145px;
   }
 
   .login-user button, .login-user .button {
       width: 90px;
   }
+
+  .login-user .welcome {
+    display: flex;
+    flex-direction: row;
+    flex-grow:2;
+    justify-content: flex-end;
+  }
+  
+  .login-user .welcome > span {
+    font-family: Park-Thin;
+    font-size: 20px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .search {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .search-bar {
+    flex-grow: 2;
+  }  
+
+@media screen and (max-width: 1000px){
+    .register-new-user input {
+        width: 80%;
+      }
+      
+      .register-new-user button{
+        min-width: 80%;
+    }
+
+    form.register-new-user,
+    .search {
+        width: 40%;
+    }
+
+    .title-login {
+        flex-direction: column;
+    }
+
+    .login-user {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .login-user input {
+        width: 25%;
+    }
+  
+    .login-user button, .login-user .button {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 670px){
+    form.register-new-user,
+    .search {
+        width: 90%;
+    }
+
+    .navbar {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .login-user {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .login-user input, .login-user button, .login-user .button {
+        width: 80%;
+        margin: 5px auto 10px ;
+    }
+
+    .login-user button, .login-user .button {
+        padding: 5px 0;
+    }
+
+    .login-user .welcome{
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .login-user .welcome span {
+        text-align: center;
+    }
+
+}

@@ -1,12 +1,26 @@
 window.addEventListener("DOMContentLoaded", () => {
 
     const closeButton = document.querySelector(".close-button");
+    const closeCount = document.querySelector(".close-button .count");
     const errorDiv = document.querySelector("div.errors");
     const errorList = document.querySelector("ul.errors-list");
 
     closeButton.addEventListener("click", () => {
         errorDiv.classList.remove("show");
     })
+
+    const countdown = () => {
+        let n = 5;
+        closeCount.innerHTML = n;
+        let interval = setInterval(()=>{
+            if (n===0) {
+                clearInterval(interval);
+            } else {
+                n --;
+                closeCount.innerHTML = n;
+            }
+        },1000)
+    }
 
     // Sign-Up
     const signUpForm = document.querySelector("#sign-up-form");
@@ -40,6 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     errorList.appendChild(p);
                 });
                 errorDiv.classList.add("show");
+                countdown();
                 setTimeout(()=>{
                     errorDiv.classList.remove("show");
                 }, 5000)
@@ -77,6 +92,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     errorList.appendChild(div);
                 });
                 errorDiv.classList.add("show");
+                countdown();
                 setTimeout(()=>{
                     errorDiv.classList.remove("show");
                 }, 5000)
@@ -138,30 +154,25 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     }
 
-    const removeVisitedButtons = document.querySelectorAll(".remove-button a");
+    const removeVisitedButtons = document.querySelectorAll(".remove-button > a.button");
     const removeButtonClick = e => {
         let parent = e.target.parentNode;
-        parent.innerHTML = "";
-        let parkId = parseInt(parent.id.slice(7));
-        let confirmation = `<span>Removing park from Visited would remove your Reviews for this park.</span>
-                            <a href="/visited/${parkId}/delete">CONFIRM</a>
-                            <a href="/visited/${parkId}/clear-rate">REMOVE RATE</a>`;
-        parent.innerHTML = confirmation;
-        let cancel = document.createElement("a");
-        cancel.innerHTML = "CANCEL";
-        parent.appendChild(cancel);
-        cancel.addEventListener("click", cancelButtonClick)
+        let confirmation = document.querySelector(`#${parent.id} .remove-confirmation`)
+        confirmation.classList.remove("hidden")
     }
-    const cancelButtonClick = e => {
-        let parent = e.target.parentNode;
-        parent.innerHTML = "";
-        let remove = document.createElement("a");
-        remove.innerHTML = "REMOVE";
-        parent.appendChild(remove);
-        remove.addEventListener("click", removeButtonClick);
-    }
+    
     removeVisitedButtons.forEach(button => {
         button.addEventListener("click", removeButtonClick);
     });
-
+    
+    
+    const cancelRemoveButtons = document.querySelectorAll(".remove-confirmation a.cancel");
+    const cancelButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.classList.add("hidden");
+    }
+    
+    cancelRemoveButtons.forEach(button => {
+        button.addEventListener("click", cancelButtonClick);
+    });
 });

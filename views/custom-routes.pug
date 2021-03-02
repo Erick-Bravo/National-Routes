@@ -1,8 +1,11 @@
-ul.custom-routes-list
-    h1="CUSTOM ROUTES"
-    each route in routes
-        div(class="custom-route")
-            a(href=`/my-routes/${route.id}` class="custom-route-link") #{route.name}
-            a(href=`/my-routes/${route.id}/delete` class="remove-button-a") REMOVE
+div.custom-routes-list
+    div
+        h1="CUSTOM ROUTES"
 
-    a(href="/my-routes/add" class="create-route-button") CREATE NEW ROUTE
+    ul
+        each route in routes
+            li(class="custom-route")
+                a(href=`/my-routes/${route.id}` class="custom-route-link") #{route.name}
+                a(href=`/my-routes/${route.id}/delete` class="remove-button-a button") REMOVE
+
+        a(href="/my-routes/add" class="create-route-button") CREATE NEW ROUTE

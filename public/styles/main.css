@@ -1,6 +1,8 @@
 main {
   align-items: flex-start;
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   padding: 70px 20px;
   position: relative;
 }
@@ -26,4 +28,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: bottom;
+  font-family: Park;
+  margin: 0;
+  padding: 0;
 }
