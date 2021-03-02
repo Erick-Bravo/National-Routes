@@ -41,7 +41,7 @@ header {
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 0 20px;
   width: 100%;
 }
 
@@ -51,11 +51,13 @@ header {
 }
 
 .nav-links > a {
+  align-items: center;
   color: #1c1c1c;
+  display: flex;
   font-size: 16px;
-  text-decoration: none;
   margin: 10px;
   margin-right: 20px;
+  text-decoration: none;
 }
 
 .nav-links > a:hover {
