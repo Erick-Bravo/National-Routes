@@ -7,13 +7,13 @@ block content
             p We couldn't find anything
         else
             if (states)
-                h2 States:
                 div.states-list
+                    h2 States:
                     each state in states
                         a(href=`/search/state/${state.id}`) #{state.name}
             if (parks)
-                h2 Parks:
                 div.park-list
+                    h2 Parks:
                     each park in parks
                         div(id=`park-${park.id}` class='park-list-item')
                             a(href=`/parks/${park.id}`)
