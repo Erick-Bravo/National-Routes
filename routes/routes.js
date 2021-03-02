@@ -211,22 +211,26 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
 
 
 
-router.get("/routepark/:routeParkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
-  const routeParkId = parseInt(req.params.routeParkId)
+router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const parkId = parseInt(req.params.parkId)
+  const routeId = parseInt(req.params.routeId)
 
 
   let routePark = await db.RoutesPark.findOne({ where: {
-    id: routeParkId
+    routeId,
+    parkId,
   }})
 
-  console.log("this is the routeParkId: " + routeParkId) // returns 7
+  console.log("this is the parkId: " + parkId) // returns 7
   console.log("routePark: " + routePark) // returns null
  
 
-  // if(routePark) {
+  if(routePark) {
     console.log("inside if statement")
-    await routePark.destroy();
-  // }
+    await routePark.destroy()
+  }
+
+  res.redirect(`/my-routes/${routeId}`);
 }));
 
 
