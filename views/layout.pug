@@ -2,12 +2,34 @@ html( lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+        title #{title}
+        <meta name="description" content="National Routes is a clone of GoodReads to support hikers and travelers love for nature in the United States. It will allow users to see what National Park is in their neck of the woods and create their own routes for future visits. Once they're done, they can rate and review that experience for others to see.">
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://national-routes-app.herokuapp.com/">
+        <meta property="og:title" content="NATIONAL ROUTES">
+        <meta property="og:description" content="National Routes is a clone of GoodReads to support hikers and travelers love for nature in the United States. It will allow users to see what National Park is in their neck of the woods and create their own routes for future visits. Once they're done, they can rate and review that experience for others to see.">
+        <meta property="og:image" content="https://github.com/Erick-Bravo/National-Routes/blob/main/public/img/NationalRoutes.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://national-routes-app.herokuapp.com/">
+        <meta property="twitter:title" content="NATIONAL ROUTES">
+        <meta property="twitter:description" content="National Routes is a clone of GoodReads to support hikers and travelers love for nature in the United States. It will allow users to see what National Park is in their neck of the woods and create their own routes for future visits. Once they're done, they can rate and review that experience for others to see.">
+        <meta property="twitter:image" content="https://github.com/Erick-Bravo/National-Routes/blob/main/public/img/NationalRoutes.png">
+
         link(rel="stylesheet" type="text/css" href="/styles/index.css")
         link(rel="icon" type="image/png" href="/favicon-16x16.png")
+        script(src="https://kit.fontawesome.com/3ae2403b47.js" crossorigin="anonymous")
         script(src="/scripts.js" type="module" defer)
-        title #{title}
     body
+        div.errors
+            span.close-button 
+                span.count 0
+                i(class="fas fa-times-circle")
+            ul.errors-list
         header(id="header")
             div(class="title-login")
                 div(class="title")
@@ -16,4 +38,4 @@ html( lang="en")
             include navbar.pug
         main
             block content
-        footer
+        footer This is a study project. We don't own any of the used images or park descriptions. If you are the owner please reach out and we'll gladly take it down.

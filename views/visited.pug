@@ -1,11 +1,19 @@
-ul.visited-list
-    h1="VISITED PARKS"
-    each park in parks
-        div(id=`park-${park.id}` class='visited-list-item')
-            a(href=`/parks/${park.id}`)
-                img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
-            p #{park.name}
-            div.visited-list-rating(class=park.Visited.rate?`star-rate-${park.Visited.rate}`:false)
-                include stars.pug
-            .remove-button(id=`remove-${park.id}`)
-                a REMOVE
+div.visited-list
+    div
+        h1="VISITED PARKS"
+    ul
+        each park in parks
+            li(id=`park-${park.id}` class='visited-list-item')
+                a(href=`/parks/${park.id}`)
+                    img(src=`./img/park-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+                div
+                    p #{park.name}
+                    div.visited-list-rating(class=park.Visited.rate?`star-rate-${park.Visited.rate}`:false)
+                        include stars.pug
+                .remove-button(id=`remove-${park.id}`)
+                    a.button REMOVE
+                    .remove-confirmation.hidden
+                        span Removing park from Visited would remove your Reviews for this park.
+                        a.button(href=`/visited/${park.id}/delete`) CONFIRM
+                        a.button(href=`/visited/${park.id}/clear-rate`) REMOVE RATE
+                        a.button.cancel(id=`cancel-${park.id}`) CANCEL

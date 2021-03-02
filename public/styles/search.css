@@ -1,33 +1,53 @@
-.search-container > h1,
-.search-container > h2 {
+.search-container h1 {
+  background-color: rgba(255,255,255, 0.5);
+}
+
+.search-container h1,
+.search-container h2 {
+  border-radius: 25px 25px 0 0;
   display: block;
   font-family: Park-Thin;
-  width: 100%;
+  margin: 0;
+  padding: 10px 0;
   text-align: center;
+  width: 100%;
 }
-.search-container > h2 {
-  font-size: 35px;
-  margin-top: 25px;
+
+.search-container h2 {
+  text-align: start;
 }
+
 .search-container {
+  background-color: rgba(255,255,255, 0.5);
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
+  padding: 0;
 }
-.states-list {
-  text-align: center;
+
+.states-list,
+.search-container .park-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
-  max-width: 1200px;
-  margin: 40px auto;
+  margin: 20px auto;
+  padding: 0 20px;  
+  text-align: center;
 }
 
 .states-list a {
+  background-color: rgba(255,255,255, 0.5);
+  border: 1px solid #fff;
+  border-radius: 5px;
   color: black;
   font-family: Park-Thin;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  padding: 5px 7px;
+  text-decoration: none;
 }
 
-.states-list a + a {
-  margin-left: 8px;
-  border-left: 1px solid black;
-  padding: 5px;
+.states-list a:hover {
+  transform: scale(1.1);
 }

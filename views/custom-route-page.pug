@@ -7,6 +7,6 @@ block content
                 div(class="routes-parks")
                     a(href=`/parks/${routepark.id}`)
                         img(src=`/img/park-${routepark.id}.png` alt=`${routepark.name}`)
-                    p #{routepark.name}
-                    p #{routepark.id}
+                        span #{routepark.name}
                     a(href=`/routepark/${route.id}/${routepark.id}/delete` class="button") REMOVE
+

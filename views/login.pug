@@ -1,6 +1,5 @@
 form(action="/login" method="post" id="login" class="login-user")
     if !user
-        div.errors
         input(type="hidden" name="_csrf" value=token)
         br
         input(type="email" name="email" placeholder="Email" class="email")
@@ -9,8 +8,8 @@ form(action="/login" method="post" id="login" class="login-user")
         br
         button(type="submit" class="login-button") LOGIN
         br
-        a(href="/demo" class="demo-user-button") DEMO LOGIN
+        a(href="/demo" class="demo-user-button button") DEMO LOGIN
     else
         div.welcome
             span Welcome, #{user.username}!
-            a(href="/logout" class="logout-button") LOGOUT
+            a(href="/logout" class="logout-button button") LOGOUT

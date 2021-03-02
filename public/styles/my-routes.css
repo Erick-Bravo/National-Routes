@@ -1,56 +1,20 @@
-.my-routes-lists {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 40px;
-  margin: 40px 60px 30px 60px;
-}
-
-.custom-routes-list {
-  grid-area: 1 / 1 / 2 / 2;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 25px;
-  padding: 20 20px 20px 50px;
-  width: 80%;
-  height: 50%;
-  align-items: start;
-}
-
-.visited-list {
-  grid-area: 1 / 2 / 2 / 3;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 25px;
-  padding: 20px;
-}
-.visited-list > h1,
-.custom-routes-list > h1 {
-  font-family: Park-Thin;
-  font-size: 35px;
-  padding: 0 0 20px 25px;
-}
-
-.custom-routes-list > h2 {
-  font-family: Park-Thin;
-  font-size: 15px;
-  padding-left: 25px;
-}
-
-.custom-routes-list-item {
+.my-routes-page {
+  align-items: flex-start;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  padding: 10px 20px 12px 30px;
-  align-items: center;
-  align-content: center;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+  width: 100%;
 }
 
 .visited-list-item > a > img,
 .custom-routes-list-item > a > img,
 .routes-parks > a > img {
-  width: 80px;
-  height: auto;
   box-sizing: border-box;
   margin-right: 25px;
+  width: 80px;
 }
 
 .visited-list-item > a > img:hover,
@@ -58,117 +22,156 @@
 .routes-parks > a > img:hover {
   transform: scale(1.2);
 }
-.routes-parks {
-  display: flex;
-  margin: 15px 0 0 30px;
-}
 
-.visited-list-item > p,
-.custom-routes-list-item > p {
-  font-family: Park-Thin;
-  font-size: 25px;
-  margin-right: 20px;
-  margin-top: 30px;
-}
-
-.date {
-  font-family: Park-Thin;
-  font-size: 10px;
-}
-
-.remove {
-  width: 60px;
-  height: 20px;
-  margin-top: 10px;
-  border: 1px solid white;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.3);
-  font-family: Park;
-  font-size: 9px;
-  margin-left: 60px;
-}
-
-.custom-route {
-  display: inline-flex;
-  justify-content: space-between;
-  font-family: Park-Thin;
-  width: 70%;
-  height: 30px;
-  font-size: 20px;
-  margin: 10px 10px 30px 30px;
-  padding: 8px 20px 8px 20px;
-  align-content: center;
-}
-
-.create-route-button {
-  font-family: Park;
-  color: black;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 200px;
-  height: 50px;
-  border-radius: 4px;
-  background-color: rgba(248, 148, 6, 0.7);
-  margin: 50px 10px 20px 40px;
-}
-
-.create-route-button:hover {
-  transform: scale(1.2);
-  background-color: rgba(248, 148, 6, 0.8);
-}
-
-a.custom-route-link {
-  font-size: 25px;
-  font-family: Park-Thin;
-  color: black;
-  text-decoration: none;
-}
-
-.custom-route-link:hover {
-  transform: scale(1.1);
-  font-family: Park;
-}
-
-.remove-button-a:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.remove-button-a {
-  box-sizing: border-box;
-  font-family: Park-Thin;
-  font-size: 10px;
-  color: black;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white;
-  padding: 6px;
-}
-
-.checked {
-  color: yellow;
+.visited-list,
+.custom-routes-list {
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 25px;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 45%;
 }
 
 .route-list {
-  font-family: Park-Thin;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.3);
-  margin: 50px 50px 50px 100px;
-  width: 700px;
-  height: 100%;
-  padding: 30px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 25px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 90%;
 }
 
-.route-list > h1 {
-  padding: 20px;
+.visited-list ul,
+.custom-routes-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.custom-routes-list h1, 
+.visited-list h1,
+.route-list h1 {
+  font-family: Park-Thin;
+  font-size: 35px;
+  text-transform: uppercase;
+}
+
+.custom-routes-list li, 
+.visited-list p,
+.routes-parks a span {
+  font-family: Park-Thin;
+  font-size: 25px;
+  margin: 20px 0 10px;
+}
+
+.visited-list-item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.visited-list-item > div {
+  flex-grow: 2;
+}
+
+.remove-button {
+  position: relative;
+}
+
+.remove-confirmation {
+  background-color: rgba(255,255,255,0.8);
+  box-sizing: border-box;
+  border: 2px solid orangered;
+  border-radius: 7px;
+  position: absolute;
+  bottom: 0;
+  padding: 7px;
+  right: 0;
+  width: 300px;
+  z-index: 99;
+}
+
+.remove-confirmation span {
+  font-family: Park-Thin;
+  display: block;
+  color: orangered;
+  font-size: 15px;
+}
+
+.remove-confirmation .button {
+  display: inline-flex;
+  background-color: rgba(255,0,0,0.3);
+  border: 1px solid orangered;
+}
+
+.hidden {
+  display: none;
+}
+
+.custom-route {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.custom-route .custom-route-link,
+.routes-parks a {
+  color: #000;
+  text-decoration: none;
+}
+
+.custom-route .custom-route-link:hover,
+.routes-parks a span:hover {
+  transform: scale(1.1);
+}
+
+.custom-route i {
+  margin-right: 10px;
+}
+
+.create-route-button,
+.submit-route-button {
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(248, 148, 6, 0.7);
+  color: black;
+  display: flex;
+  font-family: Park;
+  height: 50px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 200px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.create-route-button:hover,
+.submit-route-button:hover {
+  background-color: rgba(248, 148, 6, 0.7);
+  transform: scale(1.1);
+}
+
+.routes-parks {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.routes-parks > p {
-  margin-left: 10px;
-  margin-top: 30px;
+.routes-parks a {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+@media screen and (max-width: 1000px) {
+  .my-routes-page {
+    flex-direction: column;
+  }
+
+  .visited-list, .custom-routes-list {
+    width: 90%;
+  }
 }

@@ -1,5 +1,38 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    const closeButton = document.querySelector(".close-button");
+    const closeCount = document.querySelector(".close-button .count");
+    const errorDiv = document.querySelector("div.errors");
+    const errorList = document.querySelector("ul.errors-list");
+
+    closeButton.addEventListener("click", () => {
+        errorDiv.classList.remove("show");
+    })
+
+    let intervals = new Set();
+
+    const clearAllIntervals = () => {
+        intervals.forEach(interval => {
+            clearInterval(interval);
+            clearInterval(interval);
+        })
+        intervals = new Set ();
+    }
+
+    const countdown = () => {
+        clearAllIntervals();
+        let n = 5;
+        closeCount.innerHTML = n;
+        let interval = setInterval(()=>{
+            if (n===0) {
+                clearAllIntervals();
+            } else {
+                n --;
+                closeCount.innerHTML = n;
+            }
+        },1000)
+        intervals.add(interval);
+    }
 
     // Sign-Up
     const signUpForm = document.querySelector("#sign-up-form");
@@ -26,17 +59,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes";
                 return;
             } else {
-                let errorContent = ""
+                errorList.innerHTML = "";
                 result.errors.forEach(error => {
-                    const errorDiv = document.querySelector("#sign-up-form div.errors");
-                    errorDiv.innerHTML = "";
-                    const p = document.createElement("p");
-                    errorContent = `${errorContent}
-                    - ${error}
-                    </br>`;
-                    p.innerHTML = errorContent;
-                    errorDiv.appendChild(p);
+                    const p = document.createElement("li");
+                    p.innerHTML = error;
+                    errorList.appendChild(p);
                 });
+                errorDiv.classList.add("show");
+                countdown();
+                let timeout = setTimeout(()=>{
+                    errorDiv.classList.remove("show");
+                }, 5000)
+                intervals.add(timeout);
             };
         });
     };
@@ -64,13 +98,18 @@ window.addEventListener("DOMContentLoaded", () => {
             if (!result.errors) {
                 location.href = "/my-routes";
             } else {
-                const errorDiv = document.querySelector("#login div.errors");
-                errorDiv.innerHTML = "";
+                errorList.innerHTML = "";
                 result.errors.forEach(error => {
                     const div = document.createElement("div");
                     div.innerHTML = error;
-                    errorDiv.appendChild(div);
+                    errorList.appendChild(div);
                 });
+                errorDiv.classList.add("show");
+                countdown();
+                let timeout = setTimeout(()=>{
+                    errorDiv.classList.remove("show");
+                }, 5000)
+                intervals.add(timeout);
             };
         });
     };
@@ -104,55 +143,59 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-
     const editReviewButtons = document.querySelectorAll(".reviews a.review-edit");
     if (editReviewButtons) {
         editReviewButtons.forEach(button => {
             button.addEventListener("click", (e) => {
 
                 const id = parseInt(e.target.id.slice(11))
+                let form = document.querySelector(`#review${id} form`)
 
-                const form = document.createElement("form")
-                form.setAttribute("action", "/reviews/edit/" + id)
-                form.setAttribute("method", "post")
-                form.setAttribute("class", "review-form")
+                if (!form) {
+                    form = document.createElement("form")
+                    form.setAttribute("action", "/reviews/edit/" + id)
+                    form.setAttribute("method", "post")
+                    form.setAttribute("class", "review-form")
+                    const csrfToken = document.querySelector("#csrfToken").value
+                    const review = document.querySelector("#review" + id + " p").innerText
+                    const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-input ">${review}</textarea>`
+                    form.innerHTML = inputs
+                    const controls = document.createElement("div");
+                    controls.setAttribute("class","review-controls");
+                    controls.innerHTML = `<input type="submit" value="UPDATE REVIEW">`;
+                    const cancelButton = document.createElement("button");
+                    cancelButton.innerHTML = "CANCEL"
+                    cancelButton.addEventListener("click", () => {
+                        form.remove();
+                    })
+                    controls.appendChild(cancelButton);
+                    form.appendChild(controls);
+                }
 
 
-
-                const csrfToken = document.querySelector("#csrfToken").value
-                const review = document.querySelector("#review" + id + " p").innerText
-                const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-text-box">${review}</textarea> <input type="submit" value="Update-Review">`
-
-                form.innerHTML = inputs
                 document.querySelector("#review" + id).appendChild(form)
             })
         })
     }
 
-    const removeVisitedButtons = document.querySelectorAll(".remove-button a");
+    const removeVisitedButtons = document.querySelectorAll(".remove-button > a.button");
     const removeButtonClick = e => {
         let parent = e.target.parentNode;
-        parent.innerHTML = "";
-        let parkId = parseInt(parent.id.slice(7));
-        let confirmation = `<span>Removing park from Visited would remove your Reviews for this park.</span>
-                            <a href="/visited/${parkId}/delete">CONFIRM</a>
-                            <a href="/visited/${parkId}/clear-rate">REMOVE RATE</a>`;
-        parent.innerHTML = confirmation;
-        let cancel = document.createElement("a");
-        cancel.innerHTML = "CANCEL";
-        parent.appendChild(cancel);
-        cancel.addEventListener("click", cancelButtonClick)
+        let confirmation = document.querySelector(`#${parent.id} .remove-confirmation`)
+        confirmation.classList.remove("hidden")
     }
-    const cancelButtonClick = e => {
-        let parent = e.target.parentNode;
-        parent.innerHTML = "";
-        let remove = document.createElement("a");
-        remove.innerHTML = "REMOVE";
-        parent.appendChild(remove);
-        remove.addEventListener("click", removeButtonClick);
-    }
+    
     removeVisitedButtons.forEach(button => {
         button.addEventListener("click", removeButtonClick);
     });
-
+    
+    const cancelRemoveButtons = document.querySelectorAll(".remove-confirmation a.cancel");
+    const cancelButtonClick = e => {
+        let parent = e.target.parentNode;
+        parent.classList.add("hidden");
+    }
+    
+    cancelRemoveButtons.forEach(button => {
+        button.addEventListener("click", cancelButtonClick);
+    });
 });

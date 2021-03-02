@@ -8,26 +8,17 @@
 }
 
 .park-full {
-  display: grid;
-  margin: 50px 75px 70px 75px;
-  grid-template-columns: 40% 60%;
-  grid-template:
-    "picture picture details details"
-    "picture picture details details"
-    "visit visit details details"
-    "rating rating details details"
-    "reviews reviews reviews reviews"
-    "reviews reviews reviews reviews";
-  align-items: stretch;
-  justify-self: stretch;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /* PARK IMAGE SECTION */
-.park-image {
-  grid-area: picture;
-  align-items: stretch;
-  margin-right: 40px;
+.park-image, .park-details {
   position: relative;
+  width: 48%;
 }
 
 .park-image .visited-stamp {
@@ -41,46 +32,41 @@
 
 /* PARK DETAILS SECTION  */
 .park-details {
-  grid-area: details;
-  margin: 0;
-  height: 90%;
-  width: 100%;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 25px;
 }
 
 .park-header {
-  font-size: 1.5vw;
+  font-family: Park-Thin;
   margin: 0;
   max-width: auto;
-  padding: 20px 0px 20px 30px;
+  padding: 20px 30px 20px 30px;
   background-color: rgba(255, 255, 255, 0.3);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
-.park-name {
-  padding-bottom: 10px;
-}
 
-.park-name,
-.location {
-  font-family: Park;
+.park-header h1 {
+  font-size: 30px;
+  margin: 0%;
+}
+.park-header h3 {
+  font-size: 20px;
   margin: 0;
-  width: auto;
 }
 
 .park-info {
   font-family: Park-thin;
-  font-size: 1.6vw;
-  padding: 0px 20px 0px 30px;
+  font-size: 20px;
+  padding: 0px 30px;
 }
 
 /* RATING AND COMMUNITY REVIEWS STYLES */
-h2 {
+.reviews h2 {
   text-align: center;
   box-sizing: border-box;
   margin: 0;
-  font-size: 1.5vw;
+  font-size: 20px;
   font-family: Park;
 }
 
@@ -94,11 +80,10 @@ h2 {
 
 /* REVIEWS SECTION  */
 .reviews {
-  grid-area: reviews;
   background-color: rgba(255, 255, 255, 0.4);
-  margin-top: 30px;
-  margin-bottom: 50px;
   border-radius: 15px;
+  margin: 30px auto;
+  width: 100%;
 }
 
 .community-reviews {
@@ -109,101 +94,65 @@ h2 {
 }
 
 .review-form {
+  align-items: center;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin: 5px;
+  margin: 5px auto;
+  padding: 5px;
 }
 
-.submit-review {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 5px;
-  margin-top: 8px;
-  width: 10%;
-  height: 35px;
-  padding: 5px 0 5px 0;
-  border-color: white;
-}
-
-.submit-review:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.submit-review:focus {
-  outline: none;
-}
-
-.review-input {
-  border-radius: 10px;
-  min-height: 100px;
-  border: 1px solid white;
+.review-form textarea {
+  box-sizing: border-box;
+  margin: 0;
   width: 100%;
-  padding: 10px 10px 10px 20px;
-  font-family: Park-Thin;
-  font-size: 18px;
 }
-.review-input:focus {
-  outline: none;
+
+.review-controls {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .comments {
   box-sizing: border-box;
-  padding: 20px 0 40px 40px;
+  padding: 10px 20px;
   margin: 0;
-  font-size: 1.5vw;
   font-family: Park-Thin;
 }
 
 .comments > p {
-  font-size: 1.5vw;
-  margin: 0;
-  font-family: Park-thin;
-}
-
-.review-edit {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
   box-sizing: border-box;
-  padding: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.comments > span:first-child {
+  position: relative;
+}
+
+.comments > span:first-child::after {
+  content: "";
   display: inline-block;
-  font-size: 18px;
-  width: auto;
-  height: auto;
-  color: black;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-left: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white;
-  text-align: center;
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid rgba(255, 255, 255, 0.5);
+  border-right: 20px solid transparent;
+  position: absolute;
+  bottom: -10px;
+  transform: translateX(5px) skewX(15deg);
 }
 
-.review-delete {
-  box-sizing: border-box;
-  padding: 5px;
-  font-size: 18px;
-  display: inline-block;
-  width: auto;
-  height: auto;
-  color: black;
-  margin: 15px;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white;
-  text-align: center;
-}
-
-.review-edit:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.review-delete:hover {
-  transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.review-text-box {
-  font-family: Park-Thin;
+@media screen and (max-width: 670px){
+  .park-image, .park-details, .reviews {
+    width: 80%;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .park-full {
+    justify-content: center;
+  }
 }

@@ -8,8 +8,10 @@
 @import "team.css";
 @import "search.css";
 @import "add-park-to-route.css";
-@import "visited-list.css";
 @import "error.css";
+@import "forms.css";
+@import "signup-login.css";
+@import "footer.css";
 
 
 @font-face {

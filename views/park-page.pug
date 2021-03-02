@@ -6,12 +6,12 @@ block content
       if isVisited
         img(src="/img/stamp.png" class="visited-stamp")
       img(src=`/img/park-page-${park.id}.png` alt=`${park.name}` class=`park-image-${park.id}`)
+      include rates.pug
     div(class="park-details")
       div.park-header
         span: h1.park-name #{park.name} National Park
         h3.location #{state}, USA
       p.park-info= park.description
-    include rates.pug
     div.reviews
       h2.community-reviews COMMUNITY REVIEWS
       if user
@@ -21,8 +21,10 @@ block content
         h4.comments Sorry, no one has made a review.
       else
         each review in reviews
-          h4(id="review" + review.id, class="comments") #{review.user.username} said :
+          h4(id="review" + review.id, class="comments") 
+            span #{review.user.username+" "}
             p #{review.text}
             if(review.user.username === user.username)
-              a(class="review-edit" id="review-edit" + review.id) EDIT
-              a(class="review-delete" href="/reviews/delete/" + review.id) DELETE
+              div.review-controls
+                a(class="review-edit button" id="review-edit" + review.id) EDIT
+                a(class="review-delete button" href="/reviews/delete/" + review.id) DELETE
