@@ -1,21 +1,18 @@
 extends layout
 
 block content
-
-  form(action="/my-routes/add" method="POST" id="new-route-form" class="create-new-route")
-    div()
-      h1 CREATE NEW ROUTE
-      input(type="hidden" name="_csrf" value=token)
-      br
-      input(type="text" name="newRoute" placeholder="New Route Name")
-      br
-      label(class="add-routes-label") ADD PARKS TO YOUR ROUTE:
-      br
-      div.park-options
-        each park in parks
-          div(class="park-option")
-            img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
-            label #{park.name}
-            input(type="checkbox" name=`parkItem` value=park.id id=`park-${park.id}` class='park-option-checkbox')
-      br
-      button(type="submit" class="submit-route-button") CREATE NEW ROUTE
+  div.create-new-route
+    h1 CREATE NEW ROUTE
+    form(action="/my-routes/add" method="POST" id="new-route-form")
+        input(type="hidden" name="_csrf" value=token)
+        input(type="text" name="newRoute" placeholder="New Route Name")
+        h2(class="add-routes-label") ADD PARKS TO YOUR ROUTE:
+        div.park-options
+          each park in parks
+            div(class="park-option")
+              span
+                img(src=`/img/park-${park.id}.png` alt=`${park.name}` class=`park-image-option`)
+                label #{park.name}
+              input(type="checkbox" name=`parkItem` value=park.id id=`park-${park.id}` class='park-option-checkbox')
+        br
+        button(type="submit" class="submit-route-button") CREATE NEW ROUTE
