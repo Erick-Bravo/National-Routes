@@ -201,6 +201,30 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
   res.redirect("/my-routes");
 }));
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.get("/routepark/:routeId(\\d+)/parkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async(req, res) => {
+    const routeId = parseInt(req.params.routeId)
+    const parkId = parseInt(req.params.parkId)
+
+    let routePark = await db.RoutesParks.findOne({ where : {
+        routeId,
+        parkId
+      }})
+
+    if (routePark) {
+      await sequelize.transaction(async tx => {
+        await routePark.destroy({}, {transaction: tx});
+  
+        await route.destroy({transaction: tx});
+      }) 
+    }
+}));
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // INDIVIDUAL ROUTES
 router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   let user = req.session.auth;
