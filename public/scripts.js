@@ -9,17 +9,29 @@ window.addEventListener("DOMContentLoaded", () => {
         errorDiv.classList.remove("show");
     })
 
+    let intervals = new Set();
+
+    const clearAllIntervals = () => {
+        intervals.forEach(interval => {
+            clearInterval(interval);
+            clearInterval(interval);
+        })
+        intervals = new Set ();
+    }
+
     const countdown = () => {
+        clearAllIntervals();
         let n = 5;
         closeCount.innerHTML = n;
         let interval = setInterval(()=>{
             if (n===0) {
-                clearInterval(interval);
+                clearAllIntervals();
             } else {
                 n --;
                 closeCount.innerHTML = n;
             }
         },1000)
+        intervals.add(interval);
     }
 
     // Sign-Up
@@ -55,9 +67,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 });
                 errorDiv.classList.add("show");
                 countdown();
-                setTimeout(()=>{
+                let timeout = setTimeout(()=>{
                     errorDiv.classList.remove("show");
                 }, 5000)
+                intervals.add(timeout);
             };
         });
     };
@@ -93,9 +106,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 });
                 errorDiv.classList.add("show");
                 countdown();
-                setTimeout(()=>{
+                let timeout = setTimeout(()=>{
                     errorDiv.classList.remove("show");
                 }, 5000)
+                intervals.add(timeout);
             };
         });
     };
@@ -128,7 +142,6 @@ window.addEventListener("DOMContentLoaded", () => {
             myRoutesatParkPage.classList.toggle("open");
         });
     };
-
 
     const editReviewButtons = document.querySelectorAll(".reviews a.review-edit");
     if (editReviewButtons) {
@@ -164,7 +177,6 @@ window.addEventListener("DOMContentLoaded", () => {
     removeVisitedButtons.forEach(button => {
         button.addEventListener("click", removeButtonClick);
     });
-    
     
     const cancelRemoveButtons = document.querySelectorAll(".remove-confirmation a.cancel");
     const cancelButtonClick = e => {

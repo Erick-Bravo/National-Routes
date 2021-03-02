@@ -1,3 +1,14 @@
+.my-routes-page {
+  align-items: flex-start;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
 .visited-list-item > a > img,
 .custom-routes-list-item > a > img,
 .routes-parks > a > img {
@@ -16,8 +27,17 @@
 .custom-routes-list {
   background-color: rgba(255,255,255,0.5);
   border-radius: 25px;
+  margin-bottom: 20px;
   padding: 20px;
   width: 45%;
+}
+
+.route-list {
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 25px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 90%;
 }
 
 .visited-list ul,
@@ -26,17 +46,20 @@
   padding: 0;
 }
 
-.custom-routes-list > div > h1, 
-.visited-list > div > h1 {
+.custom-routes-list h1, 
+.visited-list h1,
+.route-list h1 {
   font-family: Park-Thin;
   font-size: 35px;
+  text-transform: uppercase;
 }
 
-.custom-routes-list p, 
-.visited-list p {
+.custom-routes-list li, 
+.visited-list p,
+.routes-parks a span {
   font-family: Park-Thin;
   font-size: 25px;
-  margin-top: 20px;
+  margin: 20px 0 10px;
 }
 
 .visited-list-item {
@@ -81,4 +104,70 @@
 
 .hidden {
   display: none;
+}
+
+.custom-route {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.custom-route .custom-route-link,
+.routes-parks a {
+  color: #000;
+  text-decoration: none;
+}
+
+.custom-route .custom-route-link:hover,
+.routes-parks a span:hover {
+  transform: scale(1.1);
+}
+
+.custom-route i {
+  margin-right: 10px;
+}
+
+.create-route-button {
+  align-items: center;
+  border-radius: 4px;
+  background-color: rgba(248, 148, 6, 0.7);
+  color: black;
+  display: flex;
+  font-family: Park;
+  height: 50px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 200px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.create-route-button:hover {
+  transform: scale(1.1);
+}
+
+.routes-parks {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.routes-parks a {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+@media screen and (max-width: 1000px) {
+  .my-routes-page {
+    flex-direction: column;
+  }
+
+  .visited-list, .custom-routes-list {
+    width: 90%;
+  }
 }

@@ -29,8 +29,11 @@ form.register-new-user {
   
   .errors {
       background-color: #fff;
+      border: 1px solid orangered;
+      border-radius: 0 0 5px 5px;
+      border-top: 0;
       box-sizing: border-box;
-      color: red;
+      color: orangered;
       font-family: Park-Thin;
       padding: 10px 20px;
       position: fixed;
@@ -51,15 +54,23 @@ form.register-new-user {
   
   span.close-button {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 20px;
     position: absolute;
     right: 10px;
     text-transform: uppercase;
     top: 10px;
   }
 
-  span.close-button:hover {
-    font-size: 15px;
+  span.close-button .count {
+    margin-right: 10px;
+  }
+
+  span.close-button > i {
+    transform: rotate(0);
+    transition: all 0.1s;
+  }
+  span.close-button:hover > i {
+    transform: rotate(90deg);
     transition: all 0.1s;
   }
 
