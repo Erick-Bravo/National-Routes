@@ -58,14 +58,14 @@ const getCustomRoutesParks = async (req, routeId) => {
 
 
 // entry points like:
-    //HOMEPAGE
+//HOMEPAGE
 router.get("/", csrfProtection, asyncHandler(async (req, res) => {
-    const parks = await db.Park.findAll(); //maybe order the list by average rating.
+  const parks = await db.Park.findAll(); //maybe order the list by average rating.
   const user = await getUserFromSession(req);
   res.render('park-list', { title: 'NATIONAL ROUTES', parks, token: req.csrfToken(), user });
 }));
 
-  //INDIVIDUAL PARK
+//INDIVIDUAL PARK
 router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.id);
   let park = await db.Park.findByPk(parkId, {
@@ -77,20 +77,20 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
 
   //PARK AVG RATES AND REVIEWS
   let visited = await db.Visited.findAll({
-    where: {parkId},
+    where: { parkId },
     include: [db.User, db.Review]
   });
 
   let reviews = [];
-  let rates =[];
+  let rates = [];
 
   if (visited) {
     visited.forEach(park => {
       park = park.toJSON();
-      if(park.rate){
+      if (park.rate) {
         rates.push(park.rate);
       };
-      const user = {username: park.User.username, userId: park.User.id};
+      const user = { username: park.User.username, userId: park.User.id };
       park.Reviews.forEach(review => {
         review.user = user;
         reviews.push(review);
@@ -98,7 +98,7 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
     });
   };
 
-  reviews.sort((a,b) => {
+  reviews.sort((a, b) => {
     if (a.createdAt < b.createdAt) return 1;
     else if (a.createdAt > b.createdAt) return -1;
     else return 0;
@@ -107,8 +107,8 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
   const user = await getUserFromSession(req);
   //average rating for park
   let rateAvg = false;
-  if (rates.length){
-    rateAvg = rates.reduce((sum, rate) => sum + parseInt(rate), 0.0)/rates.length;
+  if (rates.length) {
+    rateAvg = rates.reduce((sum, rate) => sum + parseInt(rate), 0.0) / rates.length;
   };
   //if park was visited
   let isVisited = false;
@@ -127,14 +127,15 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
       isVisited = true;
       userRate = userRate.toJSON().rate;
     };
-  //ROUTES
+    //ROUTES
     routes = await getCustomRoutes(req, parkId);
   };
 
   res.render('park-page', {
     park, state, title: `${park.name} National Park`,
     token: req.csrfToken(), reviews, user, routes,
-    isVisited, rate:{userRate, rateAvg, ratedBy:rates.length} });
+    isVisited, rate: { userRate, rateAvg, ratedBy: rates.length }
+  });
 
 }));
 
@@ -150,8 +151,10 @@ router.get("/my-routes", checkAuth, csrfProtection, asyncHandler(async (req, res
 
   user = await user.toJSON();
 
-  res.render("my-routes", { title: 'MY ROUTES', parks: user.Parks, routes, isMyRoutePage: true,
-  user: { userId: user.id, username: user.username }, token: req.csrfToken() });
+  res.render("my-routes", {
+    title: 'MY ROUTES', parks: user.Parks, routes, isMyRoutePage: true,
+    user: { userId: user.id, username: user.username }, token: req.csrfToken()
+  });
 }));
 
 // ADD CUSTOM ROUTE FORM PAGE
@@ -203,27 +206,33 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////HARD HAT AREA///////////////////////////////////////////////
 
-router.get("/routepark/:routeId(\\d+)/parkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async(req, res) => {
-    const routeId = parseInt(req.params.routeId)
-    const parkId = parseInt(req.params.parkId)
 
-    let routePark = await db.RoutesParks.findOne({ where : {
-        routeId,
-        parkId
-      }})
 
-    if (routePark) {
-      await sequelize.transaction(async tx => {
-        await routePark.destroy({}, {transaction: tx});
-  
-        await route.destroy({transaction: tx});
-      }) 
-    }
+
+router.get("/routepark/:routeParkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
+  const routeParkId = parseInt(req.params.routeParkId)
+
+
+  let routePark = await db.RoutesPark.findOne({ where: {
+    id: routeParkId
+  }})
+
+  console.log("this is the routeParkId: " + routeParkId) // returns 7
+  console.log("routePark: " + routePark) // returns null
+ 
+
+  // if(routePark) {
+    console.log("inside if statement")
+    await routePark.destroy();
+  // }
 }));
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////HARD HAT AREA/////////////////////////////////////////////////////////
 
 // INDIVIDUAL ROUTES
 router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
@@ -231,26 +240,30 @@ router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async
   let routeId = parseInt(req.params.id);
   let routesParks = await getCustomRoutesParks(req, routeId);
 
-  res.render('custom-route-page', {title: "Here we go again", route:{id: routeId, name: routesParks.name}, routesParks: routesParks.Parks , user, token: req.csrfToken()});
+  res.render('custom-route-page', { title: "Here we go again", route: { id: routeId, name: routesParks.name }, routesParks: routesParks.Parks, user, token: req.csrfToken() });
 }));
 
 // REMOVE ROUTE
-router.get("/my-routes/:id(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) =>{
+router.get("/my-routes/:id(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id);
   const userId = parseInt(req.session.auth.userId);
 
-  let route = await db.Route.findOne({where: {
-    id,
-    userId
-  }})
+  let route = await db.Route.findOne({
+    where: {
+      id,
+      userId
+    }
+  })
 
   if (route) {
     await sequelize.transaction(async tx => {
-      await db.RoutesPark.destroy({where: {
-        routeId: id
-      }}, {transaction: tx});
+      await db.RoutesPark.destroy({
+        where: {
+          routeId: id
+        }
+      }, { transaction: tx });
 
-      await route.destroy({transaction: tx});
+      await route.destroy({ transaction: tx });
     })
   }
 
@@ -295,7 +308,7 @@ router.get("/visited/:parkId(\\d+)/rate/:rate(\[12345\])", checkAuth, asyncHandl
       })
     };
 
-    if (req.query.visited === 'true'){
+    if (req.query.visited === 'true') {
       res.redirect("/my-routes")
     } else {
       res.redirect(`/parks/${parkId}`);
@@ -312,15 +325,18 @@ router.get("/visited/:parkId(\\d+)/delete", checkAuth, asyncHandler(async (req, 
     where: {
       parkId,
       userId
-    }});
+    }
+  });
   visitedJSON = visited.toJSON();
 
   await sequelize.transaction(async tx => {
-    await db.Review.destroy({where:{
-      visitedId: visitedJSON.id
-    }},{transaction:tx});
+    await db.Review.destroy({
+      where: {
+        visitedId: visitedJSON.id
+      }
+    }, { transaction: tx });
 
-    await visited.destroy({transaction:tx});
+    await visited.destroy({ transaction: tx });
 
   })
 
@@ -335,7 +351,8 @@ router.get("/visited/:parkId(\\d+)/clear-rate", checkAuth, asyncHandler(async (r
     where: {
       parkId,
       userId
-    }});
+    }
+  });
 
   await visited.update({
     rate: null
@@ -345,61 +362,61 @@ router.get("/visited/:parkId(\\d+)/clear-rate", checkAuth, asyncHandler(async (r
 }));
 //TEAM
 router.get("/team", csrfProtection, (req, res) => {
-    const user = req.session.auth ? req.session.auth : false;
-    res.render("team", { title: "Team", user, token: req.csrfToken() });
+  const user = req.session.auth ? req.session.auth : false;
+  res.render("team", { title: "Team", user, token: req.csrfToken() });
 });
 
 //SEARCH
 router.post("/search", csrfProtection, asyncHandler(async (req, res) => {
-    let { searchStr } = req.body;
-    searchStr = searchStr.replace(/[^\w\s]/ig, "").replace(/\s+/ig, " ").trim();
+  let { searchStr } = req.body;
+  searchStr = searchStr.replace(/[^\w\s]/ig, "").replace(/\s+/ig, " ").trim();
 
-    let states = await db.State.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${searchStr}%`
-        }
-      },
-      include: db.Park
-    });
-
-    if (states) {
-      states = states.map(state => state.toJSON()).filter(state => {
-        return (state.Parks.length > 0);
-      });
-    };
-
-    if (!states) {
-      states = false;
-    };
-
-    let parks = await db.Park.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${searchStr}%`
-        }
+  let states = await db.State.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${searchStr}%`
       }
+    },
+    include: db.Park
+  });
+
+  if (states) {
+    states = states.map(state => state.toJSON()).filter(state => {
+      return (state.Parks.length > 0);
     });
+  };
 
-    if (parks) {
-      parks = parks.map(park => park.toJSON());
-    } else {
-      parks = false;
-    };
+  if (!states) {
+    states = false;
+  };
 
-    if (parks.length === 1) {
-      res.redirect(`/parks/${parks[0].id}`);
-    } else {
-      const user = req.session.auth
-      res.render('search', { title: `Search for "${searchStr}":`, token: req.csrfToken(), states, parks, user });
-    };
+  let parks = await db.Park.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${searchStr}%`
+      }
+    }
+  });
 
-  }));
+  if (parks) {
+    parks = parks.map(park => park.toJSON());
+  } else {
+    parks = false;
+  };
+
+  if (parks.length === 1) {
+    res.redirect(`/parks/${parks[0].id}`);
+  } else {
+    const user = req.session.auth
+    res.render('search', { title: `Search for "${searchStr}":`, token: req.csrfToken(), states, parks, user });
+  };
+
+}));
 
 router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, res) => {
   const stateId = parseInt(req.params.id);
   let state = await db.State.findOne({
-    where: {id: stateId},
+    where: { id: stateId },
     include: [db.Park]
   });
 
@@ -410,7 +427,7 @@ router.get("/search/state/:id(\\d+)", csrfProtection, asyncHandler(async (req, r
   if (state.Parks.length) parks = state.Parks;
 
   const user = req.session.auth;
-  res.render('search',{title:`Search by state: ${state.name}`,token: req.csrfToken(), parks, user})
+  res.render('search', { title: `Search by state: ${state.name}`, token: req.csrfToken(), parks, user })
 }));
 
 //ADD/DELETE PARK TO THE ROUTE FROM PARK PAGE
@@ -437,32 +454,32 @@ router.get("/parks/:parkId(\\d+)/route/:routeId(\\d+)", asyncHandler(async (req,
 }))
 // Review
 
-router.post("/reviews", checkAuth, csrfProtection, asyncHandler(async(req, res) => {
+router.post("/reviews", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   const { parkId, text } = req.body
   const user = await getUserFromSession(req)
 
   // const validatorError = validationResult(req);
 
   // if(validatorError.isEmpty()) {
-    const userId = user.userId
-    let visited = await db.Visited.findOne({ where: { parkId, userId } })
-    // let visited = await db.Visited.findAll()
-    if (!visited) {
-      visited = await db.Visited.create({
-        userId,
-        parkId,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      })
-    }
-    const visitedId = visited.toJSON().id
-    await db.Review.create({
-      visitedId,
-      text,
+  const userId = user.userId
+  let visited = await db.Visited.findOne({ where: { parkId, userId } })
+  // let visited = await db.Visited.findAll()
+  if (!visited) {
+    visited = await db.Visited.create({
+      userId,
+      parkId,
       createdAt: new Date(),
       updatedAt: new Date()
-     })
-     res.redirect(`/parks/${ parkId }`)
+    })
+  }
+  const visitedId = visited.toJSON().id
+  await db.Review.create({
+    visitedId,
+    text,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
+  res.redirect(`/parks/${parkId}`)
   // } else {
   //   const errors = validatorError.array().map((error) => error.msg);
   //   res.json({ errors });
@@ -500,11 +517,11 @@ router.get("/error/:code(\\d+)", asyncHandler(async (req, res) => {
   const user = req.session.auth;
   res.status(status || 500);
   if (status === 404) {
-    const randomNum = Math.floor(Math.random()*100) % 7;
-    res.render('page-not-found', {title: 'Page Not Found', user, randomNum});
+    const randomNum = Math.floor(Math.random() * 100) % 7;
+    res.render('page-not-found', { title: 'Page Not Found', user, randomNum });
   } else {
-    res.render('error', {title: "Server Error", user});
+    res.render('error', { title: "Server Error", user });
   }
 }));
 //exporting router
-  module.exports = router;
+module.exports = router;
