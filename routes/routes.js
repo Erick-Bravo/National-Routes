@@ -206,37 +206,29 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
 
 
 
-/////////////////////////////////////////////////////////////////HARD HAT AREA///////////////////////////////////////////////
+
 
 
 
 
 router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
-  const parkId = parseInt(req.params.parkId)
-  const routeId = parseInt(req.params.routeId)
-
+  const parkId = parseInt(req.params.parkId);
+  const routeId = parseInt(req.params.routeId);
 
   let routePark = await db.RoutesPark.findOne({ where: {
     routeId,
     parkId,
-  }})
-
-  console.log("this is the parkId: " + parkId) // returns 7
-  console.log("routePark: " + routePark) // returns null
+  }});
  
-
   if(routePark) {
-    console.log("inside if statement")
     await routePark.destroy()
-  }
+  };
 
   res.redirect(`/my-routes/${routeId}`);
 }));
 
 
 
-
-////////////////////////////////////////////////////////////////HARD HAT AREA/////////////////////////////////////////////////////////
 
 // INDIVIDUAL ROUTES
 router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
