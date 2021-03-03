@@ -388,8 +388,13 @@ router.post("/search", csrfProtection, asyncHandler(async (req, res) => {
 
   let parks = await db.Park.findAll({
     where: {
-      name: {
-        [Op.iLike]: `%${searchStr}%`
+      [Op.or]: {
+        name: {
+          [Op.iLike]: `%${searchStr}%`
+        },
+        description: {
+          [Op.iLike]: `%${searchStr}%`
+        }
       }
     }
   });
