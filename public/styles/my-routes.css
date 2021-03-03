@@ -124,6 +124,16 @@
   transform: scale(1.1);
 }
 
+.custom-route .custom-route-link i {
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+.custom-route .custom-route-link:hover i {
+  transform: rotate(130deg);
+  transition: transform 0.5s;
+}
+
 .custom-route i {
   margin-right: 10px;
 }
