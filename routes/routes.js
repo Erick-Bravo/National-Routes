@@ -73,6 +73,21 @@ router.get('/parks/:id', csrfProtection, asyncHandler(async (req, res) => {
     include: db.State
   });
 
+  
+  const key = process.env.API_KEY;
+  // let url = `https://developer.nps.gov/api/v1/parks?api_key=${key}&parkCode=${park.code}`;
+  // let url = `https://developer.nps.gov/api/v1/amenities/parksplaces?api_key=${key}&parkCode=${park.code}`;
+  let url = `https://developer.nps.gov/api/v1/thingstodo?api_key=${key}&parkCode=${park.code}`;
+  let parks_api = await fetch(url, {
+    headers:{
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+    }
+  });
+  parks_api = await parks_api.json();
+  parks_api = parks_api;
+  parks_api = parks_api.data;
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", parks_api)
+
   park = await park.toJSON();
   const state = park.States.map(state => state.name).join(", ");
 
