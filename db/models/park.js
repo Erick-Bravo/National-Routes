@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
+    code:  DataTypes.STRING(4),
     description: DataTypes.TEXT
   }, {});
   Park.associate = function(models) {

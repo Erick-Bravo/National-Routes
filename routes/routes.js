@@ -3,6 +3,7 @@ const { next } = require("cli");
 const express = require("express");
 const { Op } = require('sequelize');
 const { sequelize } = require("../db/models");
+const fetch = require('node-fetch');
 
 //importing local files
 const db = require("../db/models");
@@ -204,13 +205,6 @@ router.post("/my-routes/add", checkAuth, csrfProtection, asyncHandler(async (req
   res.redirect("/my-routes");
 }));
 
-
-
-
-
-
-
-
 router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   const parkId = parseInt(req.params.parkId);
   const routeId = parseInt(req.params.routeId);
@@ -226,9 +220,6 @@ router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProt
 
   res.redirect(`/my-routes/${routeId}`);
 }));
-
-
-
 
 // INDIVIDUAL ROUTES
 router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
