@@ -230,12 +230,12 @@ router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProt
 
 const getVisitedRoutes = async(req) =>{
   const userId = parseInt(req.session.auth.userId);
-  const visited = db.Visited.findAll({
+  const visited = await db.Visited.findAll({
     where: { userId},
     include: db.Reviews
   });
 
-  visited = visited.toJSON();
+  // visited = visited.toJSON();
 
   return visited;
 }
@@ -248,7 +248,7 @@ router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async
   let visits = await getVisitedRoutes(req);
 
   // console.log(routesParks.Parks.map(route => route.id))
-  console.log(visits)
+  console.log(visits.map(visit => visit.toJSON()))
   res.render('custom-route-page', { title: "Here we go again", route: { id: routeId, name: routesParks.name }, routesParks: routesParks.Parks, user, token: req.csrfToken() });
 }));
 
