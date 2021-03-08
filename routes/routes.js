@@ -219,7 +219,7 @@ router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProt
     routeId,
     parkId,
   }});
- 
+
   if(routePark) {
     await routePark.destroy()
   };
@@ -228,14 +228,27 @@ router.get("/routepark/:routeId(\\d+)/:parkId(\\d+)/delete", checkAuth, csrfProt
 }));
 
 
+const getVisitedRoutes = async(req) =>{
+  const userId = parseInt(req.session.auth.userId);
+  const visited = db.Visited.findAll({
+    where: { userId},
+    include: db.Reviews
+  });
 
+  visited = visited.toJSON();
+
+  return visited;
+}
 
 // INDIVIDUAL ROUTES
 router.get('/my-routes/:id(\\d+)', checkAuth, csrfProtection, asyncHandler(async (req, res) => {
   let user = req.session.auth;
   let routeId = parseInt(req.params.id);
   let routesParks = await getCustomRoutesParks(req, routeId);
+  let visits = await getVisitedRoutes(req);
 
+  // console.log(routesParks.Parks.map(route => route.id))
+  console.log(visits)
   res.render('custom-route-page', { title: "Here we go again", route: { id: routeId, name: routesParks.name }, routesParks: routesParks.Parks, user, token: req.csrfToken() });
 }));
 
