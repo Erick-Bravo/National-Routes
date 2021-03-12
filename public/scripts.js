@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    /* ERROR HANDLING */
     const closeButton = document.querySelector(".close-button");
     const closeCount = document.querySelector(".close-button .count");
     const errorDiv = document.querySelector("div.errors");
@@ -11,29 +12,43 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let intervals = new Set();
 
-    const clearAllIntervals = () => {
-        intervals.forEach(interval => {
-            clearInterval(interval);
-            clearInterval(interval);
-        })
-        intervals = new Set ();
-    }
+    const errorHandle = (errors) => {
+        const clearAllIntervals = () => {
+            intervals.forEach(interval => {
+                clearInterval(interval);
+            })
+            intervals = new Set ();
+        }
+        
+        const countdown = () => {
+            clearAllIntervals();
+            let n = 5;
+            closeCount.innerHTML = n;
+            let interval = setInterval(()=>{
+                if (n===0) {
+                    clearAllIntervals();
+                } else {
+                    n --;
+                    closeCount.innerHTML = n;
+                }
+            },1000)
+            intervals.add(interval);
+        }
 
-    const countdown = () => {
-        clearAllIntervals();
-        let n = 5;
-        closeCount.innerHTML = n;
-        let interval = setInterval(()=>{
-            if (n===0) {
-                clearAllIntervals();
-            } else {
-                n --;
-                closeCount.innerHTML = n;
-            }
-        },1000)
-        intervals.add(interval);
+        errorList.innerHTML = "";
+        errors.forEach(error => {
+            const p = document.createElement("li");
+            p.innerHTML = error;
+            errorList.appendChild(p);
+        });
+        errorDiv.classList.add("show");
+        countdown();
+        let timeout = setTimeout(()=>{
+            errorDiv.classList.remove("show");
+        }, 5000)
+        intervals.add(timeout);
     }
-
+    
     // Sign-Up
     const signUpForm = document.querySelector("#sign-up-form");
     if (signUpForm) {
@@ -59,18 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 location.href = "/my-routes";
                 return;
             } else {
-                errorList.innerHTML = "";
-                result.errors.forEach(error => {
-                    const p = document.createElement("li");
-                    p.innerHTML = error;
-                    errorList.appendChild(p);
-                });
-                errorDiv.classList.add("show");
-                countdown();
-                let timeout = setTimeout(()=>{
-                    errorDiv.classList.remove("show");
-                }, 5000)
-                intervals.add(timeout);
+                errorHandle(result.errors);
             };
         });
     };
@@ -98,18 +102,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (!result.errors) {
                 location.href = "/my-routes";
             } else {
-                errorList.innerHTML = "";
-                result.errors.forEach(error => {
-                    const div = document.createElement("div");
-                    div.innerHTML = error;
-                    errorList.appendChild(div);
-                });
-                errorDiv.classList.add("show");
-                countdown();
-                let timeout = setTimeout(()=>{
-                    errorDiv.classList.remove("show");
-                }, 5000)
-                intervals.add(timeout);
+                errorHandle(result.errors);
             };
         });
     };
@@ -158,7 +151,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     form.setAttribute("class", "review-form")
                     const csrfToken = document.querySelector("#csrfToken").value
                     const review = document.querySelector("#review" + id + " p").innerText
-                    const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-input ">${review}</textarea>`
+                    const inputs = `<input type="hidden" name="_csrf" value=${csrfToken}> <textarea name="text" id="review-input " required>${review}</textarea>`
                     form.innerHTML = inputs
                     const controls = document.createElement("div");
                     controls.setAttribute("class","review-controls");

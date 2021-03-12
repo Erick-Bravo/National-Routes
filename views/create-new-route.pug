@@ -5,7 +5,7 @@ block content
     h1 CREATE NEW ROUTE
     form(action="/my-routes/add" method="POST" id="new-route-form")
         input(type="hidden" name="_csrf" value=token)
-        input(type="text" name="newRoute" placeholder="New Route Name")
+        input(type="text" name="newRoute" placeholder="New Route Name" required)
         h2(class="add-routes-label") ADD PARKS TO YOUR ROUTE:
         div.park-options
           each park in parks
